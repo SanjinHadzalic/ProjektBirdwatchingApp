@@ -114,7 +114,7 @@ public class PregledPodatakaController implements Initializable {
         if(LoginController.odabraniUser.equals("admin".toUpperCase())){
             podaciTableView.setItems(FXCollections.observableList(HelloApplication.getPodatakList()));
         } else {
-            podaciTableView.setItems(FXCollections.observableList(HelloApplication.getPodatakList().stream().filter(a->a.getIstrazivac().startsWith(LoginController.odabraniUser)).collect(Collectors.toList())));
+            podaciTableView.setItems(FXCollections.observableList(HelloApplication.getPodatakList().stream().filter(a->a.getIstrazivac().toLowerCase().startsWith(LoginController.odabraniUser)).collect(Collectors.toList())));
             System.out.println("U pregledu je odabran user: " + LoginController.odabraniUser);
         //TREBA NAPRAVITI DA JE SAMO PRVO SLOVO U STRINGU VELIKO....
         }
