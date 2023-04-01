@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projektbirdwatchingapp.UnosLokalitetaController">
+   <children>
+      <Text layoutX="72.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Naziv">
+         <font>
+            <Font name="Calibri" size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="72.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tip">
+         <font>
+            <Font name="Calibri" size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="72.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="X koordinata">
+         <font>
+            <Font name="Calibri" size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="72.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Y koordinata">
+         <font>
+            <Font name="Calibri" size="18.0" />
+         </font>
+      </Text>
+      <TextField fx:id="nazivLokacijeTextField" layoutX="133.0" layoutY="33.0" />
+      <TextField layoutX="178.0" layoutY="94.0" fx:id="xKoordinataTextField" />
+      <TextField fx:id="yKoordinataTextField" layoutX="178.0" layoutY="127.0" />
+      <Button layoutX="92.0" layoutY="224.0" mnemonicParsing="false" onMouseClicked="#saveLokalitet" text="Dodaj" />
+      <Button layoutX="300.0" layoutY="224.0" mnemonicParsing="false" onAction="#backToPregledLokaliteta" onMouseClicked="#backToPregledLokaliteta" text="Natrag" />
+      <RadioButton fx:id="nacionalniParkRadioButton" layoutX="140.0" layoutY="65.0" mnemonicParsing="false" text="Nacionalni park">
+         <toggleGroup>
+            <ToggleGroup fx:id="parkToggleGroup" />
+         </toggleGroup></RadioButton>
+      <RadioButton fx:id="parkPrirodeRadioButton" layoutX="257.0" layoutY="65.0" mnemonicParsing="false" text="Park prirode" toggleGroup="$parkToggleGroup" />
+      <RadioButton fx:id="ostaloRadioButton" layoutX="379.0" layoutY="65.0" mnemonicParsing="false" text="Ostalo" toggleGroup="$parkToggleGroup" />
+   </children>
+</AnchorPane>
