@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class PregledPodatakaController implements Initializable {
     @FXML
@@ -105,8 +106,18 @@ public class PregledPodatakaController implements Initializable {
         vrstaComboBox.setEditable(true);
         vrstaComboBox.getItems().setAll(Nomenklatura.values());
         spolVrsteComboBox.setItems(FXCollections.observableArrayList("M", "F","U" ));
-        for (IstrazivacUnos e : istrazivaciBaza){
-            istrazivacComboBox.getItems().add(e.getIme() + " " + e.getPrezime());
+        if (LoginController.odabraniUser.equals("admin".toUpperCase())){
+            for (IstrazivacUnos e : istrazivaciBaza){
+                istrazivacComboBox.getItems().add(e.getIme() + " " + e.getPrezime());
+            }
+        } else {
+            String user = LoginController.odabraniUser;
+            List<IstrazivacUnos> istr = istrazivaciBaza.stream()
+                            .filter(a->a.getIme().toLowerCase().startsWith(user))
+                    .collect(Collectors.toList());
+            for(IstrazivacUnos f : istr){
+                istrazivacComboBox.getItems().add(f.getIme() + " " + f.getPrezime());
+            }
         }
         for (Lokalitet l : lokacijaBazaPodataka){
             lokacijaComboBox.getItems().add(l.getNazivLokacije());
@@ -116,7 +127,6 @@ public class PregledPodatakaController implements Initializable {
         } else {
             podaciTableView.setItems(FXCollections.observableList(HelloApplication.getPodatakList().stream().filter(a->a.getIstrazivac().toLowerCase().startsWith(LoginController.odabraniUser)).collect(Collectors.toList())));
             System.out.println("U pregledu je odabran user: " + LoginController.odabraniUser);
-        //TREBA NAPRAVITI DA JE SAMO PRVO SLOVO U STRINGU VELIKO....
         }
     }
 
@@ -221,7 +231,7 @@ public class PregledPodatakaController implements Initializable {
                     target.setDatum(datumDatePicker.getValue());
 
                     String afterChange = target.getId() + "," + target.getNaziv() + "," + target.getBrojnost() + ","+ target.getSpol()+","+target.getKomentari()+","+target.getIstrazivac()+"'"+target.getLokacija()+","+target.getDatum();
-                    String user = LoginController.odabraniUser;
+                    String user = LoginController.odabraniUser.toUpperCase();
                     LocalDateTime ldt = LocalDateTime.now();
                     DateTimeFormatter dateTFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
                     String dateOfChange = ldt.format(dateTFormat);
