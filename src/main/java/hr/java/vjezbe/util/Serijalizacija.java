@@ -85,10 +85,10 @@ public class Serijalizacija implements Serializable {
             c.printStackTrace();
         }
         //validacija
-        System.out.println("Ucitane vrijednosti unutar funkcije deserijalizacije su: ");
-        for (Serijalizacija q : deserLista){
-            System.out.println(q.getBeforeChange() + " " + q.getAfterChange() + " " + q.getUser() + " " + q.getDateOfChange());
-        }
+//        System.out.println("Ucitane vrijednosti unutar funkcije deserijalizacije su: ");
+//        for (Serijalizacija q : deserLista){
+//            System.out.println(q.getBeforeChange() + " " + q.getAfterChange() + " " + q.getUser() + " " + q.getDateOfChange());
+//        }
         return deserLista;
     }
 }

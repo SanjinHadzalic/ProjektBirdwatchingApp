@@ -4,11 +4,16 @@ import hr.java.vjezbe.baza.BazaPodataka;
 import hr.java.vjezbe.entiteti.BirdUnos;
 import hr.java.vjezbe.entiteti.IstrazivacUnos;
 import hr.java.vjezbe.entiteti.Lokalitet;
+import hr.java.vjezbe.niti.PosljednjaIzmjenaNit;
 import hr.java.vjezbe.util.Serijalizacija;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -36,6 +41,12 @@ public class HelloApplication extends Application {
         stage.setTitle("BirdwatchingApp");
         stage.setScene(scene);
         stage.show();
+
+        var noviTimeLine = new Timeline(
+                new KeyFrame(Duration.seconds(10), event -> Platform.runLater(new PosljednjaIzmjenaNit()))
+        );
+        noviTimeLine.setCycleCount(Timeline.INDEFINITE);
+        noviTimeLine.play();
     }
 
     public static void main(String[] args) {
