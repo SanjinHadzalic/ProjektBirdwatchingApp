@@ -41,12 +41,6 @@ public class HelloApplication extends Application {
         stage.setTitle("BirdwatchingApp");
         stage.setScene(scene);
         stage.show();
-
-        var noviTimeLine = new Timeline(
-                new KeyFrame(Duration.seconds(10), event -> Platform.runLater(new PosljednjaIzmjenaNit()))
-        );
-        noviTimeLine.setCycleCount(Timeline.INDEFINITE);
-        noviTimeLine.play();
     }
 
     public static void main(String[] args) {

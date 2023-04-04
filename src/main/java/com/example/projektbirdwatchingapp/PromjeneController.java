@@ -2,6 +2,7 @@ package com.example.projektbirdwatchingapp;
 
 import hr.java.vjezbe.entiteti.IstrazivacUnos;
 import hr.java.vjezbe.util.Serijalizacija;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -48,9 +49,29 @@ public class PromjeneController {
                 .setCellValueFactory(cellData ->
                         new SimpleStringProperty(cellData.getValue().getDateOfChange()));
 
-        changesTableView.setItems(FXCollections.observableList(Serijalizacija.deserializeSTOList(listaSTO)));
+        refreshPromjene();
     }
 
+    public Thread refreshPromjene(){
+        Thread t = new Thread(() -> {
+            while(true){
+                System.out.println("Thread za refresh promjena radi\n");
+                try {
+                    Thread.sleep(3000); //sleep 3 secs
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                Platform.runLater(() ->{
+                    changesTableView.setItems(FXCollections.observableList(Serijalizacija.deserializeSTOList(listaSTO)));
+                });
+            }
+        });
+
+        t.setDaemon(true);
+        t.start();
+
+        return t;
+    }
     public static void showPromjeneScreen() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("promjene.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 850, 800);

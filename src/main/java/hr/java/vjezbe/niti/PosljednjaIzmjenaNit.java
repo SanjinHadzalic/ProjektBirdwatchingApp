@@ -11,13 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class PosljednjaIzmjenaNit implements Runnable{
+public class PosljednjaIzmjenaNit extends Thread{
     @Override
     public void run(){
         ArrayList<Serijalizacija> listaSTO = new ArrayList<>();
         listaSTO=Serijalizacija.deserializeSTOList(listaSTO);
 
-        System.out.println("Velicina listeSTO je " + listaSTO.size());
         Serijalizacija novi = listaSTO.get(listaSTO.size()-1);
         String a = novi.getBeforeChange();
         String b = novi.getAfterChange();
@@ -25,10 +24,10 @@ public class PosljednjaIzmjenaNit implements Runnable{
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Testiranje niti za posljednju izmjenu");
-        alert.setHeaderText("Posljednja primjena je napravljena: " + datum + "\n");
-        alert.setContentText(a + "\n " + b);
+        alert.setHeaderText("Posljednja primjena je napravljena: [" + datum + "]\n");
+        alert.setContentText(">> " + a + " <<\n " + ">> "+b + " << ");
 
-        alert.show();
+        alert.showAndWait();
 
     }
 }

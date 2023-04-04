@@ -68,7 +68,7 @@ public class Serijalizacija implements Serializable {
         }
     }
 
-    public static ArrayList<Serijalizacija> deserializeSTOList(ArrayList<Serijalizacija> deserLista){
+    public static synchronized ArrayList<Serijalizacija> deserializeSTOList(ArrayList<Serijalizacija> deserLista){
         try{
             FileInputStream fileIn = new FileInputStream("src/main/java/hr/java/vjezbe/util/serSTOList.txt");
             ObjectInputStream in = new ObjectInputStream(fileIn);
