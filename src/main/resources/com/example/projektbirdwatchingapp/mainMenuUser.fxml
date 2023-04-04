@@ -44,7 +44,7 @@
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <Button mnemonicParsing="false" text="Pregled" />
+                                    <Button mnemonicParsing="false" onAction="#openPregledLokacija" text="Pregled" />
                                  </children>
                               </AnchorPane>
                         </content>
@@ -53,7 +53,7 @@
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <Button mnemonicParsing="false" text="Pregled" />
+                                    <Button mnemonicParsing="false" onAction="#openPregledIstrazivaca" text="Pregled" />
                                  </children>
                               </AnchorPane>
                         </content>

@@ -92,7 +92,7 @@ public class UnosLokalitetaController {
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("pregledLokacija.fxml"));
             Scene scene = null;
             try{
-                scene = new Scene(fxmlLoader.load(), 1000, 800);
+                scene = new Scene(fxmlLoader.load(), 650, 500);
             } catch (IOException ex){
                 throw new RuntimeException(ex);
             }

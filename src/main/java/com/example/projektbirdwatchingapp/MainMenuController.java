@@ -66,10 +66,7 @@ public class MainMenuController{
     public void openPregledIstrazivaca(ActionEvent e) throws IOException{
         PregledIstrazivacaController.showPregledIstrazivacaScreen();
     }
-    @FXML
-    public void openUnosIstrazivaca(ActionEvent e) throws IOException{
-        UnosIstrazivacaController.showUnosIstrazivacaScreen();
-    }
+
     @FXML
     public void openPregledLokacija(ActionEvent e) throws IOException{
         PregledLokacijaController.showPregledLokacijaScreen();
@@ -77,7 +74,7 @@ public class MainMenuController{
     @FXML
     public void openLink(ActionEvent e){
         System.out.println("Ovo treba doraditi...");
-    }
+    }//OVO TREBA DORADITI
     @FXML
     public void showPromjeneScreen(ActionEvent e) throws IOException {
         PromjeneController.showPromjeneScreen();

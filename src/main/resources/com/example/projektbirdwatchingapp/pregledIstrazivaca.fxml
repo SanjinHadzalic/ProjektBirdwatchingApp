@@ -44,14 +44,14 @@
             <TableColumn fx:id="datumRodjenjaIstrazivacaTableColumn" prefWidth="120.0" text="Datum rođenja" />
             <TableColumn fx:id="institucijaIstrazivacaTableColumn" prefWidth="95.0" text="Institucija" />
             <TableColumn fx:id="adresaIstrazivacaTableColumn" prefWidth="110.6666259765625" text="Adresa" />
-            <TableColumn fx:id="mobitelIstrazivacaTableColumn" prefWidth="102.66671752929688" text="Telefon" />
-            <TableColumn fx:id="emailIstrazivacaTableColumn" prefWidth="104.6666259765625" text="Email" />
-            <TableColumn prefWidth="113.333251953125" />
+            <TableColumn fx:id="mobitelIstrazivacaTableColumn" prefWidth="118.0" text="Telefon" />
+            <TableColumn fx:id="emailIstrazivacaTableColumn" prefWidth="204.0" text="Email" />
+            <TableColumn minWidth="0.0" prefWidth="0.0" />
         </columns>
       </TableView>
       <Label text="Ime" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
          <GridPane.margin>
-            <Insets left="30.0" />
+            <Insets left="30.0" top="10.0" />
          </GridPane.margin>
          <font>
             <Font name="Calibri" size="18.0" />
@@ -59,7 +59,7 @@
       </Label>
       <Label text="Prezime" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.rowSpan="2" GridPane.valignment="TOP">
          <GridPane.margin>
-            <Insets />
+            <Insets top="10.0" />
          </GridPane.margin>
          <padding>
             <Insets left="25.0" />
@@ -68,18 +68,18 @@
             <Font name="Calibri" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="10.0" layoutY="70.0" text="D.O.B." GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+      <Label layoutX="10.0" layoutY="70.0" text="D.O.B." GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="TOP">
          <padding>
             <Insets left="30.0" />
          </padding>
          <GridPane.margin>
-            <Insets />
+            <Insets top="10.0" />
          </GridPane.margin>
          <font>
             <Font name="Calibri" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="10.0" layoutY="100.0" text="Institucija" GridPane.halignment="LEFT" GridPane.rowIndex="7" GridPane.valignment="TOP">
+      <Label layoutX="10.0" layoutY="100.0" text="Institucija" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="TOP">
          <padding>
             <Insets left="30.0" />
          </padding>
@@ -87,72 +87,72 @@
             <Font name="Calibri" size="18.0" />
          </font>
          <GridPane.margin>
-            <Insets />
+            <Insets top="10.0" />
          </GridPane.margin>
       </Label>
-      <Label layoutX="10.0" layoutY="127.0" text="Adresa" GridPane.rowIndex="5" GridPane.valignment="TOP">
+      <Label layoutX="10.0" layoutY="127.0" text="Adresa" GridPane.halignment="LEFT" GridPane.rowIndex="5" GridPane.valignment="TOP">
          <padding>
             <Insets left="30.0" />
          </padding>
          <GridPane.margin>
-            <Insets />
+            <Insets top="10.0" />
          </GridPane.margin>
          <font>
             <Font name="Calibri" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="10.0" layoutY="154.0" text="Mobitel" GridPane.halignment="LEFT" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+      <Label layoutX="10.0" layoutY="154.0" text="Mobitel" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
          <font>
             <Font name="Calibri" size="18.0" />
          </font>
          <GridPane.margin>
-            <Insets left="30.0" />
+            <Insets left="30.0" top="10.0" />
          </GridPane.margin>
       </Label>
-      <Label text="email" GridPane.rowIndex="8" GridPane.valignment="CENTER">
+      <Label text="email" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="TOP">
          <GridPane.margin>
-            <Insets left="30.0" />
+            <Insets left="40.0" top="10.0" />
          </GridPane.margin>
          <font>
             <Font name="Calibri" size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="imeIstrazivacaTextField" GridPane.valignment="CENTER">
+      <TextField fx:id="imeIstrazivacaTextField" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
          <GridPane.margin>
-            <Insets left="90.0" right="90.0" />
+            <Insets left="90.0" right="90.0" top="10.0" />
          </GridPane.margin>
       </TextField>
       <TextField fx:id="prezimeIStrazivacaTextField" layoutX="100.0" layoutY="35.0" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP" GridPane.vgrow="NEVER">
          <GridPane.margin>
-            <Insets left="90.0" right="90.0" />
+            <Insets left="90.0" right="90.0" top="10.0" />
          </GridPane.margin>
       </TextField>
-      <DatePicker fx:id="datumRodjenjaIstrazivacaTextField" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+      <DatePicker fx:id="datumRodjenjaIstrazivacaTextField" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="TOP">
          <GridPane.margin>
-            <Insets right="45.0" />
+            <Insets right="45.0" top="10.0" />
          </GridPane.margin>
       </DatePicker>
-      <TextField fx:id="institucijaIstrazivacaTextField" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="TOP">
+      <TextField fx:id="institucijaIstrazivacaTextField" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
          <GridPane.margin>
-            <Insets left="120.0" right="90.0" />
+            <Insets left="110.0" right="90.0" top="10.0" />
          </GridPane.margin>
       </TextField>
-      <TextField fx:id="adresaIstrazivacaTextField" GridPane.rowIndex="5" GridPane.rowSpan="2" GridPane.valignment="TOP">
+      <TextField fx:id="adresaIstrazivacaTextField" GridPane.rowIndex="5" GridPane.valignment="TOP">
          <GridPane.margin>
-            <Insets left="100.0" right="90.0" />
+            <Insets left="90.0" right="90.0" top="10.0" />
          </GridPane.margin>
       </TextField>
-      <TextField fx:id="mobitelIstrazivacaTextField" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+      <TextField fx:id="mobitelIstrazivacaTextField" GridPane.columnIndex="1" GridPane.valignment="CENTER">
          <GridPane.margin>
-            <Insets left="100.0" right="90.0" />
+            <Insets left="110.0" right="90.0" top="10.0" />
          </GridPane.margin>
       </TextField>
-      <TextField fx:id="emailIstrazivacaTextField" GridPane.rowIndex="8" GridPane.valignment="CENTER">
+      <TextField fx:id="emailIstrazivacaTextField" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="TOP">
          <GridPane.margin>
-            <Insets left="100.0" right="90.0" />
+            <Insets left="110.0" right="90.0" top="10.0" />
          </GridPane.margin>
       </TextField>
-      <FontAwesomeIcon fill="#77d037" glyphName="USER_PLUS" onMouseClicked="#addNewUserSpona" size="3em" GridPane.halignment="LEFT" GridPane.rowIndex="9">
+      <FontAwesomeIcon fill="#77d037" glyphName="USER_PLUS" onMouseClicked="#addNewUserSpona" size="3em" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="8">
          <GridPane.margin>
             <Insets left="280.0" />
          </GridPane.margin></FontAwesomeIcon>
@@ -176,27 +176,27 @@
                </stops>
             </LinearGradient>
          </fill></FontAwesomeIcon>
-      <FontAwesomeIcon fill="#6988d7" glyphName="FILTER" onMouseClicked="#filterIstrazivac" size="3em" GridPane.halignment="LEFT" GridPane.rowIndex="9">
+      <FontAwesomeIcon fill="#6988d7" glyphName="FILTER" onMouseClicked="#filterIstrazivac" size="3em" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="8">
          <GridPane.margin>
             <Insets left="30.0" />
          </GridPane.margin>
       </FontAwesomeIcon>
-      <FontAwesomeIcon fill="#efd331" glyphName="EDIT" size="3em" GridPane.halignment="LEFT" GridPane.rowIndex="9">
+      <FontAwesomeIcon fill="#efd331" glyphName="EDIT" size="3em" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="8">
          <GridPane.margin>
             <Insets left="90.0" />
          </GridPane.margin>
       </FontAwesomeIcon>
-      <FontAwesomeIcon fill="#f60000" glyphName="BAN" onMouseClicked="#deleteSelectedIstrazivac" size="3em" GridPane.halignment="LEFT" GridPane.rowIndex="9">
+      <FontAwesomeIcon fill="#f60000" glyphName="BAN" onMouseClicked="#deleteSelectedIstrazivac" size="3em" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="8">
          <GridPane.margin>
             <Insets left="150.0" />
          </GridPane.margin>
       </FontAwesomeIcon>
-      <FontAwesomeIcon glyphName="ERASER" onMouseClicked="#clearSelection" size="3em" GridPane.halignment="LEFT" GridPane.rowIndex="9">
+      <FontAwesomeIcon glyphName="ERASER" onMouseClicked="#clearSelection" size="3em" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="8">
          <GridPane.margin>
             <Insets left="210.0" />
          </GridPane.margin>
       </FontAwesomeIcon>
-      <Button mnemonicParsing="false" onAction="#submit" opacity="0.0" text="QWER" textFill="TRANSPARENT" GridPane.halignment="LEFT" GridPane.rowIndex="9">
+      <Button mnemonicParsing="false" onAction="#submit" opacity="0.0" text="QWER" textFill="TRANSPARENT" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="8">
          <GridPane.margin>
             <Insets left="80.0" />
          </GridPane.margin></Button>

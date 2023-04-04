@@ -26,6 +26,8 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
+import static com.example.projektbirdwatchingapp.LoginController.odabraniUser;
+
 public class PregledLokacijaController {
     String probaGlob = "NP";
     @FXML
@@ -172,47 +174,57 @@ public class PregledLokacijaController {
 
     @FXML
     public void updateSelectedLokacijja(ActionEvent event) throws Exception {
-        ObservableList<Lokalitet> crntLokalitetList = lokacijeTableView.getItems();
-        Lokalitet toBeChanged = lokacijeTableView.getSelectionModel().getSelectedItem();
-        String beforeChange = toBeChanged.getId()+","+toBeChanged.getNazivLokacije()+","+toBeChanged.getTypeLocation()+","+toBeChanged.getxCoord()+","+toBeChanged.getyCoord();
+        if (odabraniUser.equals("admin".toUpperCase())){
+            ObservableList<Lokalitet> crntLokalitetList = lokacijeTableView.getItems();
+            Lokalitet toBeChanged = lokacijeTableView.getSelectionModel().getSelectedItem();
+            String beforeChange = toBeChanged.getId()+","+toBeChanged.getNazivLokacije()+","+toBeChanged.getTypeLocation()+","+toBeChanged.getxCoord()+","+toBeChanged.getyCoord();
 
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Azuriranje odabrane lokacije");
-        alert.setHeaderText("Zelite li lokaciji >>" + toBeChanged.getNazivLokacije() +  "<< promijeniti vrijednosti:");
-        alert.setContentText(toBeChanged.getNazivLokacije() + " u " + nazivLokacijeTextField.getText() + "\n " +
-                toBeChanged.getTypeLocation() + " u " + probaGlob + "\n " +
-                toBeChanged.getxCoord() + " u " + x_coordTextField.getText() + "\n " +
-                toBeChanged.getyCoord() + " u " + y_coordTextField.getText() + "\n ");
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Azuriranje odabrane lokacije");
+            alert.setHeaderText("Zelite li lokaciji >>" + toBeChanged.getNazivLokacije() +  "<< promijeniti vrijednosti:");
+            alert.setContentText(toBeChanged.getNazivLokacije() + " u " + nazivLokacijeTextField.getText() + "\n " +
+                    toBeChanged.getTypeLocation() + " u " + probaGlob + "\n " +
+                    toBeChanged.getxCoord() + " u " + x_coordTextField.getText() + "\n " +
+                    toBeChanged.getyCoord() + " u " + y_coordTextField.getText() + "\n ");
 
-        Optional<ButtonType> action = alert.showAndWait();
+            Optional<ButtonType> action = alert.showAndWait();
 
-        if (action.get() == ButtonType.OK){
-            Integer currentLokacijaId = Integer.parseInt(String.valueOf(toBeChanged.getId()));
+            if (action.get() == ButtonType.OK){
+                Integer currentLokacijaId = Integer.parseInt(String.valueOf(toBeChanged.getId()));
 
-            for(Lokalitet target : crntLokalitetList){
-                if(target.getId() == currentLokacijaId){
-                    target.setNazivLokacije(nazivLokacijeTextField.getText());
-                    target.setTypeLocation(probaGlob);
-                    target.setxCoord(x_coordTextField.getText());
-                    target.setyCoord(y_coordTextField.getText());
+                for(Lokalitet target : crntLokalitetList){
+                    if(target.getId() == currentLokacijaId){
+                        target.setNazivLokacije(nazivLokacijeTextField.getText());
+                        target.setTypeLocation(probaGlob);
+                        target.setxCoord(x_coordTextField.getText());
+                        target.setyCoord(y_coordTextField.getText());
 
-                    String afterChange = target.getId()+","+target.getNazivLokacije()+","+target.getTypeLocation()+","+target.getxCoord()+","+target.getyCoord();
-                    String user = LoginController.odabraniUser;
-                    LocalDateTime ldt = LocalDateTime.now();
-                    DateTimeFormatter dateTFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-                    String dateOfChange = ldt.format(dateTFormat);
+                        String afterChange = target.getId()+","+target.getNazivLokacije()+","+target.getTypeLocation()+","+target.getxCoord()+","+target.getyCoord();
+                        String user = LoginController.odabraniUser;
+                        LocalDateTime ldt = LocalDateTime.now();
+                        DateTimeFormatter dateTFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+                        String dateOfChange = ldt.format(dateTFormat);
 
-                    listaSTO=Serijalizacija.deserializeSTOList(listaSTO);
-                    Serijalizacija serSTO = new Serijalizacija(beforeChange,afterChange,user,dateOfChange);
-                    listaSTO.add(serSTO);
-                    Serijalizacija.serializeSTO(listaSTO);
+                        listaSTO=Serijalizacija.deserializeSTOList(listaSTO);
+                        Serijalizacija serSTO = new Serijalizacija(beforeChange,afterChange,user,dateOfChange);
+                        listaSTO.add(serSTO);
+                        Serijalizacija.serializeSTO(listaSTO);
 
-                    lokacijeTableView.setItems(crntLokalitetList);
-                    BazaPodataka.azurirajLLokalitet(toBeChanged);
-                    lokacijeTableView.refresh();
-                    break;
+                        lokacijeTableView.setItems(crntLokalitetList);
+                        BazaPodataka.azurirajLLokalitet(toBeChanged);
+                        lokacijeTableView.refresh();
+                        break;
+                    }
                 }
             }
+
+        } else {
+            Alert warning = new Alert(Alert.AlertType.WARNING);
+            warning.setTitle("Upozorenje");
+            warning.setHeaderText(null);
+            warning.setContentText("Nemate administratorske ovlasti da ažurirate odabranu lokaciju!");
+
+            warning.showAndWait();
         }
     }
 
@@ -228,19 +240,29 @@ public class PregledLokacijaController {
 
     @FXML
     public void deleteSelectedLokacija() throws Exception{
-        Lokalitet abolished = lokacijeTableView.getSelectionModel().getSelectedItem();
+        if (odabraniUser.equals("admin".toUpperCase())){
+            Lokalitet abolished = lokacijeTableView.getSelectionModel().getSelectedItem();
 
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Brisanje odabrane lokacije");
-        alert.setHeaderText(null);
-        alert.setContentText("Zelite li ukloniti odabranu lokaciju?");
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Brisanje odabrane lokacije");
+            alert.setHeaderText(null);
+            alert.setContentText("Zelite li ukloniti odabranu lokaciju?");
 
-        Optional<ButtonType> action = alert.showAndWait();
+            Optional<ButtonType> action = alert.showAndWait();
 
-        if (action.get() == ButtonType.OK){
-            lokacijeTableView.getItems().remove(abolished);
-            BazaPodataka.ukloniLokaciju(abolished.getId());
+            if (action.get() == ButtonType.OK){
+                lokacijeTableView.getItems().remove(abolished);
+                BazaPodataka.ukloniLokaciju(abolished.getId());
+            }
+        } else {
+            Alert warning = new Alert(Alert.AlertType.WARNING);
+            warning.setTitle("Upozorenje");
+            warning.setHeaderText(null);
+            warning.setContentText("Nemate administratorske ovlasti da uklonite odabranu lokaciju!");
+
+            warning.showAndWait();
         }
+
     }
     public static void showPregledLokacijaScreen() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("pregledLokacija.fxml"));
@@ -255,7 +277,13 @@ public class PregledLokacijaController {
         UnosLokalitetaController.showUnosLokalitetaScreen();
     }
     public void natragButtonClicked() throws IOException {
-        MainMenuController.showMainMenuScreen();
+        if (odabraniUser.equals("admin".toUpperCase())){
+            MainMenuController.showMainMenuScreen();
+            running.set(false);
+        } else {
+            MainMenuController.showMainMenuScreenUser();
+            running.set(false);
+        }
     }
 
 }

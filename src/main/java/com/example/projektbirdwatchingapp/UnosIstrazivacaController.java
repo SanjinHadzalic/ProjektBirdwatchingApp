@@ -95,7 +95,7 @@ public class UnosIstrazivacaController {
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("pregledIstrazivaca.fxml"));
             Scene scene = null;
             try{
-                scene = new Scene(fxmlLoader.load(), 1000, 800);
+                scene = new Scene(fxmlLoader.load(), 800, 600);
             } catch (IOException ex){
                 throw new RuntimeException(ex);
             }

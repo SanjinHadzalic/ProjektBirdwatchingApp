@@ -26,6 +26,8 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
+import static com.example.projektbirdwatchingapp.LoginController.odabraniUser;
+
 public class PregledIstrazivacaController {
     @FXML
     private TextField imeIstrazivacaTextField;
@@ -129,7 +131,7 @@ public class PregledIstrazivacaController {
 
     public static void showPregledIstrazivacaScreen() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("pregledIstrazivaca.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 750, 800);
+        Scene scene = new Scene(fxmlLoader.load(), 800, 600);
         HelloApplication.getMainStage().setTitle("Pregled istrazivaca");
         HelloApplication.getMainStage().setScene(scene);
         HelloApplication.getMainStage().show();
@@ -214,79 +216,113 @@ public class PregledIstrazivacaController {
     }
     @FXML
     public void submit(ActionEvent event) throws Exception {
-        ObservableList<IstrazivacUnos> crntIstrazivacList = istrazivacPregledTableView.getItems();
-        IstrazivacUnos toBeChanged = istrazivacPregledTableView.getSelectionModel().getSelectedItem();
-        String beforeChange = toBeChanged.getId()+","+toBeChanged.getIme()+","+toBeChanged.getPrezime()+","+toBeChanged.getDatum()+","+toBeChanged.getInstitucija()+","+toBeChanged.getBroj()+","+toBeChanged.getAdresa()+","+toBeChanged.getEmail();
+        if (odabraniUser.equals("admin".toUpperCase())){
+            ObservableList<IstrazivacUnos> crntIstrazivacList = istrazivacPregledTableView.getItems();
+            IstrazivacUnos toBeChanged = istrazivacPregledTableView.getSelectionModel().getSelectedItem();
+            String beforeChange = toBeChanged.getId()+","+toBeChanged.getIme()+","+toBeChanged.getPrezime()+","+toBeChanged.getDatum()+","+toBeChanged.getInstitucija()+","+toBeChanged.getBroj()+","+toBeChanged.getAdresa()+","+toBeChanged.getEmail();
 
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Azuriranje odabranog korisnika");
-        alert.setHeaderText("Zelite li istrazivacu " + toBeChanged.getIme() + " " + toBeChanged.getPrezime() + " promijeniti vrijednosti:");
-        alert.setContentText(toBeChanged.getIme() + " u " + imeIstrazivacaTextField.getText() + "\n " +
-                            toBeChanged.getPrezime() + " u " + prezimeIStrazivacaTextField.getText() + "\n " +
-                            toBeChanged.getDatum() + " u " + datumRodjenjaIstrazivacaTextField.getValue() + "\n " +
-                            toBeChanged.getInstitucija() + " u " + institucijaIstrazivacaTextField.getText() + "\n " +
-                            toBeChanged.getBroj() + " u " + mobitelIstrazivacaTextField.getText() + "\n " +
-                            toBeChanged.getAdresa() + " u " + adresaIstrazivacaTextField.getText() + "\n " +
-                            toBeChanged.getEmail() + " u " + emailIstrazivacaTextField.getText() + "\n");
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Azuriranje odabranog korisnika");
+            alert.setHeaderText("Zelite li istrazivacu " + toBeChanged.getIme() + " " + toBeChanged.getPrezime() + " promijeniti vrijednosti:");
+            alert.setContentText(toBeChanged.getIme() + " u " + imeIstrazivacaTextField.getText() + "\n " +
+                                toBeChanged.getPrezime() + " u " + prezimeIStrazivacaTextField.getText() + "\n " +
+                                toBeChanged.getDatum() + " u " + datumRodjenjaIstrazivacaTextField.getValue() + "\n " +
+                                toBeChanged.getInstitucija() + " u " + institucijaIstrazivacaTextField.getText() + "\n " +
+                                toBeChanged.getBroj() + " u " + mobitelIstrazivacaTextField.getText() + "\n " +
+                                toBeChanged.getAdresa() + " u " + adresaIstrazivacaTextField.getText() + "\n " +
+                                toBeChanged.getEmail() + " u " + emailIstrazivacaTextField.getText() + "\n");
 
-        Optional<ButtonType> action = alert.showAndWait();
+            Optional<ButtonType> action = alert.showAndWait();
 
-        if (action.get() == ButtonType.OK){
-            Integer currentIstrazivacId = Integer.parseInt(String.valueOf(toBeChanged.getId()));
+            if (action.get() == ButtonType.OK){
+                Integer currentIstrazivacId = Integer.parseInt(String.valueOf(toBeChanged.getId()));
 
-            for(IstrazivacUnos target : crntIstrazivacList){
-                if(target.getId() == currentIstrazivacId){
-                    target.setIme(imeIstrazivacaTextField.getText());
-                    target.setPrezime(prezimeIStrazivacaTextField.getText());
-                    target.setDatum(datumRodjenjaIstrazivacaTextField.getValue());
-                    target.setInstitucija(institucijaIstrazivacaTextField.getText());
-                    target.setAdresa(adresaIstrazivacaTextField.getText());
-                    target.setBroj(Integer.valueOf(mobitelIstrazivacaTextField.getText()));
-                    target.setEmail(emailIstrazivacaTextField.getText());
+                for(IstrazivacUnos target : crntIstrazivacList){
+                    if(target.getId() == currentIstrazivacId){
+                        target.setIme(imeIstrazivacaTextField.getText());
+                        target.setPrezime(prezimeIStrazivacaTextField.getText());
+                        target.setDatum(datumRodjenjaIstrazivacaTextField.getValue());
+                        target.setInstitucija(institucijaIstrazivacaTextField.getText());
+                        target.setAdresa(adresaIstrazivacaTextField.getText());
+                        target.setBroj(Integer.valueOf(mobitelIstrazivacaTextField.getText()));
+                        target.setEmail(emailIstrazivacaTextField.getText());
 
-                    String afterChange = target.getId()+","+target.getIme()+","+target.getPrezime()+","+target.getDatum()+","+target.getInstitucija()+","+target.getBroj()+","+target.getAdresa()+","+target.getEmail();
-                    String user = LoginController.odabraniUser;
-                    LocalDateTime ldt = LocalDateTime.now();
-                    DateTimeFormatter dateTFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-                    String dateOfChange = ldt.format(dateTFormat);
+                        String afterChange = target.getId()+","+target.getIme()+","+target.getPrezime()+","+target.getDatum()+","+target.getInstitucija()+","+target.getBroj()+","+target.getAdresa()+","+target.getEmail();
+                        String user = LoginController.odabraniUser;
+                        LocalDateTime ldt = LocalDateTime.now();
+                        DateTimeFormatter dateTFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+                        String dateOfChange = ldt.format(dateTFormat);
 
-                    listaSTO=Serijalizacija.deserializeSTOList(listaSTO);
-                    Serijalizacija serSTO = new Serijalizacija(beforeChange,afterChange,user,dateOfChange);
-                    listaSTO.add(serSTO);
-                    Serijalizacija.serializeSTO(listaSTO);
+                        listaSTO=Serijalizacija.deserializeSTOList(listaSTO);
+                        Serijalizacija serSTO = new Serijalizacija(beforeChange,afterChange,user,dateOfChange);
+                        listaSTO.add(serSTO);
+                        Serijalizacija.serializeSTO(listaSTO);
 
-                    istrazivacPregledTableView.setItems(crntIstrazivacList);
-                    BazaPodataka.azurirajIstrazivaca(toBeChanged);
-                    istrazivacPregledTableView.refresh();
-                    break;
+                        istrazivacPregledTableView.setItems(crntIstrazivacList);
+                        BazaPodataka.azurirajIstrazivaca(toBeChanged);
+                        istrazivacPregledTableView.refresh();
+                        break;
+                    }
                 }
             }
+        } else{
+            Alert warning = new Alert(Alert.AlertType.WARNING);
+            warning.setTitle("Upozorenje");
+            warning.setHeaderText(null);
+            warning.setContentText("Nemate administratorske ovlasti za ažuriranje odabrane osobe");
+
+            warning.showAndWait();
         }
 
     }
     @FXML
     public void deleteSelectedIstrazivac() throws Exception{
-        IstrazivacUnos abolished = istrazivacPregledTableView.getSelectionModel().getSelectedItem();
+        if (odabraniUser.equals("admin".toUpperCase())){
+            IstrazivacUnos abolished = istrazivacPregledTableView.getSelectionModel().getSelectedItem();
 
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Brisanje odabranog korisnika");
-        alert.setHeaderText(null);
-        alert.setContentText("Zelite li ukloniti odabranog istrazivaca?");
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Brisanje odabranog korisnika");
+            alert.setHeaderText(null);
+            alert.setContentText("Zelite li ukloniti odabranog istrazivaca?");
 
-        Optional<ButtonType> action = alert.showAndWait();
+            Optional<ButtonType> action = alert.showAndWait();
 
-        if (action.get() == ButtonType.OK){
-            istrazivacPregledTableView.getItems().remove(abolished);
-            BazaPodataka.ukloniIstrazivaca(abolished.getId());
+            if (action.get() == ButtonType.OK){
+                istrazivacPregledTableView.getItems().remove(abolished);
+                BazaPodataka.ukloniIstrazivaca(abolished.getId());
+            }
+        } else {
+            Alert warning = new Alert(Alert.AlertType.WARNING);
+            warning.setTitle("Upozorenje");
+            warning.setHeaderText(null);
+            warning.setContentText("Nemate administratorske ovlasti za uklanjanje odabrane osobe");
+
+            warning.showAndWait();
+
         }
     }
 
     @FXML
     public void addNewUserSpona() throws IOException {
-        UnosIstrazivacaController.showUnosIstrazivacaScreen();
+        if (odabraniUser.equals("admin".toUpperCase())){
+            UnosIstrazivacaController.showUnosIstrazivacaScreen();
+        } else {
+            Alert warning = new Alert(Alert.AlertType.WARNING);
+            warning.setTitle("Upozorenje");
+            warning.setHeaderText(null);
+            warning.setContentText("Nemate administratorske ovlasti za dodavanje novog istraživača");
+
+            warning.showAndWait();
+
+        }
     }
     public void natragButtonClicked() throws IOException {
-        MainMenuController.showMainMenuScreen();
-        running.set(false);
+        if (odabraniUser.equals("admin".toUpperCase())){
+            MainMenuController.showMainMenuScreen();
+            running.set(false);
+        } else {
+            MainMenuController.showMainMenuScreenUser();
+            running.set(false);
+        }
     }
 }
