@@ -4,6 +4,7 @@ import hr.java.vjezbe.baza.BazaPodataka;
 import hr.java.vjezbe.entiteti.IstrazivacUnos;
 import hr.java.vjezbe.entiteti.Lokalitet;
 import hr.java.vjezbe.util.Serijalizacija;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -22,6 +23,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
 public class PregledLokacijaController {
@@ -51,6 +53,7 @@ public class PregledLokacijaController {
     @FXML
     private TableColumn<Lokalitet, String> yCoordLokacijeTableColumn;
     private ArrayList<Serijalizacija> listaSTO = new ArrayList<>();
+    private final AtomicBoolean running = new AtomicBoolean(true);
 
     @FXML
     public void initialize(){
@@ -84,7 +87,27 @@ public class PregledLokacijaController {
             }
         });
 
-        lokacijeTableView.setItems(FXCollections.observableList(HelloApplication.getLokacijaList()));
+        refreshLokacija(running);
+    }
+    public Thread refreshLokacija(AtomicBoolean running){
+        Thread t = new Thread(() -> {
+            while(running.get()){
+                System.out.println("Thread za refresh lokacija radi\n");
+                Platform.runLater(() ->{
+                    lokacijeTableView.setItems(FXCollections.observableList(HelloApplication.getLokacijaList()));
+                });
+                try {
+                    Thread.sleep(3000); //sleep 3 secs
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+
+        t.setDaemon(true);
+        t.start();
+
+        return t;
     }
 
     @FXML
@@ -119,6 +142,7 @@ public class PregledLokacijaController {
 
         lokacijeTableView.setItems(FXCollections.observableList(filterLokacija));
         System.out.println(nazivLokacije + " " +  tipLokacije + " " + x_coord + " " +  y_coord);
+        running.set(false);
     }
 
     @FXML
@@ -198,6 +222,8 @@ public class PregledLokacijaController {
         nacionalniParkRadioButton.setSelected(true);
         x_coordTextField.clear();
         y_coordTextField.clear();
+        running.set(true);
+        refreshLokacija(running);
     }
 
     @FXML

@@ -3,6 +3,7 @@ package com.example.projektbirdwatchingapp;
 import hr.java.vjezbe.baza.BazaPodataka;
 import hr.java.vjezbe.entiteti.IstrazivacUnos;
 import hr.java.vjezbe.util.Serijalizacija;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -12,10 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.util.Callback;
-import org.w3c.dom.events.MouseEvent;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -25,10 +23,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
 public class PregledIstrazivacaController {
-
     @FXML
     private TextField imeIstrazivacaTextField;
     @FXML
@@ -60,6 +58,8 @@ public class PregledIstrazivacaController {
     @FXML
     private TableColumn<IstrazivacUnos,String> emailIstrazivacaTableColumn;
     private ArrayList<Serijalizacija> listaSTO = new ArrayList<>();
+    private final AtomicBoolean running = new AtomicBoolean(true);
+
     @FXML
     public void initialize() throws FileNotFoundException {
         imeIstrazivacaTableColumn
@@ -102,8 +102,31 @@ public class PregledIstrazivacaController {
                 .setCellValueFactory(cellData ->
                         new SimpleStringProperty(cellData.getValue().getEmail()));
 
-        istrazivacPregledTableView.setItems(FXCollections.observableList(HelloApplication.getIstrazivacUnosList()));
+        refreshIstrazivac(running);
     }
+
+    public Thread refreshIstrazivac(AtomicBoolean running){
+        Thread t = new Thread(() -> {
+            while(running.get()){
+                System.out.println("Thread za refresh istrazivaca radi\n");
+                System.out.println(LocalDateTime.now());
+                Platform.runLater(() ->{
+                    istrazivacPregledTableView.setItems(FXCollections.observableList(HelloApplication.getIstrazivacUnosList()));
+                });
+                try {
+                    Thread.sleep(3000); //sleep 3 secs
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+
+        t.setDaemon(true);
+        t.start();
+
+        return t;
+    }
+
     public static void showPregledIstrazivacaScreen() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("pregledIstrazivaca.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 750, 800);
@@ -161,6 +184,7 @@ public class PregledIstrazivacaController {
         }
 
         istrazivacPregledTableView.setItems(FXCollections.observableList(filterIStrazivacUnos));
+        running.set(false);
     }
 
     @FXML
@@ -185,6 +209,8 @@ public class PregledIstrazivacaController {
         adresaIstrazivacaTextField.clear();
         mobitelIstrazivacaTextField.clear();
         emailIstrazivacaTextField.clear();
+        running.set(true);
+        refreshIstrazivac(running);
     }
     @FXML
     public void submit(ActionEvent event) throws Exception {
@@ -261,5 +287,6 @@ public class PregledIstrazivacaController {
     }
     public void natragButtonClicked() throws IOException {
         MainMenuController.showMainMenuScreen();
+        running.set(false);
     }
 }

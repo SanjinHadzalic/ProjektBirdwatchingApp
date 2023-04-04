@@ -6,6 +6,7 @@ import hr.java.vjezbe.entiteti.IstrazivacUnos;
 import hr.java.vjezbe.entiteti.Lokalitet;
 import hr.java.vjezbe.entiteti.Nomenklatura;
 import hr.java.vjezbe.util.Serijalizacija;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -27,8 +28,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import static com.example.projektbirdwatchingapp.LoginController.odabraniUser;
 
 public class PregledPodatakaController implements Initializable {
     @FXML
@@ -65,6 +69,8 @@ public class PregledPodatakaController implements Initializable {
     private final List<IstrazivacUnos> istrazivaciBaza = BazaPodataka.dohvatiSveIstrazivace().stream().toList();
     private final List<Lokalitet> lokacijaBazaPodataka = BazaPodataka.dohvatiSveLokacije().stream().toList();
     private ArrayList<Serijalizacija> listaSTO = new ArrayList<>();
+    private final AtomicBoolean running = new AtomicBoolean(true);
+
 
     public static void showPregledPodatakaScreen() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("pregledPodataka.fxml"));
@@ -74,10 +80,12 @@ public class PregledPodatakaController implements Initializable {
         HelloApplication.getMainStage().show();
     }
     public void natragButtonClicked() throws IOException {
-        if (LoginController.odabraniUser.equals("admin".toUpperCase())){
+        if (odabraniUser.equals("admin".toUpperCase())){
             MainMenuController.showMainMenuScreen();
+            running.set(false);
         } else {
             MainMenuController.showMainMenuScreenUser();
+            running.set(false);
         }
     }
     @Override
@@ -106,12 +114,12 @@ public class PregledPodatakaController implements Initializable {
         vrstaComboBox.setEditable(true);
         vrstaComboBox.getItems().setAll(Nomenklatura.values());
         spolVrsteComboBox.setItems(FXCollections.observableArrayList("M", "F","U" ));
-        if (LoginController.odabraniUser.equals("admin".toUpperCase())){
+        if (odabraniUser.equals("admin".toUpperCase())){
             for (IstrazivacUnos e : istrazivaciBaza){
                 istrazivacComboBox.getItems().add(e.getIme() + " " + e.getPrezime());
             }
         } else {
-            String user = LoginController.odabraniUser;
+            String user = odabraniUser;
             List<IstrazivacUnos> istr = istrazivaciBaza.stream()
                             .filter(a->a.getIme().toLowerCase().startsWith(user))
                     .collect(Collectors.toList());
@@ -122,14 +130,33 @@ public class PregledPodatakaController implements Initializable {
         for (Lokalitet l : lokacijaBazaPodataka){
             lokacijaComboBox.getItems().add(l.getNazivLokacije());
         }
-        if(LoginController.odabraniUser.equals("admin".toUpperCase())){
-            podaciTableView.setItems(FXCollections.observableList(HelloApplication.getPodatakList()));
-        } else {
-            podaciTableView.setItems(FXCollections.observableList(HelloApplication.getPodatakList().stream().filter(a->a.getIstrazivac().toLowerCase().startsWith(LoginController.odabraniUser)).collect(Collectors.toList())));
-            System.out.println("U pregledu je odabran user: " + LoginController.odabraniUser);
-        }
+        refreshPodatak(odabraniUser, running);
     }
 
+    public Thread refreshPodatak(String odabraniUser, AtomicBoolean running){
+        Thread t = new Thread(() -> {
+            while(running.get()){
+                System.out.println("Thread za refresh podataka radi\n");
+                Platform.runLater(() ->{
+                    if (odabraniUser.equals("admin".toUpperCase())){
+                        podaciTableView.setItems(FXCollections.observableList(HelloApplication.getPodatakList()));
+                    } else {
+                        podaciTableView.setItems(FXCollections.observableList(HelloApplication.getPodatakList().stream().filter(a->a.getIstrazivac().toLowerCase().startsWith(odabraniUser)).collect(Collectors.toList())));
+                    }
+                });
+                try {
+                    Thread.sleep(3000); //sleep 3 secs
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+
+        t.setDaemon(true);
+        t.start();
+
+        return t;
+    }
     @FXML
     public void filterPodatak(){
         String naziv = String.valueOf(vrstaComboBox.getSelectionModel().getSelectedItem());
@@ -173,6 +200,7 @@ public class PregledPodatakaController implements Initializable {
         }
         podaciTableView.setItems(FXCollections.observableList(filterPodatakList));
         System.out.println(vrstaComboBox.getSelectionModel().getSelectedItem());
+        running.set(false);
     }
 
     @FXML
@@ -197,6 +225,8 @@ public class PregledPodatakaController implements Initializable {
         datumDatePicker.setValue(null);
 
         podaciTableView.setItems(FXCollections.observableList(HelloApplication.getPodatakList()));
+        running.set(true);
+        refreshPodatak(odabraniUser,running);
     }
 
     @FXML
@@ -231,7 +261,7 @@ public class PregledPodatakaController implements Initializable {
                     target.setDatum(datumDatePicker.getValue());
 
                     String afterChange = target.getId() + "," + target.getNaziv() + "," + target.getBrojnost() + ","+ target.getSpol()+","+target.getKomentari()+","+target.getIstrazivac()+"'"+target.getLokacija()+","+target.getDatum();
-                    String user = LoginController.odabraniUser.toUpperCase();
+                    String user = odabraniUser.toUpperCase();
                     LocalDateTime ldt = LocalDateTime.now();
                     DateTimeFormatter dateTFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
                     String dateOfChange = ldt.format(dateTFormat);
