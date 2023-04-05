@@ -103,7 +103,7 @@
             <Insets left="10.0" right="10.0" />
          </GridPane.margin>
       </SplitPane>
-      <Label fx:id="greetingLabel" alignment="CENTER" contentDisplay="CENTER" text="admin" GridPane.columnSpan="2" GridPane.halignment="CENTER">
+      <Label alignment="CENTER" contentDisplay="CENTER" text="admin" GridPane.columnSpan="2" GridPane.halignment="CENTER">
          <font>
             <Font size="24.0" />
          </font>

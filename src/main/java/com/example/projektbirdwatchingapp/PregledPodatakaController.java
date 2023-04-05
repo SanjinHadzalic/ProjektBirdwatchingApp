@@ -79,12 +79,13 @@ public class PregledPodatakaController implements Initializable {
         HelloApplication.getMainStage().setScene(scene);
         HelloApplication.getMainStage().show();
     }
+    @FXML
     public void natragButtonClicked() throws IOException {
         if (odabraniUser.equals("admin".toUpperCase())){
             MainMenuController.showMainMenuScreen();
             running.set(false);
         } else {
-            MainMenuController.showMainMenuScreenUser();
+            MainMenuUserController.showMainMenuScreenUser();
             running.set(false);
         }
     }
@@ -120,8 +121,9 @@ public class PregledPodatakaController implements Initializable {
             }
         } else {
             String user = odabraniUser;
+            System.out.println("Tijekom pregleda je " + user);
             List<IstrazivacUnos> istr = istrazivaciBaza.stream()
-                            .filter(a->a.getIme().toLowerCase().startsWith(user))
+                            .filter(a->a.getIme().toLowerCase().startsWith(user.toLowerCase()))
                     .collect(Collectors.toList());
             for(IstrazivacUnos f : istr){
                 istrazivacComboBox.getItems().add(f.getIme() + " " + f.getPrezime());
@@ -141,7 +143,7 @@ public class PregledPodatakaController implements Initializable {
                     if (odabraniUser.equals("admin".toUpperCase())){
                         podaciTableView.setItems(FXCollections.observableList(HelloApplication.getPodatakList()));
                     } else {
-                        podaciTableView.setItems(FXCollections.observableList(HelloApplication.getPodatakList().stream().filter(a->a.getIstrazivac().toLowerCase().startsWith(odabraniUser)).collect(Collectors.toList())));
+                        podaciTableView.setItems(FXCollections.observableList(HelloApplication.getPodatakList().stream().filter(a->a.getIstrazivac().toLowerCase().startsWith(odabraniUser.toLowerCase())).collect(Collectors.toList())));
                     }
                 });
                 try {
