@@ -81,8 +81,10 @@ public class LoginController {
                     }
                 } else if (userTest.equals(itUser)  && Objects.equals(itRole, "U")) {
                     if (passTest.equals(itPass)){
-                        MainMenuController.showMainMenuScreenUser();
-                        odabraniUser=itUser.toUpperCase();
+                        MainMenuUserController.showMainMenuScreenUser();
+                        odabraniUser=itUser;
+                        odabraniUser=odabraniUser.substring(0,1).toUpperCase() + odabraniUser.substring(1);
+                        MainMenuUserController.statGreeting.setText("Bok " + odabraniUser);
                         System.out.println(odabraniUser);
                     } else if (!passTest.equals(itPass)) {
                         Alert losaLozinka = new Alert(Alert.AlertType.ERROR);
@@ -147,8 +149,10 @@ public class LoginController {
                     }
                 } else if (userTest.equals(itUser) && Objects.equals(itRole, "U")) {
                     if (passTest.equals(itPass)){
-                        MainMenuController.showMainMenuScreenUser();
+                        MainMenuUserController.showMainMenuScreenUser();
                         odabraniUser=itUser;
+                        odabraniUser=odabraniUser.substring(0,1).toUpperCase() + odabraniUser.substring(1);
+                        MainMenuUserController.statGreeting.setText("Bok " + odabraniUser);
                         System.out.println(odabraniUser);
                     } else if (!passTest.equals(itPass)) {
                         Alert losaLozinka = new Alert(Alert.AlertType.ERROR);

@@ -49,7 +49,7 @@
             <TableColumn minWidth="0.0" prefWidth="0.0" />
         </columns>
       </TableView>
-      <Label text="Ime" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
+      <Label fx:id="linija" text="Ime" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
          <GridPane.margin>
             <Insets left="30.0" top="10.0" />
          </GridPane.margin>

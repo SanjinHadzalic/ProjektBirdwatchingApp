@@ -17,6 +17,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class PromjeneController {
     @FXML
@@ -30,6 +31,7 @@ public class PromjeneController {
     @FXML
     private TableView<Serijalizacija> changesTableView;
     private ArrayList<Serijalizacija> listaSTO;
+    private AtomicBoolean running = new AtomicBoolean(true);
     @FXML
     public void initialize() throws FileNotFoundException {
         beforeTableColumn
@@ -54,7 +56,7 @@ public class PromjeneController {
 
     public Thread refreshPromjene(){
         Thread t = new Thread(() -> {
-            while(true){
+            while(running.get()){
                 System.out.println("Thread za refresh promjena radi\n");
                 try {
                     Thread.sleep(3000); //sleep 3 secs
@@ -82,5 +84,6 @@ public class PromjeneController {
 
     public void natragButtonClicked() throws IOException {
         MainMenuController.showMainMenuScreen();
+        running.set(false);
     }
 }

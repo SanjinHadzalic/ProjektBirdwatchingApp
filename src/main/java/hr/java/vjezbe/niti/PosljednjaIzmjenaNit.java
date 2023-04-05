@@ -28,6 +28,5 @@ public class PosljednjaIzmjenaNit extends Thread{
         alert.setContentText(">> " + a + " <<\n " + ">> "+b + " << ");
 
         alert.showAndWait();
-
     }
 }

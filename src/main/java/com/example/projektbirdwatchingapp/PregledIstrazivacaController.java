@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.text.Text;
 import javafx.util.Callback;
 
 import java.io.FileNotFoundException;
@@ -321,7 +322,7 @@ public class PregledIstrazivacaController {
             MainMenuController.showMainMenuScreen();
             running.set(false);
         } else {
-            MainMenuController.showMainMenuScreenUser();
+            MainMenuUserController.showMainMenuScreenUser();
             running.set(false);
         }
     }

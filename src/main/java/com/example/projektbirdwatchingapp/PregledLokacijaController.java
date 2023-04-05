@@ -281,7 +281,7 @@ public class PregledLokacijaController {
             MainMenuController.showMainMenuScreen();
             running.set(false);
         } else {
-            MainMenuController.showMainMenuScreenUser();
+            MainMenuUserController.showMainMenuScreenUser();
             running.set(false);
         }
     }
