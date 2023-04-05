@@ -8,10 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
-import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -22,16 +19,16 @@ public class MainMenuController{
     private Label pozdrav;
     private  final AtomicBoolean flag = new AtomicBoolean(true);
     private static Timeline noviTimeLine = new Timeline(
-            new KeyFrame(Duration.seconds(5), event -> Platform.runLater(new PosljednjaIzmjenaNit()))
+            new KeyFrame(Duration.seconds(30), event -> Platform.runLater(new PosljednjaIzmjenaNit()))
     );
 
 
     public static void showMainMenuScreen() throws IOException{
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("mainMenu.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("mainMenu.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 520, 400);
-        HelloApplication.getMainStage().setTitle("Glavni ekran");
-        HelloApplication.getMainStage().setScene(scene);
-        HelloApplication.getMainStage().show();
+        Application.getMainStage().setTitle("Glavni ekran");
+        Application.getMainStage().setScene(scene);
+        Application.getMainStage().show();
 
 //        var noviTimeLine = new Timeline(
 //                new KeyFrame(Duration.seconds(5), event -> Platform.runLater(new PosljednjaIzmjenaNit()))
@@ -41,11 +38,11 @@ public class MainMenuController{
     }
 
     public void logoutButtonOnAction(ActionEvent e) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("login.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 520, 400);
-        HelloApplication.getMainStage().setTitle("BirdwatchingApp");
-        HelloApplication.getMainStage().setScene(scene);
-        HelloApplication.getMainStage().show();
+        Application.getMainStage().setTitle("BirdwatchingApp");
+        Application.getMainStage().setScene(scene);
+        Application.getMainStage().show();
         noviTimeLine.stop();
     }
 

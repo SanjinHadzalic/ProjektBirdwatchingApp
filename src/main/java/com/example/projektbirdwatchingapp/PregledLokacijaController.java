@@ -1,7 +1,6 @@
 package com.example.projektbirdwatchingapp;
 
 import hr.java.vjezbe.baza.BazaPodataka;
-import hr.java.vjezbe.entiteti.IstrazivacUnos;
 import hr.java.vjezbe.entiteti.Lokalitet;
 import hr.java.vjezbe.util.Serijalizacija;
 import javafx.application.Platform;
@@ -17,7 +16,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -96,7 +94,7 @@ public class PregledLokacijaController {
             while(running.get()){
                 System.out.println("Thread za refresh lokacija radi\n");
                 Platform.runLater(() ->{
-                    lokacijeTableView.setItems(FXCollections.observableList(HelloApplication.getLokacijaList()));
+                    lokacijeTableView.setItems(FXCollections.observableList(Application.getLokacijaList()));
                 });
                 try {
                     Thread.sleep(3000); //sleep 3 secs
@@ -119,7 +117,7 @@ public class PregledLokacijaController {
         String x_coord = x_coordTextField.getText();
         String y_coord = y_coordTextField.getText();
 
-        List<Lokalitet> filterLokacija = new ArrayList<>(HelloApplication.getLokacijaList());
+        List<Lokalitet> filterLokacija = new ArrayList<>(Application.getLokacijaList());
 
         if (Optional.of(nazivLokacije).isPresent() == true) {
             filterLokacija = filterLokacija.stream()
@@ -265,11 +263,11 @@ public class PregledLokacijaController {
 
     }
     public static void showPregledLokacijaScreen() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("pregledLokacija.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("pregledLokacija.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 650, 500);
-        HelloApplication.getMainStage().setTitle("Pregled lokacija");
-        HelloApplication.getMainStage().setScene(scene);
-        HelloApplication.getMainStage().show();
+        Application.getMainStage().setTitle("Pregled lokacija");
+        Application.getMainStage().setScene(scene);
+        Application.getMainStage().show();
     }
 
     @FXML

@@ -1,21 +1,17 @@
 package com.example.projektbirdwatchingapp;
 
-import hr.java.vjezbe.entiteti.IstrazivacUnos;
 import hr.java.vjezbe.util.Serijalizacija;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.util.Callback;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -75,11 +71,11 @@ public class PromjeneController {
         return t;
     }
     public static void showPromjeneScreen() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("promjene.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("promjene.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 850, 800);
-        HelloApplication.getMainStage().setTitle("Promjene");
-        HelloApplication.getMainStage().setScene(scene);
-        HelloApplication.getMainStage().show();
+        Application.getMainStage().setTitle("Promjene");
+        Application.getMainStage().setScene(scene);
+        Application.getMainStage().show();
     }
 
     public void natragButtonClicked() throws IOException {

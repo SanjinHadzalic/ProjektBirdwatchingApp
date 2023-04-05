@@ -96,7 +96,7 @@ public class UnosPodatkaController implements Initializable {
         } else if (vrstaPodatka.isBlank() != true && brojnostPodatka.isBlank() != true && datumPodatka != null && spolPodatka.isBlank() != true && istrazivacPodatka.isBlank() != true && lokacijaPodatka.isBlank() != true) {
             BirdUnos noviPodatak = new BirdUnos(idPodatka, vrstaPodatka, Integer.parseInt(brojnostPodatka), spolPodatka, komentari, istrazivacPodatka, lokacijaPodatka, datumPodatka);
 
-            HelloApplication.getPodatakList().add(noviPodatak);
+            Application.getPodatakList().add(noviPodatak);
 
             writeNewPodatak();
 
@@ -107,16 +107,16 @@ public class UnosPodatkaController implements Initializable {
 
             obavijestUnosa.showAndWait();
 
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("pregledPodataka.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("pregledPodataka.fxml"));
             Scene scene = null;
             try{
                 scene = new Scene(fxmlLoader.load(), 1000, 800);
             } catch (IOException ex){
                 throw new RuntimeException(ex);
             }
-            HelloApplication.getMainStage().setTitle("Pregled podataka");
-            HelloApplication.getMainStage().setScene(scene);
-            HelloApplication.getMainStage().show();
+            Application.getMainStage().setTitle("Pregled podataka");
+            Application.getMainStage().setScene(scene);
+            Application.getMainStage().show();
         }
     }
 
@@ -141,11 +141,11 @@ public class UnosPodatkaController implements Initializable {
 
 
     public static void showUnosPodatkaScreen() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("unosPodatka.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("unosPodatka.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 400);
-        HelloApplication.getMainStage().setTitle("Unos novog podatka");
-        HelloApplication.getMainStage().setScene(scene);
-        HelloApplication.getMainStage().show();
+        Application.getMainStage().setTitle("Unos novog podatka");
+        Application.getMainStage().setScene(scene);
+        Application.getMainStage().show();
     }
 
 

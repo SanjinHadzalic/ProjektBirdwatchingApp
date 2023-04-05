@@ -1,7 +1,6 @@
 package com.example.projektbirdwatchingapp;
 
 import hr.java.vjezbe.baza.BazaPodataka;
-import hr.java.vjezbe.entiteti.IstrazivacUnos;
 import hr.java.vjezbe.entiteti.Lokalitet;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,7 +11,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.OptionalInt;
 
@@ -78,7 +76,7 @@ public class UnosLokalitetaController {
         } else if (nazivLokacije.isBlank() != true && tipLokacije.isBlank() != true && xKoordLokacije.isBlank() != true && yKoordLokacije.isBlank() != true) {
             Lokalitet novaLokacija = new Lokalitet(idLokalitet, nazivLokacije, tipLokacije, xKoordLokacije, yKoordLokacije);
 
-            HelloApplication.getLokacijaList().add(novaLokacija);
+            Application.getLokacijaList().add(novaLokacija);
 
             writeNewLokalitet();
 
@@ -89,16 +87,16 @@ public class UnosLokalitetaController {
 
             obavijestUnosa.showAndWait();
 
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("pregledLokacija.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("pregledLokacija.fxml"));
             Scene scene = null;
             try{
                 scene = new Scene(fxmlLoader.load(), 650, 500);
             } catch (IOException ex){
                 throw new RuntimeException(ex);
             }
-            HelloApplication.getMainStage().setTitle("Pregled lokacija");
-            HelloApplication.getMainStage().setScene(scene);
-            HelloApplication.getMainStage().show();
+            Application.getMainStage().setTitle("Pregled lokacija");
+            Application.getMainStage().setScene(scene);
+            Application.getMainStage().show();
         }
     }
 
@@ -127,11 +125,11 @@ public class UnosLokalitetaController {
     }
 
     public static void showUnosLokalitetaScreen() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("unosLokaliteta.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("unosLokaliteta.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 400);
-        HelloApplication.getMainStage().setTitle("Unos lokaliteta");
-        HelloApplication.getMainStage().setScene(scene);
-        HelloApplication.getMainStage().show();
+        Application.getMainStage().setTitle("Unos lokaliteta");
+        Application.getMainStage().setScene(scene);
+        Application.getMainStage().show();
     }
     @FXML
     public void backToPregledLokaliteta() throws IOException {

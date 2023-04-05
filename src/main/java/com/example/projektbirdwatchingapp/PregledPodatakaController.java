@@ -30,7 +30,6 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import static com.example.projektbirdwatchingapp.LoginController.odabraniUser;
 
@@ -73,11 +72,11 @@ public class PregledPodatakaController implements Initializable {
 
 
     public static void showPregledPodatakaScreen() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("pregledPodataka.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("pregledPodataka.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1000, 800);
-        HelloApplication.getMainStage().setTitle("Pregled Podataka");
-        HelloApplication.getMainStage().setScene(scene);
-        HelloApplication.getMainStage().show();
+        Application.getMainStage().setTitle("Pregled Podataka");
+        Application.getMainStage().setScene(scene);
+        Application.getMainStage().show();
     }
     @FXML
     public void natragButtonClicked() throws IOException {
@@ -138,12 +137,12 @@ public class PregledPodatakaController implements Initializable {
     public Thread refreshPodatak(String odabraniUser, AtomicBoolean running){
         Thread t = new Thread(() -> {
             while(running.get()){
-                System.out.println("Thread za refresh podataka radi\n");
+//                System.out.println("Thread za refresh podataka radi\n");
                 Platform.runLater(() ->{
                     if (odabraniUser.equals("admin".toUpperCase())){
-                        podaciTableView.setItems(FXCollections.observableList(HelloApplication.getPodatakList()));
+                        podaciTableView.setItems(FXCollections.observableList(Application.getPodatakList()));
                     } else {
-                        podaciTableView.setItems(FXCollections.observableList(HelloApplication.getPodatakList().stream().filter(a->a.getIstrazivac().toLowerCase().startsWith(odabraniUser.toLowerCase())).collect(Collectors.toList())));
+                        podaciTableView.setItems(FXCollections.observableList(Application.getPodatakList().stream().filter(a->a.getIstrazivac().toLowerCase().startsWith(odabraniUser.toLowerCase())).collect(Collectors.toList())));
                     }
                 });
                 try {
@@ -168,7 +167,7 @@ public class PregledPodatakaController implements Initializable {
         String lokacija = String.valueOf(lokacijaComboBox.getSelectionModel().getSelectedItem());
         LocalDate datum = datumDatePicker.getValue();
 
-        List<BirdUnos> filterPodatakList = new ArrayList<>(HelloApplication.getPodatakList());
+        List<BirdUnos> filterPodatakList = new ArrayList<>(Application.getPodatakList());
 
         if(Optional.of(naziv).isPresent() == true){
             filterPodatakList = filterPodatakList.stream()
@@ -226,7 +225,7 @@ public class PregledPodatakaController implements Initializable {
         lokacijaComboBox.getSelectionModel().clearSelection();
         datumDatePicker.setValue(null);
 
-        podaciTableView.setItems(FXCollections.observableList(HelloApplication.getPodatakList()));
+        podaciTableView.setItems(FXCollections.observableList(Application.getPodatakList()));
         running.set(true);
         refreshPodatak(odabraniUser,running);
     }

@@ -1,0 +1,5 @@
+2023-04-05 21:32:02,467 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] radi
+2023-04-05 21:34:09,704 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-04-05 21:37:19,725 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-04-05 21:37:46,335 ERROR [JavaFX Application Thread] c.e.p.Application [UnosIstrazivacaController.java:61] Uneseni email: w ne sadrzi znak @
+2023-04-05 21:38:06,809 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta

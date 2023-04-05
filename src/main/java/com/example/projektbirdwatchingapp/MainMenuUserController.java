@@ -23,21 +23,21 @@ public class MainMenuUserController {
         statGreeting=greetingText;
     }
     public static void showMainMenuScreenUser() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("mainMenuUser.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("mainMenuUser.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 520, 400);
-        HelloApplication.getMainStage().setTitle("Glavni ekran");
+        Application.getMainStage().setTitle("Glavni ekran");
         statGreeting.setText("Bok " + LoginController.odabraniUser);
-        HelloApplication.getMainStage().setScene(scene);
-        HelloApplication.getMainStage().show();
+        Application.getMainStage().setScene(scene);
+        Application.getMainStage().show();
 
     }
 
     public void logoutButtonOnAction(ActionEvent e) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("login.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 520, 400);
-        HelloApplication.getMainStage().setTitle("BirdwatchingApp");
-        HelloApplication.getMainStage().setScene(scene);
-        HelloApplication.getMainStage().show();
+        Application.getMainStage().setTitle("BirdwatchingApp");
+        Application.getMainStage().setScene(scene);
+        Application.getMainStage().show();
     }
 
     @FXML

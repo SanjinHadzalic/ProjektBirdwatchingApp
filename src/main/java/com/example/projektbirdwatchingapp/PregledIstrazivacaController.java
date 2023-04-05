@@ -13,7 +13,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.text.Text;
 import javafx.util.Callback;
 
 import java.io.FileNotFoundException;
@@ -111,10 +110,10 @@ public class PregledIstrazivacaController {
     public Thread refreshIstrazivac(AtomicBoolean running){
         Thread t = new Thread(() -> {
             while(running.get()){
-                System.out.println("Thread za refresh istrazivaca radi\n");
-                System.out.println(LocalDateTime.now());
+//                System.out.println("Thread za refresh istrazivaca radi\n");
+//                System.out.println(LocalDateTime.now());
                 Platform.runLater(() ->{
-                    istrazivacPregledTableView.setItems(FXCollections.observableList(HelloApplication.getIstrazivacUnosList()));
+                    istrazivacPregledTableView.setItems(FXCollections.observableList(Application.getIstrazivacUnosList()));
                 });
                 try {
                     Thread.sleep(3000); //sleep 3 secs
@@ -131,11 +130,11 @@ public class PregledIstrazivacaController {
     }
 
     public static void showPregledIstrazivacaScreen() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("pregledIstrazivaca.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("pregledIstrazivaca.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 600);
-        HelloApplication.getMainStage().setTitle("Pregled istrazivaca");
-        HelloApplication.getMainStage().setScene(scene);
-        HelloApplication.getMainStage().show();
+        Application.getMainStage().setTitle("Pregled istrazivaca");
+        Application.getMainStage().setScene(scene);
+        Application.getMainStage().show();
     }
 
     @FXML
@@ -148,7 +147,7 @@ public class PregledIstrazivacaController {
         String mobitelIstrazivaca = mobitelIstrazivacaTextField.getText();
         String emailIstrazivaca = emailIstrazivacaTextField.getText();
 
-        List<IstrazivacUnos> filterIStrazivacUnos = new ArrayList<>(HelloApplication.getIstrazivacUnosList());
+        List<IstrazivacUnos> filterIStrazivacUnos = new ArrayList<>(Application.getIstrazivacUnosList());
 
         if(Optional.of(imeIstrazivac).isPresent() == true){
             filterIStrazivacUnos = filterIStrazivacUnos.stream()
