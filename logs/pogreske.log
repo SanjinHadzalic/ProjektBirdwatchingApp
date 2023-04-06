@@ -38,3 +38,13 @@
 2023-04-06 16:29:19,890 ERROR [JavaFX Application Thread] c.e.p.Application [UnosIstrazivacaController.java:181] Uneseni podaci za novog korisnika: Mika Bjelic 2000-04-06 vec postoje u aplikaciji!
 2023-04-06 16:29:19,891 ERROR [JavaFX Application Thread] c.e.p.Application [UnosIstrazivacaController.java:118] Uneseni podaci za novog korisnika: Mika Bjelic 2000-04-06 vec postoje u aplikaciji!
 2023-04-06 16:29:29,346 ERROR [JavaFX Application Thread] c.e.p.Application [UnosIstrazivacaController.java:62] Datum rodjenja ne moze biti poslije 2002-01-01
+2023-04-06 17:02:14,541 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-04-06 17:04:53,455 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-04-06 17:14:43,324 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-04-06 17:15:27,746 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-04-06 17:18:01,913 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-04-06 17:18:30,811 ERROR [JavaFX Application Thread] c.e.p.Application [UnosIstrazivacaController.java:101] Datum rodjenja ne moze biti poslije 2002-01-01
+2023-04-06 17:18:43,987 ERROR [JavaFX Application Thread] c.e.p.Application [UnosIstrazivacaController.java:186] Uneseni podaci za novog korisnika: Mika Bjelic 2000-04-06 vec postoje u aplikaciji!
+2023-04-06 17:18:43,987 ERROR [JavaFX Application Thread] c.e.p.Application [UnosIstrazivacaController.java:123] Uneseni podaci za novog korisnika: Mika Bjelic 2000-04-06 vec postoje u aplikaciji!
+2023-04-06 17:18:58,422 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-04-06 17:21:02,597 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta

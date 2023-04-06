@@ -38,7 +38,7 @@ public class UnosIstrazivacaController {
 
     @FXML
     public void saveIstrazivac() throws Exception {
-        boolean flag = true;
+//        boolean flag = true;
         List<IstrazivacUnos> listaIstrazivaca = BazaPodataka.dohvatiSveIstrazivace();
 
         OptionalInt idIstrazivacaRaw = listaIstrazivaca.stream()
@@ -47,35 +47,19 @@ public class UnosIstrazivacaController {
 
         Integer idIstrazivaca = idIstrazivacaRaw.getAsInt() + 1;
         String imeIstrazivac = imeIstrazivacaTextField.getText();
-        imeIstrazivac=capitalizeString(imeIstrazivac);
+        if(!imeIstrazivac.isBlank()){
+            imeIstrazivac=capitalizeString(imeIstrazivac);
+        }
         String prezimeIStrazivac = prezimeIStrazivacaTextField.getText();
-        prezimeIStrazivac=capitalizeString(prezimeIStrazivac);
+        if (!prezimeIStrazivac.isBlank()){
+            prezimeIStrazivac=capitalizeString(prezimeIStrazivac);
+        }
         LocalDate datumIstrazivac = datumRodjenjaIstrazivacaDatePicker.getValue();
         String institucijaIstrazivaca = institucijaIstrazivacaTextField.getText();
         String adresaIstrazivaca = adresaIstrazivacaTextField.getText();
         String mobitelIstrazivaca = mobitelIstrazivacaTextField.getText();
         String emailIstrazivaca = emailIstrazivacaTextField.getText();
 
-        try{
-            checkDate(datumIstrazivac,flag);
-        } catch (NeispravanUnosException e){
-            logger.error(e.getMessage());
-            Alert ob = new Alert(Alert.AlertType.ERROR, "Neispranvo je unesen datum!");
-            ob.showAndWait();
-            datumRodjenjaIstrazivacaDatePicker.setValue(LocalDate.now());
-            flag=false;
-
-        }
-
-        try{
-            checkEmail(emailIstrazivaca,flag);
-        } catch (NeispravanUnosException e){
-                logger.error(e.getMessage());
-                Alert ob = new Alert(Alert.AlertType.ERROR, "Neispranvo je unesen mail!");
-                ob.showAndWait();
-                emailIstrazivacaTextField.clear();
-                flag=false;
-        }
 
         StringBuilder errors = new StringBuilder();
 
@@ -107,11 +91,30 @@ public class UnosIstrazivacaController {
             obavijestUpozerenja.setContentText(errors.toString());
             
             obavijestUpozerenja.showAndWait();
-        } else if (imeIstrazivac.isBlank() != true && prezimeIStrazivac.isBlank() != true && datumIstrazivac != null && institucijaIstrazivaca.isBlank() != true && adresaIstrazivaca.isBlank() != true && mobitelIstrazivaca.isBlank() != true && emailIstrazivaca.isBlank()!=true && flag) {
+        } else if (imeIstrazivac.isBlank() != true && prezimeIStrazivac.isBlank() != true && datumIstrazivac != null && institucijaIstrazivaca.isBlank() != true && adresaIstrazivaca.isBlank() != true && mobitelIstrazivaca.isBlank() != true && emailIstrazivaca.isBlank()!=true) {
             IstrazivacUnos noviIStrazivac = new IstrazivacUnos(idIstrazivaca, imeIstrazivac, prezimeIStrazivac, datumIstrazivac, institucijaIstrazivaca, adresaIstrazivaca, Integer.parseInt(mobitelIstrazivaca), emailIstrazivaca);
 
             boolean flag2 = true;
-            //metoda koja provjerava ime, prezime, DOB
+            try{
+                checkDate(datumIstrazivac,flag2);
+            } catch (NeispravanUnosException e){
+                logger.error(e.getMessage());
+                Alert ob = new Alert(Alert.AlertType.ERROR, "Neispranvo je unesen datum!");
+                ob.showAndWait();
+                datumRodjenjaIstrazivacaDatePicker.setValue(LocalDate.now());
+                flag2=false;
+            }
+
+            try{
+                checkEmail(emailIstrazivaca,flag2);
+            } catch (NeispravanUnosException e){
+                logger.error(e.getMessage());
+                Alert ob = new Alert(Alert.AlertType.ERROR, "Neispranvo je unesen mail!");
+                ob.showAndWait();
+                emailIstrazivacaTextField.clear();
+                flag2=false;
+            }
+
             try{
                 checkUser(noviIStrazivac);
             } catch (KorisnikPostojiException e){
@@ -120,7 +123,7 @@ public class UnosIstrazivacaController {
                 ob.showAndWait();
                 imeIstrazivacaTextField.setText("PROMIJENI");
                 prezimeIStrazivacaTextField.setText("PROMIJENI");
-                datumRodjenjaIstrazivacaDatePicker.setValue(LocalDate.now());
+                datumRodjenjaIstrazivacaDatePicker.setValue(LocalDate.now().minusYears(23));
                 flag2=false;
             }
 
