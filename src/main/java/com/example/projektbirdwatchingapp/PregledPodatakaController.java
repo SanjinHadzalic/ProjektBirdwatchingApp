@@ -24,10 +24,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
@@ -65,8 +62,8 @@ public class PregledPodatakaController implements Initializable {
     @FXML
     private TableColumn<BirdUnos,String> datumTableColumn;
 
-    private final List<IstrazivacUnos> istrazivaciBaza = BazaPodataka.dohvatiSveIstrazivace().stream().toList();
-    private final List<Lokalitet> lokacijaBazaPodataka = BazaPodataka.dohvatiSveLokacije().stream().toList();
+    private final List<IstrazivacUnos> istrazivaciBaza = BazaPodataka.dohvatiSveIstrazivace().stream().sorted(Comparator.comparing(IstrazivacUnos::getIme)).toList();
+    private final List<Lokalitet> lokacijaBazaPodataka = BazaPodataka.dohvatiSveLokacije().stream().sorted(Comparator.comparing(Lokalitet::getNazivLokacije)).toList();
     private ArrayList<Serijalizacija> listaSTO = new ArrayList<>();
     private final AtomicBoolean running = new AtomicBoolean(true);
 

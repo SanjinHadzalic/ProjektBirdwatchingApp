@@ -2,6 +2,8 @@ package com.example.projektbirdwatchingapp;
 
 import hr.java.vjezbe.baza.BazaPodataka;
 import hr.java.vjezbe.entiteti.Lokalitet;
+import hr.java.vjezbe.iznimke.KorisnikPostojiException;
+import hr.java.vjezbe.iznimke.LokalitetPostojiException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -9,12 +11,16 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.OptionalInt;
 
 public class UnosLokalitetaController {
+    private static final Logger logger = LoggerFactory.getLogger(Application.class);
     @FXML
     private TextField nazivLokacijeTextField;
     @FXML
@@ -76,30 +82,62 @@ public class UnosLokalitetaController {
         } else if (nazivLokacije.isBlank() != true && tipLokacije.isBlank() != true && xKoordLokacije.isBlank() != true && yKoordLokacije.isBlank() != true) {
             Lokalitet novaLokacija = new Lokalitet(idLokalitet, nazivLokacije, tipLokacije, xKoordLokacije, yKoordLokacije);
 
-            Application.getLokacijaList().add(novaLokacija);
+            boolean flag = true;
 
-            writeNewLokalitet();
-
-            Alert obavijestUnosa = new Alert(Alert.AlertType.INFORMATION);
-            obavijestUnosa.setTitle("Spremanje lokaliteta");
-            obavijestUnosa.setHeaderText("Uspjesno je spremlena nova lokacija:");
-            obavijestUnosa.setContentText("Lokalitet: " + nazivLokacije + " " + tipLokacije + " je uspjesno dodana u aplikaciju!\n");
-
-            obavijestUnosa.showAndWait();
-
-            FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("pregledLokacija.fxml"));
-            Scene scene = null;
             try{
-                scene = new Scene(fxmlLoader.load(), 650, 500);
-            } catch (IOException ex){
-                throw new RuntimeException(ex);
+                checkNewLokalitet(novaLokacija);
+            } catch (LokalitetPostojiException e){
+                logger.error(e.getMessage());
+                Alert ob = new Alert(Alert.AlertType.ERROR, "Lokalitet vec postoji u aplikaciji!");
+                ob.showAndWait();
+                nazivLokacijeTextField.setText("PROMIJENI");
+                nacionalniParkRadioButton.setSelected(true);
+                xKoordinataTextField.setText("PROMIJENI");
+                yKoordinataTextField.setText("PROMIJENI");
+                flag=false;
             }
-            Application.getMainStage().setTitle("Pregled lokacija");
-            Application.getMainStage().setScene(scene);
-            Application.getMainStage().show();
+
+            if (flag){
+                Application.getLokacijaList().add(novaLokacija);
+
+                writeNewLokalitet();
+
+                Alert obavijestUnosa = new Alert(Alert.AlertType.INFORMATION);
+                obavijestUnosa.setTitle("Spremanje lokaliteta");
+                obavijestUnosa.setHeaderText("Uspjesno je spremljena nova lokacija:");
+                obavijestUnosa.setContentText("Lokalitet: " + nazivLokacije + " " + tipLokacije + " je uspjesno dodana u aplikaciju!\n");
+
+                obavijestUnosa.showAndWait();
+
+                FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("pregledLokacija.fxml"));
+                Scene scene = null;
+                try{
+                    scene = new Scene(fxmlLoader.load(), 650, 500);
+                } catch (IOException ex){
+                    throw new RuntimeException(ex);
+                }
+                Application.getMainStage().setTitle("Pregled lokacija");
+                Application.getMainStage().setScene(scene);
+                Application.getMainStage().show();
+            }
         }
     }
 
+    private void checkNewLokalitet(Lokalitet newLokalitet) throws LokalitetPostojiException {
+        List<Lokalitet> lokalitetiExisting = Application.getLokacijaList();
+
+        boolean flag = lokalitetiExisting.stream()
+                .filter(a-> a.getNazivLokacije().toUpperCase().equals(newLokalitet.getNazivLokacije().toUpperCase()))
+                .findFirst()
+                .isPresent();
+
+        if (flag){
+            logger.error("Uneseni podaci za novu lokaciju: " + newLokalitet.getNazivLokacije() + " " + newLokalitet.getTypeLocation() + " " + newLokalitet.getxCoord() + newLokalitet.getyCoord() + " vec postoje u aplikaciji!");
+            throw new LokalitetPostojiException("Uneseni podaci za novog korisnika: " + newLokalitet.getNazivLokacije() + " " + newLokalitet.getTypeLocation() + " " + newLokalitet.getxCoord() + newLokalitet.getyCoord() + " vec postoji u aplikaciji!");
+        }
+        System.out.println(flag);
+
+    }
     public void writeNewLokalitet() throws Exception{
         List<Lokalitet> listaLokaliteta = BazaPodataka.dohvatiSveLokacije();
         OptionalInt idLokalitetaRaw = listaLokaliteta.stream()
