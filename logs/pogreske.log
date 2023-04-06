@@ -3,3 +3,38 @@
 2023-04-05 21:37:19,725 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
 2023-04-05 21:37:46,335 ERROR [JavaFX Application Thread] c.e.p.Application [UnosIstrazivacaController.java:61] Uneseni email: w ne sadrzi znak @
 2023-04-05 21:38:06,809 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-04-06 11:18:09,218 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-04-06 11:25:23,031 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-04-06 11:25:51,263 ERROR [JavaFX Application Thread] c.e.p.Application [UnosIstrazivacaController.java:58] Uneseni mail: 2ne sadrzi znak @
+2023-04-06 11:25:55,882 ERROR [JavaFX Application Thread] c.e.p.Application [UnosIstrazivacaController.java:58] Uneseni mail: ne sadrzi znak @
+2023-04-06 11:26:00,394 ERROR [JavaFX Application Thread] c.e.p.Application [UnosIstrazivacaController.java:58] Uneseni mail: ne sadrzi znak @
+2023-04-06 11:26:04,479 ERROR [JavaFX Application Thread] c.e.p.Application [UnosIstrazivacaController.java:58] Uneseni mail: 1234ne sadrzi znak @
+2023-04-06 11:47:20,491 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-04-06 11:48:16,454 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-04-06 11:48:46,940 ERROR [JavaFX Application Thread] c.e.p.Application [UnosIstrazivacaController.java:59] Datum rodjenja ne moze biti prije 1958-01-01
+2023-04-06 11:52:11,448 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-04-06 11:52:42,017 ERROR [JavaFX Application Thread] c.e.p.Application [UnosIstrazivacaController.java:59] Datum rodjenja ne moze biti poslije 2002-01-01
+2023-04-06 11:52:48,367 ERROR [JavaFX Application Thread] c.e.p.Application [UnosIstrazivacaController.java:59] Datum rodjenja ne moze biti poslije 2002-01-01
+2023-04-06 11:52:53,603 ERROR [JavaFX Application Thread] c.e.p.Application [UnosIstrazivacaController.java:59] Datum rodjenja ne moze biti poslije 2002-01-01
+2023-04-06 11:52:54,644 ERROR [JavaFX Application Thread] c.e.p.Application [UnosIstrazivacaController.java:70] Uneseni mail: 34ne sadrzi znak @
+2023-04-06 11:53:06,382 ERROR [JavaFX Application Thread] c.e.p.Application [UnosIstrazivacaController.java:59] Datum rodjenja ne moze biti prije 1958-01-01
+2023-04-06 11:53:07,422 ERROR [JavaFX Application Thread] c.e.p.Application [UnosIstrazivacaController.java:70] Uneseni mail: 12ne sadrzi znak @
+2023-04-06 11:53:16,589 ERROR [JavaFX Application Thread] c.e.p.Application [UnosIstrazivacaController.java:70] Uneseni mail: 2ne sadrzi znak @
+2023-04-06 15:36:38,662 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-04-06 15:37:14,670 ERROR [JavaFX Application Thread] c.e.p.Application [UnosIstrazivacaController.java:59] Datum rodjenja ne moze biti poslije 2002-01-01
+2023-04-06 16:08:17,541 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-04-06 16:11:27,384 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-04-06 16:12:46,541 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-04-06 16:16:26,854 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-04-06 16:21:37,543 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-04-06 16:21:59,135 ERROR [JavaFX Application Thread] c.e.p.Application [UnosIstrazivacaController.java:171] Uneseni podaci za novog korisnika: Mika Bjelic 2000-04-06 vec postoje u aplikaciji!
+2023-04-06 16:24:12,389 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-04-06 16:25:30,224 ERROR [JavaFX Application Thread] c.e.p.Application [UnosIstrazivacaController.java:179] Uneseni podaci za novog korisnika: Mika Bjelic 2000-04-06 vec postoje u aplikaciji!
+2023-04-06 16:25:30,224 ERROR [JavaFX Application Thread] c.e.p.Application [UnosIstrazivacaController.java:118] Uneseni podaci za novog korisnika: Mika Bjelic 2000-04-06 vec postoje u aplikaciji!
+2023-04-06 16:25:39,391 ERROR [JavaFX Application Thread] c.e.p.Application [UnosIstrazivacaController.java:73] Uneseni mail: ne sadrzi znak @
+2023-04-06 16:25:52,439 ERROR [JavaFX Application Thread] c.e.p.Application [UnosIstrazivacaController.java:179] Uneseni podaci za novog korisnika: Mika Bjelic 2000-04-06 vec postoje u aplikaciji!
+2023-04-06 16:25:52,439 ERROR [JavaFX Application Thread] c.e.p.Application [UnosIstrazivacaController.java:118] Uneseni podaci za novog korisnika: Mika Bjelic 2000-04-06 vec postoje u aplikaciji!
+2023-04-06 16:28:44,746 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-04-06 16:29:19,890 ERROR [JavaFX Application Thread] c.e.p.Application [UnosIstrazivacaController.java:181] Uneseni podaci za novog korisnika: Mika Bjelic 2000-04-06 vec postoje u aplikaciji!
+2023-04-06 16:29:19,891 ERROR [JavaFX Application Thread] c.e.p.Application [UnosIstrazivacaController.java:118] Uneseni podaci za novog korisnika: Mika Bjelic 2000-04-06 vec postoje u aplikaciji!
+2023-04-06 16:29:29,346 ERROR [JavaFX Application Thread] c.e.p.Application [UnosIstrazivacaController.java:62] Datum rodjenja ne moze biti poslije 2002-01-01

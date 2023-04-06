@@ -2,7 +2,8 @@ package com.example.projektbirdwatchingapp;
 
 import hr.java.vjezbe.baza.BazaPodataka;
 import hr.java.vjezbe.entiteti.IstrazivacUnos;
-import hr.java.vjezbe.iznimke.NeispravanUnos;
+import hr.java.vjezbe.iznimke.KorisnikPostojiException;
+import hr.java.vjezbe.iznimke.NeispravanUnosException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,6 +15,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.OptionalInt;
 
@@ -24,7 +26,7 @@ public class UnosIstrazivacaController {
     @FXML
     private TextField prezimeIStrazivacaTextField;
     @FXML
-    private DatePicker datumRodjenjaIstrazivacaTextField;
+    private DatePicker datumRodjenjaIstrazivacaDatePicker;
     @FXML
     private TextField institucijaIstrazivacaTextField;
     @FXML
@@ -45,19 +47,29 @@ public class UnosIstrazivacaController {
 
         Integer idIstrazivaca = idIstrazivacaRaw.getAsInt() + 1;
         String imeIstrazivac = imeIstrazivacaTextField.getText();
+        imeIstrazivac=capitalizeString(imeIstrazivac);
         String prezimeIStrazivac = prezimeIStrazivacaTextField.getText();
-        LocalDate datumIstrazivac = datumRodjenjaIstrazivacaTextField.getValue();
+        prezimeIStrazivac=capitalizeString(prezimeIStrazivac);
+        LocalDate datumIstrazivac = datumRodjenjaIstrazivacaDatePicker.getValue();
         String institucijaIstrazivaca = institucijaIstrazivacaTextField.getText();
         String adresaIstrazivaca = adresaIstrazivacaTextField.getText();
         String mobitelIstrazivaca = mobitelIstrazivacaTextField.getText();
         String emailIstrazivaca = emailIstrazivacaTextField.getText();
 
         try{
-            if(!emailIstrazivaca.contains("@")){
-                String notGood = "Uneseni email: " + emailIstrazivaca + " ne sadrzi znak @";
-                throw new NeispravanUnos(notGood);
-            }
-        } catch (NeispravanUnos e){
+            checkDate(datumIstrazivac,flag);
+        } catch (NeispravanUnosException e){
+            logger.error(e.getMessage());
+            Alert ob = new Alert(Alert.AlertType.ERROR, "Neispranvo je unesen datum!");
+            ob.showAndWait();
+            datumRodjenjaIstrazivacaDatePicker.setValue(LocalDate.now());
+            flag=false;
+
+        }
+
+        try{
+            checkEmail(emailIstrazivaca,flag);
+        } catch (NeispravanUnosException e){
                 logger.error(e.getMessage());
                 Alert ob = new Alert(Alert.AlertType.ERROR, "Neispranvo je unesen mail!");
                 ob.showAndWait();
@@ -98,30 +110,83 @@ public class UnosIstrazivacaController {
         } else if (imeIstrazivac.isBlank() != true && prezimeIStrazivac.isBlank() != true && datumIstrazivac != null && institucijaIstrazivaca.isBlank() != true && adresaIstrazivaca.isBlank() != true && mobitelIstrazivaca.isBlank() != true && emailIstrazivaca.isBlank()!=true && flag) {
             IstrazivacUnos noviIStrazivac = new IstrazivacUnos(idIstrazivaca, imeIstrazivac, prezimeIStrazivac, datumIstrazivac, institucijaIstrazivaca, adresaIstrazivaca, Integer.parseInt(mobitelIstrazivaca), emailIstrazivaca);
 
-            Application.getIstrazivacUnosList().add(noviIStrazivac);
-
-            writeNewIstrazivac();
-
-            Alert obavijestUnosa = new Alert(Alert.AlertType.INFORMATION);
-            obavijestUnosa.setTitle("Spremanje istrazivaca");
-            obavijestUnosa.setHeaderText("Uspjesno je spremljen istrazivac:");
-            obavijestUnosa.setContentText("Istrazivac: " + imeIstrazivac + " " + prezimeIStrazivac + " je uspjesno dodan u aplikaciju!\n");
-
-            obavijestUnosa.showAndWait();
-
-            FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("pregledIstrazivaca.fxml"));
-            Scene scene = null;
+            boolean flag2 = true;
+            //metoda koja provjerava ime, prezime, DOB
             try{
-                scene = new Scene(fxmlLoader.load(), 800, 600);
-            } catch (IOException ex){
-                throw new RuntimeException(ex);
+                checkUser(noviIStrazivac);
+            } catch (KorisnikPostojiException e){
+                logger.error(e.getMessage());
+                Alert ob = new Alert(Alert.AlertType.ERROR, "Korisnik vec postoji u aplikaciji!");
+                ob.showAndWait();
+                imeIstrazivacaTextField.setText("PROMIJENI");
+                prezimeIStrazivacaTextField.setText("PROMIJENI");
+                datumRodjenjaIstrazivacaDatePicker.setValue(LocalDate.now());
+                flag2=false;
             }
-            Application.getMainStage().setTitle("Pregled istrazivaca");
-            Application.getMainStage().setScene(scene);
-            Application.getMainStage().show();
+
+            if (flag2){
+                Application.getIstrazivacUnosList().add(noviIStrazivac);
+
+                writeNewIstrazivac();
+
+                Alert obavijestUnosa = new Alert(Alert.AlertType.INFORMATION);
+                obavijestUnosa.setTitle("Spremanje istrazivaca");
+                obavijestUnosa.setHeaderText("Uspjesno je spremljen istrazivac:");
+                obavijestUnosa.setContentText("Istrazivac: " + imeIstrazivac + " " + prezimeIStrazivac + " je uspjesno dodan u aplikaciju!\n");
+
+                obavijestUnosa.showAndWait();
+
+                FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("pregledIstrazivaca.fxml"));
+                Scene scene = null;
+                try{
+                    scene = new Scene(fxmlLoader.load(), 800, 600);
+                } catch (IOException ex){
+                    throw new RuntimeException(ex);
+                }
+                Application.getMainStage().setTitle("Pregled istrazivaca");
+                Application.getMainStage().setScene(scene);
+                Application.getMainStage().show();
+            }
         }
     }
 
+    private void checkEmail(String emailIstrazivaca,boolean flag) throws NeispravanUnosException {
+        if (!emailIstrazivaca.contains("@")){
+            throw new NeispravanUnosException("Uneseni mail: "+emailIstrazivaca + "ne sadrzi znak @");
+        } else {
+            flag=true;
+        }
+    }
+
+    private void checkDate(LocalDate datumIstrazivaca,boolean flag) throws NeispravanUnosException {
+        LocalDate olderCheckDate = LocalDate.parse("01.01.1958.", DateTimeFormatter.ofPattern("dd.MM.yyyy."));
+        LocalDate youngerCheckDate = LocalDate.parse("01.01.2002.",DateTimeFormatter.ofPattern("dd.MM.yyyy."));
+        if(datumIstrazivaca.isBefore(olderCheckDate)){
+            throw new NeispravanUnosException("Datum rodjenja ne moze biti prije " + olderCheckDate);
+        } else if (datumIstrazivaca.isAfter(youngerCheckDate)) {
+            throw new NeispravanUnosException("Datum rodjenja ne moze biti poslije " + youngerCheckDate);
+        } else {
+            flag=true;
+        }
+    }
+
+    private void checkUser(IstrazivacUnos checkNewUser) throws KorisnikPostojiException{
+        List<IstrazivacUnos> listaIstrazivacProvjera = Application.getIstrazivacUnosList();
+
+        boolean flag = listaIstrazivacProvjera.stream()
+                .filter(a->a.getIme().toUpperCase().contains(checkNewUser.getIme().toUpperCase()) && a.getPrezime().toUpperCase().contains(checkNewUser.getPrezime().toUpperCase()) && a.getDatum().equals(checkNewUser.getDatum()))
+                .findFirst()
+                .isPresent();
+        if (flag){
+            logger.error("Uneseni podaci za novog korisnika: " + checkNewUser.getIme() + " " + checkNewUser.getPrezime()+ " " + checkNewUser.getDatum() + " vec postoje u aplikaciji!");
+            throw new KorisnikPostojiException("Uneseni podaci za novog korisnika: " + checkNewUser.getIme() + " " + checkNewUser.getPrezime()+ " " + checkNewUser.getDatum() + " vec postoje u aplikaciji!");
+        }
+    }
+
+    private String capitalizeString(String toBeCapitalized){
+        String ret = toBeCapitalized.substring(0,1).toUpperCase() + toBeCapitalized.substring(1).toLowerCase();
+        return ret;
+    }
     public void writeNewIstrazivac() throws Exception{
         List<IstrazivacUnos> listaIstrazivaca = BazaPodataka.dohvatiSveIstrazivace();
         OptionalInt idIstrazivacaRaw = listaIstrazivaca.stream()
@@ -130,7 +195,7 @@ public class UnosIstrazivacaController {
         Integer idIstrazivaca = idIstrazivacaRaw.getAsInt() + 1;
         String imeIstrazivac = imeIstrazivacaTextField.getText();
         String prezimeIStrazivac = prezimeIStrazivacaTextField.getText();
-        LocalDate datumIstrazivac = datumRodjenjaIstrazivacaTextField.getValue();
+        LocalDate datumIstrazivac = datumRodjenjaIstrazivacaDatePicker.getValue();
         String institucijaIstrazivaca = institucijaIstrazivacaTextField.getText();
         String adresaIstrazivaca = adresaIstrazivacaTextField.getText();
         String mobitelIstrazivaca = mobitelIstrazivacaTextField.getText();
@@ -153,5 +218,7 @@ public class UnosIstrazivacaController {
     public void natragButtonClicked() throws IOException {
         PregledIstrazivacaController.showPregledIstrazivacaScreen();
     }
+
+
 
 }
