@@ -48,3 +48,22 @@
 2023-04-06 17:18:43,987 ERROR [JavaFX Application Thread] c.e.p.Application [UnosIstrazivacaController.java:123] Uneseni podaci za novog korisnika: Mika Bjelic 2000-04-06 vec postoje u aplikaciji!
 2023-04-06 17:18:58,422 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
 2023-04-06 17:21:02,597 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-04-06 18:27:59,297 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-04-06 18:28:46,001 ERROR [JavaFX Application Thread] c.e.p.Application [UnosIstrazivacaController.java:101] Datum rodjenja ne moze biti poslije 2002-01-01
+2023-04-06 18:28:47,508 ERROR [JavaFX Application Thread] c.e.p.Application [UnosIstrazivacaController.java:184] Uneseni podaci za novog korisnika: Pero Pero 2023-04-06 vec postoje u aplikaciji!
+2023-04-06 18:28:47,509 ERROR [JavaFX Application Thread] c.e.p.Application [UnosIstrazivacaController.java:121] Uneseni podaci za novog korisnika: Pero Pero 2023-04-06 vec postoje u aplikaciji!
+2023-04-06 18:29:19,614 ERROR [JavaFX Application Thread] c.e.p.Application [UnosIstrazivacaController.java:184] Uneseni podaci za novog korisnika: Mika Bjelic 2000-04-06 vec postoje u aplikaciji!
+2023-04-06 18:29:19,614 ERROR [JavaFX Application Thread] c.e.p.Application [UnosIstrazivacaController.java:121] Uneseni podaci za novog korisnika: Mika Bjelic 2000-04-06 vec postoje u aplikaciji!
+2023-04-06 18:30:27,209 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-04-06 18:32:05,641 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-04-06 18:50:58,179 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-04-06 18:53:43,103 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-04-06 18:54:13,844 ERROR [JavaFX Application Thread] c.e.p.Application [UnosLokalitetaController.java:135] Uneseni podaci za novu lokaciju: Dummy2 Ostalo 12.3000000012.40000000 vec postoje u aplikaciji!
+2023-04-06 18:54:13,844 ERROR [JavaFX Application Thread] c.e.p.Application [UnosLokalitetaController.java:90] Uneseni podaci za novog korisnika: Dummy2 Ostalo 12.3000000012.40000000 vec postoji u aplikaciji!
+2023-04-06 18:59:23,194 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-04-06 18:59:38,897 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-04-06 19:00:23,681 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-04-06 19:02:46,774 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-04-06 19:03:44,740 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-04-06 19:06:56,625 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-04-06 19:09:24,884 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
