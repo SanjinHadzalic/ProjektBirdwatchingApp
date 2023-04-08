@@ -1,9 +1,9 @@
 package hr.java.vjezbe.baza;
 
-import com.example.projektbirdwatchingapp.PregledPodatakaController;
 import hr.java.vjezbe.entiteti.BirdUnos;
 import hr.java.vjezbe.entiteti.IstrazivacUnos;
 import hr.java.vjezbe.entiteti.Lokalitet;
+import org.slf4j.LoggerFactory;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -12,8 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.sql.*;
+import org.slf4j.Logger;
 
 public class BazaPodataka {
+    private static final Logger logger = LoggerFactory.getLogger(BazaPodataka.class);
+    private static final String DATABASE_FINAL = "dat/bazaPodataka.properties";
+
     private static Connection spajanjeNaBazu() throws Exception{
         Properties konfiguracijaBaze = new Properties();
         konfiguracijaBaze.load(new FileInputStream(DATABASE_FINAL));
@@ -26,9 +30,7 @@ public class BazaPodataka {
                 return con;
     }
 
-    private static final String DATABASE_FINAL = "dat/bazaPodataka.properties";
-
-    public static List<IstrazivacUnos> dohvatiSveIstrazivace(){
+    public static List<IstrazivacUnos> dohvatiSveIstrazivace() {
         List<IstrazivacUnos> listaIstrazivacUnos = new ArrayList<>();
         Connection con = null;
         Statement stmt = null;
@@ -59,8 +61,10 @@ public class BazaPodataka {
                 listaIstrazivacUnos.add(newIStrazivac);
             }
         } catch (Exception ex){
-            System.out.println("Doslo je do greske tijekom spajanja na bazu podataka!\n");
-            ex.printStackTrace();
+            String m = "Doslo je do greske tijekom spajanja na bazu podataka!";
+//            System.out.println("Doslo je do greske tijekom spajanja na bazu podataka!\n");
+            logger.error(m);
+//            ex.printStackTrace();
         }finally {
             try{
                 rst.close();
