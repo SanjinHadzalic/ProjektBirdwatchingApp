@@ -2,10 +2,7 @@ package hr.java.vjezbe.entiteti;
 
 import java.util.List;
 
-/**
- * countUnos() metoda prebrojava ukupan unos podataka po lokaciji
- */
-public non-sealed class Lokalitet implements Istrazivac {
+public class Lokalitet {
     private Integer id;
     private String nazivLokacije;
     private String typeLocation;
@@ -68,16 +65,4 @@ public non-sealed class Lokalitet implements Istrazivac {
     public void setUnosi(List<BirdUnos> unosi) {
         this.unosi = unosi;
     }
-
-    @Override
-    public int countUnos(Lokalitet lok) {
-        int counter = 0;
-        for(int i = 0; i < lok.unosi.size(); i++){
-            if(lok.unosi.get(i).getBrojnost()>0){
-                counter++;
-            }
-        }
-        return counter;
-    }
-
 }

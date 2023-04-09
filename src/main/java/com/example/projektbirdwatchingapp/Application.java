@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,15 +29,19 @@ public class Application extends javafx.application.Application {
         istrazivacUnosList= new ArrayList<>();
         lokacijaList = new ArrayList<>();
         podatakList = new ArrayList<>();
+        try{
         addIstrazivac();
         addLokacija();
         addPodatak();
+        } catch (RuntimeException e){
+            logger.error("Niste povezani s H2 bat datotekom");
+        }
         mainStage = stage;
         FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("login.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 520, 400);
         stage.setTitle("BirdwatchingApp");
         stage.setScene(scene);
-        stage.show();;
+        stage.show();
     }
 
     public static void main(String[] args) {
@@ -45,7 +50,7 @@ public class Application extends javafx.application.Application {
     public static List<IstrazivacUnos> getIstrazivacUnosList(){return istrazivacUnosList;}
     public static List<Lokalitet> getLokacijaList(){return lokacijaList;}
     public static List<BirdUnos> getPodatakList(){return podatakList;}
-    private void addIstrazivac() throws Exception {
+    private void addIstrazivac() throws FileNotFoundException {
         istrazivacUnosList = BazaPodataka.dohvatiSveIstrazivacee();
     }
 

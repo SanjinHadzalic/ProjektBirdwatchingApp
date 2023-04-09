@@ -88,3 +88,28 @@
 2023-04-09 13:47:44,864 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
 2023-04-09 13:48:38,296 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
 2023-04-09 13:56:07,578 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-04-09 15:54:29,461 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-04-09 15:54:30,792 ERROR [JavaFX Application Thread] h.j.v.b.BazaPodataka [BazaPodataka.java:80] Problem tijekom dohvacanja svih istrazivaca!
+2023-04-09 15:55:00,117 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-04-09 15:55:39,318 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-04-09 15:55:47,187 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-04-09 15:55:48,492 ERROR [JavaFX Application Thread] h.j.v.b.BazaPodataka [BazaPodataka.java:80] Problem tijekom dohvacanja svih istrazivaca!
+2023-04-09 15:56:42,325 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:28] Aplikacija je pokrenuta
+2023-04-09 15:56:43,642 ERROR [JavaFX Application Thread] h.j.v.b.BazaPodataka [BazaPodataka.java:80] Problem tijekom dohvacanja svih istrazivaca!
+2023-04-09 15:57:36,871 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:28] Aplikacija je pokrenuta
+2023-04-09 15:58:20,913 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:28] Aplikacija je pokrenuta
+2023-04-09 15:58:35,611 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:28] Aplikacija je pokrenuta
+2023-04-09 15:58:36,920 ERROR [JavaFX Application Thread] h.j.v.b.BazaPodataka [BazaPodataka.java:80] Problem tijekom dohvacanja svih istrazivaca!
+2023-04-09 15:59:34,107 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:28] Aplikacija je pokrenuta
+2023-04-09 15:59:35,437 ERROR [JavaFX Application Thread] h.j.v.b.BazaPodataka [BazaPodataka.java:80] Problem tijekom dohvacanja svih istrazivaca!
+2023-04-09 16:00:52,943 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:28] Aplikacija je pokrenuta
+2023-04-09 16:00:54,261 ERROR [JavaFX Application Thread] h.j.v.b.BazaPodataka [BazaPodataka.java:80] Problem tijekom dohvacanja svih istrazivaca!
+2023-04-09 16:01:12,312 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:28] Aplikacija je pokrenuta
+2023-04-09 16:01:13,628 ERROR [JavaFX Application Thread] h.j.v.b.BazaPodataka [BazaPodataka.java:80] Problem tijekom dohvacanja svih istrazivaca!
+2023-04-09 16:01:37,617 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:28] Aplikacija je pokrenuta
+2023-04-09 16:01:38,929 ERROR [JavaFX Application Thread] h.j.v.b.BazaPodataka [BazaPodataka.java:80] Problem tijekom dohvacanja svih istrazivaca!
+2023-04-09 16:01:38,929 ERROR [JavaFX Application Thread] c.e.p.Application [Application.java:37] Niste povezani s H2 bat datotekom
+2023-04-09 16:02:29,647 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:28] Aplikacija je pokrenuta
+2023-04-09 16:02:30,963 ERROR [JavaFX Application Thread] h.j.v.b.BazaPodataka [BazaPodataka.java:80] Problem tijekom dohvacanja svih istrazivaca!
+2023-04-09 16:02:30,963 ERROR [JavaFX Application Thread] c.e.p.Application [Application.java:37] Niste povezani s H2 bat datotekom
+2023-04-09 16:03:23,533 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:28] Aplikacija je pokrenuta

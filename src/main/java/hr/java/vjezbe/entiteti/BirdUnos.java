@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
-public final class BirdUnos implements Serializable {
+public class BirdUnos implements Serializable {
     private Integer id;
     private String naziv;
     private Integer brojnost;

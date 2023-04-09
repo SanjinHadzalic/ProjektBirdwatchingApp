@@ -1,20 +1,16 @@
 package com.example.projektbirdwatchingapp;
 
 import hr.java.vjezbe.entiteti.AppUser;
+import hr.java.vjezbe.entiteti.AppUserBuilder;
 import hr.java.vjezbe.entiteti.HashingPassword;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URL;
 import java.util.*;
 
 public class LoginController {
@@ -29,7 +25,6 @@ public class LoginController {
 
     @FXML
     private Button loginButton;
-
     private static Set<AppUser> appUserSet;
     public static String odabraniUser;
     public static Set<AppUser> getAppUserSet(){return appUserSet;}
@@ -46,12 +41,11 @@ public class LoginController {
             String password = appUserScanner.nextLine();
             String role = appUserScanner.nextLine();
 
-            AppUser newAppUser = new AppUser(username, password, role);
+            AppUser newAppUser = new AppUserBuilder().setUsername(username).setPassword(password).setRole(role).createAppUser();
 
             getAppUserSet().add(newAppUser);
         }
     }
-
     public void loginButtonOnAction(ActionEvent e) throws IOException{
         if (usernameTextField.getText().isBlank() == false && passwordTextField.getText().isBlank() == false){
             String userTest = usernameTextField.getText();
@@ -120,7 +114,6 @@ public class LoginController {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
     }
-
     @FXML
     public void onEnter(ActionEvent e) throws IOException {
         if (usernameTextField.getText().isBlank() == false && passwordTextField.getText().isBlank() == false){
@@ -162,9 +155,7 @@ public class LoginController {
 
                         passwordTextField.clear();
                         System.out.println("Sifra korisnika: " + usernameTextField.getText() + " je pogresna!");
-
                     }
-                    System.out.println("ucitan je korisnik...");
                 }
             }
         } else {
@@ -185,6 +176,4 @@ public class LoginController {
             }
         }
     }
-
-
 }
