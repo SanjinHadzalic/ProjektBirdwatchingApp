@@ -2,8 +2,9 @@ package hr.java.vjezbe.entiteti;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
-public class BirdUnos implements Serializable {
+public final class BirdUnos implements Serializable {
     private Integer id;
     private String naziv;
     private Integer brojnost;

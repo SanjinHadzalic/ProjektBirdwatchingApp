@@ -1,10 +1,7 @@
 package com.example.projektbirdwatchingapp;
 
 import hr.java.vjezbe.baza.BazaPodataka;
-import hr.java.vjezbe.entiteti.BirdUnos;
-import hr.java.vjezbe.entiteti.IstrazivacUnos;
-import hr.java.vjezbe.entiteti.Lokalitet;
-import hr.java.vjezbe.entiteti.Nomenklatura;
+import hr.java.vjezbe.entiteti.*;
 import hr.java.vjezbe.util.Serijalizacija;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
@@ -30,7 +27,7 @@ import java.util.stream.Collectors;
 
 import static com.example.projektbirdwatchingapp.LoginController.odabraniUser;
 
-public class PregledPodatakaController implements Initializable {
+public non-sealed class PregledPodatakaController implements Initializable, Analiza {
     @FXML
     private ComboBox<Nomenklatura> vrstaComboBox;
     @FXML
@@ -38,7 +35,7 @@ public class PregledPodatakaController implements Initializable {
     @FXML
     private ComboBox<String> spolVrsteComboBox;
     @FXML
-    private TextField komentariTextField;
+    private TextField countFemaleTextField;
     @FXML
     private ComboBox<String> istrazivacComboBox;
     @FXML
@@ -75,6 +72,9 @@ public class PregledPodatakaController implements Initializable {
     private final List<Lokalitet> lokacijaBazaPodataka = BazaPodataka.dohvatiSveLokalitete().stream().sorted(Comparator.comparing(Lokalitet::getNazivLokacije)).toList();
     private ArrayList<Serijalizacija> listaSTO = new ArrayList<>();
     private final AtomicBoolean running = new AtomicBoolean(true);
+    private Integer countFemale = countFemale(Application.getPodatakList());
+    private Integer countMale = countMale(Application.getPodatakList());
+    private Integer countUnknown = countUnkonown(Application.getPodatakList());
 
 
     public static void showPregledPodatakaScreen() throws IOException {
@@ -147,6 +147,7 @@ public class PregledPodatakaController implements Initializable {
                 Platform.runLater(() ->{
                     if (odabraniUser.equals("admin".toUpperCase())){
                         podaciTableView.setItems(FXCollections.observableList(Application.getPodatakList()));
+                        countFemaleTextField.setText(String.valueOf(countFemale));
                     } else {
                         podaciTableView.setItems(FXCollections.observableList(Application.getPodatakList().stream().filter(a->a.getIstrazivac().toLowerCase().startsWith(odabraniUser.toLowerCase())).collect(Collectors.toList())));
                     }
@@ -206,7 +207,7 @@ public class PregledPodatakaController implements Initializable {
                     .collect(Collectors.toList());
         }
         podaciTableView.setItems(FXCollections.observableList(filterPodatakList));
-        System.out.println(vrstaComboBox.getSelectionModel().getSelectedItem());
+//        System.out.println(vrstaComboBox.getSelectionModel().getSelectedItem());
         running.set(false);
     }
 
@@ -320,4 +321,35 @@ public class PregledPodatakaController implements Initializable {
         UnosPodatkaController.showUnosPodatkaScreen();
     }
 
+    @Override
+    public Integer countHowMany(List<BirdUnos> podaci) {
+        Integer countAll = Math.toIntExact(podaci.stream()
+                .filter(a -> a.getBrojnost() > 0)
+                .count());
+        return countAll;
+    }
+
+    @Override
+    public Integer countFemale(List<BirdUnos> podaci) {
+        Integer countFemale = Math.toIntExact(podaci.stream()
+                .filter(f -> f.getSpol().toUpperCase().equals("F".toUpperCase()))
+                .count());
+        return countFemale;
+    }
+
+    @Override
+    public Integer countMale(List<BirdUnos> podaci) {
+        Integer countMale = Math.toIntExact(podaci.stream()
+                .filter(m -> m.getSpol().toUpperCase().equals("M".toUpperCase()))
+                .count());
+        return countMale;
+    }
+
+    @Override
+    public Integer countUnkonown(List<BirdUnos> podaci) {
+        Integer countUnknown = Math.toIntExact(podaci.stream()
+                .filter(u -> u.getSpol().toUpperCase().equals("U".toUpperCase()))
+                .count());
+        return countUnknown;
+    }
 }

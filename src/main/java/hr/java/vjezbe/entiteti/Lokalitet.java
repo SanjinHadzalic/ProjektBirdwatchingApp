@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * countUnos() metoda prebrojava ukupan unos podataka po lokaciji
  */
-public non-sealed class Lokalitet implements Istrazivac, Analiza {
+public non-sealed class Lokalitet implements Istrazivac {
     private Integer id;
     private String nazivLokacije;
     private String typeLocation;
@@ -78,29 +78,6 @@ public non-sealed class Lokalitet implements Istrazivac, Analiza {
             }
         }
         return counter;
-    }
-    @Override
-    public int[] countGender(List<Lokalitet> lok) {
-        int[] container = new int[3];
-        int countM = 0;
-        int countF = 0;
-        int countU = 0;
-
-        for(int i = 0; i < lok.size(); i ++){
-            for(int j = 0; j < lok.get(i).getUnosi().size(); j++) {
-                if (lok.get(i).getUnosi().get(j).getSpol().equals("M")) {
-                    countM++;
-                    container[0] = countM;
-                } else if (lok.get(i).getUnosi().get(j).getSpol().equals("F")) {
-                    countF++;
-                    container[1] = countF;
-                } else {
-                    countU++;
-                    container[2] = countU;
-                }
-            }
-        }
-        return container;
     }
 
 }

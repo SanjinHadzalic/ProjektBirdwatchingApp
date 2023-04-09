@@ -1,8 +1,13 @@
 package hr.java.vjezbe.entiteti;
 
+import com.example.projektbirdwatchingapp.PregledPodatakaController;
+
 import java.util.List;
 
-interface Analiza{
+sealed public interface Analiza permits PregledPodatakaController {
 
-     int[] countGender(List<Lokalitet> lok);
+     Integer countHowMany(List<BirdUnos> podaci);
+     Integer countFemale(List<BirdUnos> podaci);
+     Integer countMale(List<BirdUnos> podaci);
+     Integer countUnkonown(List<BirdUnos> podaci);
  }

@@ -7,14 +7,13 @@ import org.slf4j.LoggerFactory;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.sql.*;
 import org.slf4j.Logger;
 
-public class BazaPodataka {
+public final class BazaPodataka {
     private static final Logger logger = LoggerFactory.getLogger(BazaPodataka.class);
     private static final String DATABASE_FINAL = "dat/bazaPodataka.properties";
 
@@ -57,6 +56,19 @@ public class BazaPodataka {
         }
         return listaData;
     }
+    public static  <T> void removeData(Integer id, String query) {
+        try {
+            Connection cnnt = spajanjeNaBazu();
+
+            PreparedStatement pstmt = cnnt.prepareStatement(query);
+            pstmt.setInt(1, id);
+
+            pstmt.executeUpdate();
+        } catch (Exception e) {
+            logger.error("Greska tijekom uklanjanja retka iz baze podataka!");
+            throw new RuntimeException(e);
+        }
+    }
 
     public static List<IstrazivacUnos> dohvatiSveIstrazivacee() {
         try {
@@ -69,7 +81,6 @@ public class BazaPodataka {
             throw new RuntimeException(e);
         }
     }
-
     public static List<Lokalitet> dohvatiSveLokalitete() {
         try {
             return getAllData(resultset -> new Lokalitet(resultset.getInt("id"), resultset.getString("naziv"),
@@ -92,7 +103,6 @@ public class BazaPodataka {
             throw new RuntimeException(e);
         }
     }
-
     public static void spremiNovogIstrazivaca(IstrazivacUnos istrazivac) throws Exception{
         try(Connection con = spajanjeNaBazu()){
             PreparedStatement pstmt = con.prepareStatement("INSERT INTO ISTRAZIVAC(ime, prezime, datum_rodjenja, institucija, adresa, telefon, email) VALUES(?, ?, ?, ?, ?, ?, ?);");
@@ -114,14 +124,7 @@ public class BazaPodataka {
     }
 
     public static void ukloniIstrazivaca(Integer id) throws Exception{
-        Connection cnt = spajanjeNaBazu();
-
-        PreparedStatement stmt = cnt.prepareStatement("DELETE FROM ISTRAZIVAC WHERE ID = ?");
-        stmt.setInt(1, id);
-
-        stmt.executeUpdate();
-
-        System.out.println("Uspjesno je uklonjen istrazivac pod rednim brojem " + id);
+        removeData(id, "DELETE FROM ISTRAZIVAC WHERE ID = ?");
     }
 
     public static void azurirajIstrazivaca(IstrazivacUnos istrazivac) throws Exception {
@@ -186,14 +189,7 @@ public class BazaPodataka {
     }
 
     public static void ukloniLokaciju(Integer id) throws Exception{
-        Connection cnt = spajanjeNaBazu();
-
-        PreparedStatement stmt = cnt.prepareStatement("DELETE FROM LOKACIJA WHERE ID = ?");
-        stmt.setInt(1, id);
-
-        stmt.executeUpdate();
-
-        System.out.println("Uspjesno je uklonjena lokacija pod rednim brojem: " + id);
+        removeData(id,"DELETE FROM LOKACIJA WHERE ID = ?");
     }
 
 
@@ -241,14 +237,6 @@ public class BazaPodataka {
     }
 
     public static void ukloniPodatak(Integer id) throws Exception{
-        Connection cnt = spajanjeNaBazu();
-
-        PreparedStatement stmt = cnt.prepareStatement("DELETE FROM PODATAK WHERE ID = ?");
-        stmt.setInt(1, id);
-
-        stmt.executeUpdate();
-
-        System.out.println("Uspjesno je uklonjen podatak pod rednim brojem: " + id);
+        removeData(id,"DELETE FROM PODATAK WHERE ID = ?");
     }
-
 }

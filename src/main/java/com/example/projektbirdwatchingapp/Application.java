@@ -36,7 +36,7 @@ public class Application extends javafx.application.Application {
         Scene scene = new Scene(fxmlLoader.load(), 520, 400);
         stage.setTitle("BirdwatchingApp");
         stage.setScene(scene);
-        stage.show();
+        stage.show();;
     }
 
     public static void main(String[] args) {
