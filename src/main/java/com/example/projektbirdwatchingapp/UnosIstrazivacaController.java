@@ -39,7 +39,7 @@ public class UnosIstrazivacaController {
     @FXML
     public void saveIstrazivac() throws Exception {
 //        boolean flag = true;
-        List<IstrazivacUnos> listaIstrazivaca = BazaPodataka.dohvatiSveIstrazivace();
+        List<IstrazivacUnos> listaIstrazivaca = BazaPodataka.dohvatiSveIstrazivacee();
 
         OptionalInt idIstrazivacaRaw = listaIstrazivaca.stream()
                 .mapToInt(s -> s.getId())
@@ -50,9 +50,9 @@ public class UnosIstrazivacaController {
         if(!imeIstrazivac.isBlank()){
             imeIstrazivac=capitalizeString(imeIstrazivac);
         }
-        String prezimeIStrazivac = prezimeIStrazivacaTextField.getText();
-        if (!prezimeIStrazivac.isBlank()){
-            prezimeIStrazivac=capitalizeString(prezimeIStrazivac);
+        String prezimeIstrazivac = prezimeIStrazivacaTextField.getText();
+        if (!prezimeIstrazivac.isBlank()){
+            prezimeIstrazivac=capitalizeString(prezimeIstrazivac);
         }
         LocalDate datumIstrazivac = datumRodjenjaIstrazivacaDatePicker.getValue();
         String institucijaIstrazivaca = institucijaIstrazivacaTextField.getText();
@@ -66,7 +66,7 @@ public class UnosIstrazivacaController {
         if (imeIstrazivac.isBlank()){
             errors.append("Nedostaje unos za ime istrazivaca!\n");
         }
-        if (prezimeIStrazivac.isBlank()){
+        if (prezimeIstrazivac.isBlank()){
             errors.append("Nedostaje unos za prezime istrazivaca!\n");
         }
         if (datumIstrazivac == null){
@@ -91,8 +91,8 @@ public class UnosIstrazivacaController {
             obavijestUpozerenja.setContentText(errors.toString());
             
             obavijestUpozerenja.showAndWait();
-        } else if (imeIstrazivac.isBlank() != true && prezimeIStrazivac.isBlank() != true && datumIstrazivac != null && institucijaIstrazivaca.isBlank() != true && adresaIstrazivaca.isBlank() != true && mobitelIstrazivaca.isBlank() != true && emailIstrazivaca.isBlank()!=true) {
-            IstrazivacUnos noviIStrazivac = new IstrazivacUnos(idIstrazivaca, imeIstrazivac, prezimeIStrazivac, datumIstrazivac, institucijaIstrazivaca, adresaIstrazivaca, Integer.parseInt(mobitelIstrazivaca), emailIstrazivaca);
+        } else if (imeIstrazivac.isBlank() != true && prezimeIstrazivac.isBlank() != true && datumIstrazivac != null && institucijaIstrazivaca.isBlank() != true && adresaIstrazivaca.isBlank() != true && mobitelIstrazivaca.isBlank() != true && emailIstrazivaca.isBlank()!=true) {
+            IstrazivacUnos noviIStrazivac = new IstrazivacUnos(idIstrazivaca, capitalizeString(imeIstrazivac), capitalizeString(prezimeIstrazivac), datumIstrazivac, institucijaIstrazivaca, adresaIstrazivaca, Integer.parseInt(mobitelIstrazivaca), emailIstrazivaca);
 
             boolean flag2 = true;
             try{
@@ -135,7 +135,7 @@ public class UnosIstrazivacaController {
                 Alert obavijestUnosa = new Alert(Alert.AlertType.INFORMATION);
                 obavijestUnosa.setTitle("Spremanje istrazivaca");
                 obavijestUnosa.setHeaderText("Uspjesno je spremljen istrazivac:");
-                obavijestUnosa.setContentText("Istrazivac: " + imeIstrazivac + " " + prezimeIStrazivac + " je uspjesno dodan u aplikaciju!\n");
+                obavijestUnosa.setContentText("Istrazivac: " + imeIstrazivac + " " + prezimeIstrazivac + " je uspjesno dodan u aplikaciju!\n");
 
                 obavijestUnosa.showAndWait();
 
@@ -191,20 +191,20 @@ public class UnosIstrazivacaController {
         return ret;
     }
     public void writeNewIstrazivac() throws Exception{
-        List<IstrazivacUnos> listaIstrazivaca = BazaPodataka.dohvatiSveIstrazivace();
+        List<IstrazivacUnos> listaIstrazivaca = BazaPodataka.dohvatiSveIstrazivacee();
         OptionalInt idIstrazivacaRaw = listaIstrazivaca.stream()
                 .mapToInt(s->s.getId())
                 .max();
         Integer idIstrazivaca = idIstrazivacaRaw.getAsInt() + 1;
         String imeIstrazivac = imeIstrazivacaTextField.getText();
-        String prezimeIStrazivac = prezimeIStrazivacaTextField.getText();
+        String prezimeIstrazivac = prezimeIStrazivacaTextField.getText();
         LocalDate datumIstrazivac = datumRodjenjaIstrazivacaDatePicker.getValue();
         String institucijaIstrazivaca = institucijaIstrazivacaTextField.getText();
         String adresaIstrazivaca = adresaIstrazivacaTextField.getText();
         String mobitelIstrazivaca = mobitelIstrazivacaTextField.getText();
         String emailIstrazivaca = emailIstrazivacaTextField.getText();
 
-        IstrazivacUnos noviIstrazivac = new IstrazivacUnos(idIstrazivaca, imeIstrazivac, prezimeIStrazivac, datumIstrazivac, institucijaIstrazivaca, adresaIstrazivaca, Integer.parseInt(mobitelIstrazivaca), emailIstrazivaca);
+        IstrazivacUnos noviIstrazivac = new IstrazivacUnos(idIstrazivaca, capitalizeString(imeIstrazivac), capitalizeString(prezimeIstrazivac), datumIstrazivac, institucijaIstrazivaca, adresaIstrazivaca, Integer.parseInt(mobitelIstrazivaca), emailIstrazivaca);
 
         BazaPodataka.spremiNovogIstrazivaca(noviIstrazivac);
     }

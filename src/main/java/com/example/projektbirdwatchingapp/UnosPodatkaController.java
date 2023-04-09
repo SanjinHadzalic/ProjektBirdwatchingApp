@@ -34,8 +34,17 @@ public class UnosPodatkaController implements Initializable {
     private DatePicker datumDatePicker;
     @FXML
     private TextArea komentariTextArea;
-    private final List<IstrazivacUnos> istrazivaciBaza = BazaPodataka.dohvatiSveIstrazivace().stream().toList();
-    private final List<Lokalitet> lokacijaBazaPodataka = BazaPodataka.dohvatiSveLokacije().stream().toList();
+    private final List<IstrazivacUnos> istrazivaciBaza;
+
+    {
+        try {
+            istrazivaciBaza = BazaPodataka.dohvatiSveIstrazivacee().stream().toList();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private final List<Lokalitet> lokacijaBazaPodataka = BazaPodataka.dohvatiSveLokalitete().stream().toList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -51,7 +60,7 @@ public class UnosPodatkaController implements Initializable {
     }
     @FXML
     public void savePodatak() throws Exception {
-        List<BirdUnos> podatakList = BazaPodataka.dohvatiSvePodatke();
+        List<BirdUnos> podatakList = BazaPodataka.dohvatiSvePodatkee();
 
         OptionalInt idPodatakRaw = podatakList.stream()
                 .mapToInt(s -> s.getId())
@@ -121,7 +130,7 @@ public class UnosPodatkaController implements Initializable {
     }
 
     public void writeNewPodatak() throws Exception{
-        List<BirdUnos> podatakList = BazaPodataka.dohvatiSvePodatke();
+        List<BirdUnos> podatakList = BazaPodataka.dohvatiSvePodatkee();
         OptionalInt idPodatakRaw = podatakList.stream()
                 .mapToInt(s->s.getId())
                 .max();

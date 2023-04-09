@@ -30,51 +30,67 @@ public class BazaPodataka {
                 return con;
     }
 
-    public static List<IstrazivacUnos> dohvatiSveIstrazivace() {
-        List<IstrazivacUnos> listaIstrazivacUnos = new ArrayList<>();
-        Connection con = null;
+    public static <T> List<T> getAllData(ResultConverter<T> converter, String query) throws Exception {
+        List<T> listaData = new ArrayList<>();
+        Connection cntn = null;
         Statement stmt = null;
-        ResultSet rst = null;
+        ResultSet rstt = null;
+        cntn = spajanjeNaBazu();
         try{
-            con = spajanjeNaBazu();
-
-            if (con != null){
-                System.out.println("Uspjesno smo se spojili na bazu podataka!\n");
+            stmt = cntn.createStatement();
+            rstt = stmt.executeQuery(query);
+            while(rstt.next()){
+                T t = converter.converter(rstt);
+                listaData.add(t);
             }
-
-            stmt = con.createStatement();
-
-            rst = stmt.executeQuery("SELECT * FROM ISTRAZIVAC;");
-
-            while (rst.next()){
-                Integer id = rst.getInt("id");
-                String ime = rst.getString("ime");
-                String prezime = rst.getString("prezime");
-                LocalDate datumRodjenja = rst.getDate("datum_rodjenja").toLocalDate();
-                String institucija = rst.getString("institucija");
-                String adresa = rst.getString("adresa");
-                Integer telefon = rst.getInt("telefon");
-                String email = rst.getString("email");
-
-                IstrazivacUnos newIStrazivac = new IstrazivacUnos(id, ime, prezime, datumRodjenja, institucija, adresa, telefon, email);
-
-                listaIstrazivacUnos.add(newIStrazivac);
-            }
-        } catch (Exception ex){
-            String m = "Doslo je do greske tijekom spajanja na bazu podataka!";
-//            System.out.println("Doslo je do greske tijekom spajanja na bazu podataka!\n");
-            logger.error(m);
-//            ex.printStackTrace();
-        }finally {
+        }  catch (Exception ex){
+            logger.error("Doslo je do greske tijekom spajanja na bazu podataka!");
+            ex.printStackTrace();
+        } finally {
             try{
-                rst.close();
+                rstt.close();
                 stmt.close();
-                con.close();
+                cntn.close();
             } catch (SQLException sqlex){
                 sqlex.printStackTrace();
             }
         }
-        return listaIstrazivacUnos;
+        return listaData;
+    }
+
+    public static List<IstrazivacUnos> dohvatiSveIstrazivacee() {
+        try {
+            return getAllData(resultset -> new IstrazivacUnos(resultset.getInt("id"), resultset.getString("ime"),
+                                                                    resultset.getString("prezime"), resultset.getDate("datum_rodjenja").toLocalDate(),
+                                                                    resultset.getString("institucija"), resultset.getString("adresa"),
+                                                                    resultset.getInt("telefon"), resultset.getString("email")), "SELECT * FROM ISTRAZIVAC;");
+        } catch (Exception e) {
+            logger.error("Problem tijekom dohvacanja svih istrazivaca!");
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static List<Lokalitet> dohvatiSveLokalitete() {
+        try {
+            return getAllData(resultset -> new Lokalitet(resultset.getInt("id"), resultset.getString("naziv"),
+                                                        resultset.getString("tip"), resultset.getString("x_coord"),
+                                                        resultset.getString("y_coord")), "SELECT * FROM LOKACIJA;");
+        } catch (Exception e) {
+            logger.error("Problem tijekom dohvacanja svih lokaliteta!");
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static List<BirdUnos> dohvatiSvePodatkee(){
+        try {
+            return getAllData(resultset -> new BirdUnos(resultset.getInt("id"), resultset.getString("vrsta"),
+                                                        resultset.getInt("brojnost"), resultset.getString("spol"),
+                                                        resultset.getString("komentari"), resultset.getString("istrazivac"),
+                                                        resultset.getString("lokacija"), resultset.getDate("datum").toLocalDate()), "SELECT * FROM PODATAK;");
+        } catch (Exception e) {
+            logger.error("Problem tijekom dohvacanja svih podataka istrazivanja!");
+            throw new RuntimeException(e);
+        }
     }
 
     public static void spremiNovogIstrazivaca(IstrazivacUnos istrazivac) throws Exception{
@@ -91,7 +107,7 @@ public class BazaPodataka {
             pstmt.executeUpdate();
 
             System.out.println("Spremljeno je!");
-        }catch (SQLException| IOException ex){
+        }catch (SQLException | IOException ex){
             String msg = "Doslo je do greske u radu s bazom podataka tijekom spremanja novog istraizvaca!\n";
             System.out.println(msg);
         }
@@ -131,48 +147,6 @@ public class BazaPodataka {
         pstmt.setInt(8, istrazivac.getId());
 
         pstmt.executeUpdate();
-    }
-
-    public static List<Lokalitet> dohvatiSveLokacije(){
-        List<Lokalitet> lokacijeLista = new ArrayList<>();
-        Connection con = null;
-        Statement stmt = null;
-        ResultSet rst = null;
-        try{
-            con = spajanjeNaBazu();
-
-            if (con != null){
-                System.out.println("Uspjesno smo se spojili na bazu podataka!\n");
-            }
-
-            stmt = con.createStatement();
-
-            rst = stmt.executeQuery("SELECT * FROM LOKACIJA;");
-
-            while (rst.next()){
-                Integer id = rst.getInt("id");
-                String naziv = rst.getString("naziv");
-                String tip = rst.getString("tip");
-                String x_coord = rst.getString("x_coord");
-                String y_coord = rst.getString("y_coord");
-
-                Lokalitet newLokalitet = new Lokalitet(id, naziv, tip, x_coord, y_coord);
-
-                lokacijeLista.add(newLokalitet);
-            }
-        } catch (Exception ex){
-            System.out.println("Doslo je do greske tijekom spajanja na bazu podataka!\n");
-            ex.printStackTrace();
-        } finally {
-            try{
-                rst.close();
-                stmt.close();
-                con.close();
-            } catch (SQLException sqlex){
-                sqlex.printStackTrace();
-            }
-        }
-        return lokacijeLista;
     }
 
     public static void spremiNovuLokaciju(Lokalitet novaLokacija) throws Exception{
@@ -222,50 +196,6 @@ public class BazaPodataka {
         System.out.println("Uspjesno je uklonjena lokacija pod rednim brojem: " + id);
     }
 
-    public static List<BirdUnos> dohvatiSvePodatke(){
-        List<BirdUnos> podatakLista = new ArrayList<>();
-        Connection con = null;
-        Statement stmt = null;
-        ResultSet rst = null;
-        try{
-            con = spajanjeNaBazu();
-
-            if (con != null){
-                System.out.println("Uspjesno smo se spojili na bazu podataka!\n");
-            }
-
-            stmt = con.createStatement();
-
-            rst = stmt.executeQuery("SELECT * FROM PODATAK;");
-
-            while (rst.next()){
-                Integer id = rst.getInt("id");
-                String vrsta = rst.getString("vrsta");
-                Integer brojnost = rst.getInt("brojnost");
-                String spol = rst.getString("spol");
-                String komentari = rst.getString("komentari");
-                String istrazivac = rst.getString("istrazivac");
-                String lokacija = rst.getString("lokacija");
-                LocalDate datum = rst.getDate("datum").toLocalDate();
-
-                BirdUnos newUnos = new BirdUnos(id, vrsta, brojnost, spol, komentari, istrazivac, lokacija, datum);
-
-                podatakLista.add(newUnos);
-            }
-        } catch (Exception ex){
-            System.out.println("Doslo je do greske tijekom spajanja na bazu podataka!\n");
-            ex.printStackTrace();
-        } finally {
-            try{
-                rst.close();
-                stmt.close();
-                con.close();
-            } catch (SQLException sqlex){
-                sqlex.printStackTrace();
-            }
-        }
-        return podatakLista;
-    }
 
     public static void azurirajPodatak(BirdUnos updatePodatak) throws Exception {
         Connection cnt = spajanjeNaBazu();

@@ -37,7 +37,7 @@ public class UnosLokalitetaController {
     private TextField yKoordinataTextField;
     @FXML
     public void saveLokalitet() throws Exception{
-        List<Lokalitet> listaLokaliteta = BazaPodataka.dohvatiSveLokacije();
+        List<Lokalitet> listaLokaliteta = BazaPodataka.dohvatiSveLokalitete();
 
         OptionalInt idLokalitetaRaw = listaLokaliteta.stream()
                 .mapToInt(s -> s.getId())
@@ -139,7 +139,7 @@ public class UnosLokalitetaController {
 
     }
     public void writeNewLokalitet() throws Exception{
-        List<Lokalitet> listaLokaliteta = BazaPodataka.dohvatiSveLokacije();
+        List<Lokalitet> listaLokaliteta = BazaPodataka.dohvatiSveLokalitete();
         OptionalInt idLokalitetaRaw = listaLokaliteta.stream()
                 .mapToInt(s->s.getId())
                 .max();
@@ -157,10 +157,16 @@ public class UnosLokalitetaController {
         String xKoordLokacije = xKoordinataTextField.getText();
         String yKoordLokacije = yKoordinataTextField.getText();
 
-        Lokalitet noviLokalitet = new Lokalitet(idLokalitet, nazivLokacije, tipLokacije, xKoordLokacije, yKoordLokacije);
+        Lokalitet noviLokalitet = new Lokalitet(idLokalitet, capitalizeString(nazivLokacije), tipLokacije, xKoordLokacije, yKoordLokacije);
 
         BazaPodataka.spremiNovuLokaciju(noviLokalitet);
     }
+
+    private String capitalizeString(String toBeCapitalized){
+        String ret = toBeCapitalized.substring(0,1).toUpperCase() + toBeCapitalized.substring(1).toLowerCase();
+        return ret;
+    }
+
 
     public static void showUnosLokalitetaScreen() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("unosLokaliteta.fxml"));

@@ -23,7 +23,7 @@ public class Application extends javafx.application.Application {
     private static List<Lokalitet> lokacijaList;
     private static List<BirdUnos> podatakList;
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) throws Exception {
         logger.info("Aplikacija je pokrenuta");
         istrazivacUnosList= new ArrayList<>();
         lokacijaList = new ArrayList<>();
@@ -45,15 +45,15 @@ public class Application extends javafx.application.Application {
     public static List<IstrazivacUnos> getIstrazivacUnosList(){return istrazivacUnosList;}
     public static List<Lokalitet> getLokacijaList(){return lokacijaList;}
     public static List<BirdUnos> getPodatakList(){return podatakList;}
-    private void addIstrazivac() throws FileNotFoundException{
-        istrazivacUnosList = BazaPodataka.dohvatiSveIstrazivace();
+    private void addIstrazivac() throws Exception {
+        istrazivacUnosList = BazaPodataka.dohvatiSveIstrazivacee();
     }
 
     private void addLokacija() throws FileNotFoundException{
-        lokacijaList = BazaPodataka.dohvatiSveLokacije();
+        lokacijaList = BazaPodataka.dohvatiSveLokalitete();
     }
     private void addPodatak() throws FileNotFoundException{
-            podatakList = BazaPodataka.dohvatiSvePodatke();
+            podatakList = BazaPodataka.dohvatiSvePodatkee();
     }
     public static Stage getMainStage(){return mainStage;}
 }

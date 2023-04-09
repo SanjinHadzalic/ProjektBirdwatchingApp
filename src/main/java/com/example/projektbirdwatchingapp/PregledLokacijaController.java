@@ -58,7 +58,7 @@ public class PregledLokacijaController {
     @FXML
     public void initialize(){
         nazivLokacijeTableColumn.setCellValueFactory(
-                cellData->new SimpleStringProperty(cellData.getValue().getNazivLokacije())
+                cellData->new SimpleStringProperty(capitalizeString(cellData.getValue().getNazivLokacije()))
         );
         tipLokacijeTableColumn.setCellValueFactory(
                 cellData->new SimpleStringProperty(cellData.getValue().getTypeLocation())
@@ -89,6 +89,12 @@ public class PregledLokacijaController {
 
         refreshLokacija(running);
     }
+
+    private String capitalizeString(String toBeCapitalized){
+        String ret = toBeCapitalized.substring(0,1).toUpperCase() + toBeCapitalized.substring(1).toLowerCase();
+        return ret;
+    }
+
     public Thread refreshLokacija(AtomicBoolean running){
         Thread t = new Thread(() -> {
             while(running.get()){

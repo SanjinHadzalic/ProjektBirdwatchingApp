@@ -62,8 +62,17 @@ public class PregledPodatakaController implements Initializable {
     @FXML
     private TableColumn<BirdUnos,String> datumTableColumn;
 
-    private final List<IstrazivacUnos> istrazivaciBaza = BazaPodataka.dohvatiSveIstrazivace().stream().sorted(Comparator.comparing(IstrazivacUnos::getIme)).toList();
-    private final List<Lokalitet> lokacijaBazaPodataka = BazaPodataka.dohvatiSveLokacije().stream().sorted(Comparator.comparing(Lokalitet::getNazivLokacije)).toList();
+    private final List<IstrazivacUnos> istrazivaciBaza;
+
+    {
+        try {
+            istrazivaciBaza = BazaPodataka.dohvatiSveIstrazivacee().stream().sorted(Comparator.comparing(IstrazivacUnos::getIme)).toList();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private final List<Lokalitet> lokacijaBazaPodataka = BazaPodataka.dohvatiSveLokalitete().stream().sorted(Comparator.comparing(Lokalitet::getNazivLokacije)).toList();
     private ArrayList<Serijalizacija> listaSTO = new ArrayList<>();
     private final AtomicBoolean running = new AtomicBoolean(true);
 
