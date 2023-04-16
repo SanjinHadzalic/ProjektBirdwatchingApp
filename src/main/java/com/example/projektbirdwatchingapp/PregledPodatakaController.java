@@ -118,7 +118,7 @@ public non-sealed class PregledPodatakaController implements Initializable, Anal
                     }
                 });
         vrstaComboBox.setEditable(true);
-        vrstaComboBox.getItems().setAll(Nomenklatura.values());
+        vrstaComboBox.getItems().setAll(Arrays.stream(Nomenklatura.values()).sorted(Comparator.comparing(Nomenklatura::getVrsta)).toList());
         spolVrsteComboBox.setItems(FXCollections.observableArrayList("M", "F","U" ));
         if (odabraniUser.equals("admin".toUpperCase())){
             for (IstrazivacUnos e : istrazivaciBaza){
@@ -143,7 +143,6 @@ public non-sealed class PregledPodatakaController implements Initializable, Anal
     public Thread refreshPodatak(String odabraniUser, AtomicBoolean running){
         Thread t = new Thread(() -> {
             while(running.get()){
-//                System.out.println("Thread za refresh podataka radi\n");
                 Platform.runLater(() ->{
                     if (odabraniUser.equals("admin".toUpperCase())){
                         podaciTableView.setItems(FXCollections.observableList(Application.getPodatakList()));

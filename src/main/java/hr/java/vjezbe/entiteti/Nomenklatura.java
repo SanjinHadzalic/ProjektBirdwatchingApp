@@ -11,7 +11,7 @@ public enum Nomenklatura {
     kos("Turdus merula"),
     skanjac("Buteo buteo"),
     vjetrusa("Falco tinnunculus"),
-    divlja_patka("anas platyrhynchos"),
+    divlja_patka("Anas platyrhynchos"),
     cesljugar("Carduelis carduelis"),
     zelendur("Carduelic chloris"),
     vrabac("Passer domesticus"),
