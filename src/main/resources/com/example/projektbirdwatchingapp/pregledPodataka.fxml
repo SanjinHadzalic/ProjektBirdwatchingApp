@@ -151,10 +151,52 @@
             <Insets right="30.0" top="30.0" />
          </GridPane.margin>
       </FontAwesomeIcon>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Female" GridPane.columnIndex="3" />
-      <TextField fx:id="countFemaleTextField" GridPane.columnIndex="3">
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Female:" GridPane.columnIndex="3" GridPane.valignment="TOP">
+         <font>
+            <Font name="Calibri" size="18.0" />
+         </font>
+         <GridPane.margin>
+            <Insets top="30.0" />
+         </GridPane.margin></Text>
+      <TextField fx:id="countFemaleTextField" GridPane.columnIndex="3" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets left="80.0" right="30.0" top="27.0" />
+         </GridPane.margin>
+      </TextField>
+      <Text layoutX="686.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Male:" GridPane.columnIndex="3">
+         <font>
+            <Font name="Calibri" size="18.0" />
+         </font>
+      </Text>
+      <TextField fx:id="countMaleTextField" layoutX="766.0" layoutY="37.0" GridPane.columnIndex="3">
          <GridPane.margin>
             <Insets left="80.0" right="30.0" />
+         </GridPane.margin>
+      </TextField>
+      <Text layoutX="686.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Unknown:" GridPane.columnIndex="3" GridPane.valignment="BOTTOM">
+         <font>
+            <Font name="Calibri" size="18.0" />
+         </font>
+         <GridPane.margin>
+            <Insets bottom="30.0" />
+         </GridPane.margin>
+      </Text>
+      <TextField fx:id="countUnknownTextField" layoutX="766.0" layoutY="80.0" GridPane.columnIndex="3" GridPane.valignment="BOTTOM">
+         <GridPane.margin>
+            <Insets bottom="25.0" left="90.0" right="30.0" />
+         </GridPane.margin>
+      </TextField>
+      <Text layoutX="686.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Suma" GridPane.columnIndex="4" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+         <font>
+            <Font name="Calibri" size="18.0" />
+         </font>
+         <GridPane.margin>
+            <Insets bottom="20.0" />
+         </GridPane.margin>
+      </Text>
+      <TextField fx:id="countHowManyTextField" GridPane.columnIndex="4" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+         <GridPane.margin>
+            <Insets bottom="17.0" left="60.0" right="50.0" />
          </GridPane.margin>
       </TextField>
    </children>

@@ -15,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.util.Callback;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.net.URL;
@@ -36,6 +37,12 @@ public non-sealed class PregledPodatakaController implements Initializable, Anal
     private ComboBox<String> spolVrsteComboBox;
     @FXML
     private TextField countFemaleTextField;
+    @FXML
+    private TextField countMaleTextField;
+    @FXML
+    private TextField countUnknownTextField;
+    @FXML
+    private TextField countHowManyTextField;
     @FXML
     private ComboBox<String> istrazivacComboBox;
     @FXML
@@ -75,6 +82,7 @@ public non-sealed class PregledPodatakaController implements Initializable, Anal
     private Integer countFemale = countFemale(Application.getPodatakList());
     private Integer countMale = countMale(Application.getPodatakList());
     private Integer countUnknown = countUnkonown(Application.getPodatakList());
+    private Integer countHowMany = countHowMany(Application.getPodatakList());
 
 
     public static void showPregledPodatakaScreen() throws IOException {
@@ -147,6 +155,9 @@ public non-sealed class PregledPodatakaController implements Initializable, Anal
                     if (odabraniUser.equals("admin".toUpperCase())){
                         podaciTableView.setItems(FXCollections.observableList(Application.getPodatakList()));
                         countFemaleTextField.setText(String.valueOf(countFemale));
+                        countMaleTextField.setText(String.valueOf(countMale));
+                        countUnknownTextField.setText(String.valueOf(countUnknown));
+                        countHowManyTextField.setText(String.valueOf(countHowMany));
                     } else {
                         podaciTableView.setItems(FXCollections.observableList(Application.getPodatakList().stream().filter(a->a.getIstrazivac().toLowerCase().startsWith(odabraniUser.toLowerCase())).collect(Collectors.toList())));
                     }
@@ -206,7 +217,6 @@ public non-sealed class PregledPodatakaController implements Initializable, Anal
                     .collect(Collectors.toList());
         }
         podaciTableView.setItems(FXCollections.observableList(filterPodatakList));
-//        System.out.println(vrstaComboBox.getSelectionModel().getSelectedItem());
         running.set(false);
     }
 
