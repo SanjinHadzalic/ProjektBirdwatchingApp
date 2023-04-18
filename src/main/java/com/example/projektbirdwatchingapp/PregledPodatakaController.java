@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 
 import static com.example.projektbirdwatchingapp.LoginController.odabraniUser;
 
-public non-sealed class PregledPodatakaController implements Initializable, Analiza {
+public non-sealed class PregledPodatakaController extends ScreenControllerMethods implements Initializable, Analiza {
     @FXML
     private ComboBox<Nomenklatura> vrstaComboBox;
     @FXML
@@ -79,10 +79,10 @@ public non-sealed class PregledPodatakaController implements Initializable, Anal
     private final List<Lokalitet> lokacijaBazaPodataka = BazaPodataka.dohvatiSveLokalitete().stream().sorted(Comparator.comparing(Lokalitet::getNazivLokacije)).toList();
     private ArrayList<Serijalizacija> listaSTO = new ArrayList<>();
     private final AtomicBoolean running = new AtomicBoolean(true);
-    private Integer countFemale = countFemale(Application.getPodatakList());
-    private Integer countMale = countMale(Application.getPodatakList());
-    private Integer countUnknown = countUnkonown(Application.getPodatakList());
-    private Integer countHowMany = countHowMany(Application.getPodatakList());
+    private Integer countFemale;// = countFemale(Application.getPodatakList());
+    private Integer countMale;// = countMale(Application.getPodatakList());
+    private Integer countUnknown;// = countUnkonown(Application.getPodatakList());
+    private Integer countHowMany;// = countHowMany(Application.getPodatakList());
 
 
     public static void showPregledPodatakaScreen() throws IOException {
@@ -154,6 +154,10 @@ public non-sealed class PregledPodatakaController implements Initializable, Anal
                 Platform.runLater(() ->{
                     if (odabraniUser.equals("admin".toUpperCase())){
                         podaciTableView.setItems(FXCollections.observableList(Application.getPodatakList()));
+                        countFemale= countFemale(Application.getPodatakList());
+                        countMale = countMale(Application.getPodatakList());
+                        countUnknown = countUnkonown(Application.getPodatakList());
+                        countHowMany = countHowMany(Application.getPodatakList());
                         countFemaleTextField.setText(String.valueOf(countFemale));
                         countMaleTextField.setText(String.valueOf(countMale));
                         countUnknownTextField.setText(String.valueOf(countUnknown));
@@ -175,64 +179,7 @@ public non-sealed class PregledPodatakaController implements Initializable, Anal
 
         return t;
     }
-    @FXML
-    public void filterPodatak(){
-        String naziv = String.valueOf(vrstaComboBox.getSelectionModel().getSelectedItem());
-        String brojnost = brojnostVrsteTextField.getText();
-        String spol = String.valueOf(spolVrsteComboBox.getSelectionModel().getSelectedItem());
-        String istrazivac = String.valueOf(istrazivacComboBox.getSelectionModel().getSelectedItem());
-        String lokacija = String.valueOf(lokacijaComboBox.getSelectionModel().getSelectedItem());
-        LocalDate datum = datumDatePicker.getValue();
-
-        List<BirdUnos> filterPodatakList = new ArrayList<>(Application.getPodatakList());
-
-        if(Optional.of(naziv).isPresent() == true){
-            filterPodatakList = filterPodatakList.stream()
-                    .filter(s->s.getNaziv().toLowerCase().contains(naziv.toLowerCase()))
-                    .collect(Collectors.toList());
-        }
-        if (Optional.of(brojnost).isPresent()==true){
-            filterPodatakList=filterPodatakList.stream()
-                    .filter(s->s.getBrojnost().toString().contains(brojnost))
-                    .collect(Collectors.toList());
-        }
-        if (Optional.ofNullable(spol).isPresent()==true){
-            filterPodatakList=filterPodatakList.stream()
-                    .filter(s->s.getSpol().contains(spol))
-                    .collect(Collectors.toList());
-        }
-        if(Optional.ofNullable(istrazivac).isPresent() == true){
-            filterPodatakList = filterPodatakList.stream()
-                    .filter(s->s.getIstrazivac().contains(istrazivac))
-                    .collect(Collectors.toList());
-        }
-        if(Optional.ofNullable(lokacija).isPresent() == true){
-            filterPodatakList = filterPodatakList.stream()
-                    .filter(s->s.getLokacija().contains(lokacija))
-                    .collect(Collectors.toList());
-        }
-        if(Optional.ofNullable(datum).isEmpty() == false){
-            filterPodatakList = filterPodatakList.stream()
-                    .filter(s->s.getDatum().equals(datum))
-                    .collect(Collectors.toList());
-        }
-        podaciTableView.setItems(FXCollections.observableList(filterPodatakList));
-        running.set(false);
-    }
-
-    @FXML
-    public void onClickedRowShow(){
-        BirdUnos changed = podaciTableView.getSelectionModel().getSelectedItem();
-
-        vrstaComboBox.setValue(Nomenklatura.valueOf(changed.getNaziv()));
-        brojnostVrsteTextField.setText(changed.getBrojnost().toString());
-        spolVrsteComboBox.setValue(changed.getSpol());
-        istrazivacComboBox.setValue(changed.getIstrazivac());
-        lokacijaComboBox.setValue(changed.getLokacija());
-        datumDatePicker.setValue(changed.getDatum());
-    }
-
-    @FXML
+    @Override
     public void clearSelection(){
         vrstaComboBox.getSelectionModel().clearSelection();
         brojnostVrsteTextField.clear();
@@ -244,6 +191,23 @@ public non-sealed class PregledPodatakaController implements Initializable, Anal
         podaciTableView.setItems(FXCollections.observableList(Application.getPodatakList()));
         running.set(true);
         refreshPodatak(odabraniUser,running);
+    }
+
+    @Override
+    public void deleteSelectedRowValue() throws Exception {
+        BirdUnos abolished = podaciTableView.getSelectionModel().getSelectedItem();
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Brisanje odabranog podatka");
+        alert.setHeaderText(null);
+        alert.setContentText("Zelite li ukloniti odabrani podatak?");
+
+        Optional<ButtonType> action = alert.showAndWait();
+
+        if (action.get() == ButtonType.OK){
+            podaciTableView.getItems().remove(abolished);
+            BazaPodataka.ukloniPodatak(abolished.getId());
+        }
     }
 
     @FXML
@@ -307,24 +271,6 @@ public non-sealed class PregledPodatakaController implements Initializable, Anal
             }
         }
     }
-
-    @FXML
-    public void deleteSelectedPodatak() throws Exception{
-        BirdUnos abolished = podaciTableView.getSelectionModel().getSelectedItem();
-
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Brisanje odabranog podatka");
-        alert.setHeaderText(null);
-        alert.setContentText("Zelite li ukloniti odabrani podatak?");
-
-        Optional<ButtonType> action = alert.showAndWait();
-
-        if (action.get() == ButtonType.OK){
-            podaciTableView.getItems().remove(abolished);
-            BazaPodataka.ukloniPodatak(abolished.getId());
-        }
-    }
-
     @FXML
     public void showNoviPodatakScreen() throws IOException {
         UnosPodatkaController.showUnosPodatkaScreen();
@@ -360,5 +306,62 @@ public non-sealed class PregledPodatakaController implements Initializable, Anal
                 .filter(u -> u.getSpol().toUpperCase().equals("U".toUpperCase()))
                 .count());
         return countUnknown;
+    }
+    @Override
+    @FXML
+    public void filterValue() {
+        String naziv = String.valueOf(vrstaComboBox.getSelectionModel().getSelectedItem());
+        String brojnost = brojnostVrsteTextField.getText();
+        String spol = String.valueOf(spolVrsteComboBox.getSelectionModel().getSelectedItem());
+        String istrazivac = String.valueOf(istrazivacComboBox.getSelectionModel().getSelectedItem());
+        String lokacija = String.valueOf(lokacijaComboBox.getSelectionModel().getSelectedItem());
+        LocalDate datum = datumDatePicker.getValue();
+
+        List<BirdUnos> filterPodatakList = new ArrayList<>(Application.getPodatakList());
+
+        if(Optional.of(naziv).isPresent() == true){
+            filterPodatakList = filterPodatakList.stream()
+                    .filter(s->s.getNaziv().toLowerCase().contains(naziv.toLowerCase()))
+                    .collect(Collectors.toList());
+        }
+        if (Optional.of(brojnost).isPresent()==true){
+            filterPodatakList=filterPodatakList.stream()
+                    .filter(s->s.getBrojnost().toString().contains(brojnost))
+                    .collect(Collectors.toList());
+        }
+        if (Optional.ofNullable(spol).isPresent()==true){
+            filterPodatakList=filterPodatakList.stream()
+                    .filter(s->s.getSpol().contains(spol))
+                    .collect(Collectors.toList());
+        }
+        if(Optional.ofNullable(istrazivac).isPresent() == true){
+            filterPodatakList = filterPodatakList.stream()
+                    .filter(s->s.getIstrazivac().contains(istrazivac))
+                    .collect(Collectors.toList());
+        }
+        if(Optional.ofNullable(lokacija).isPresent() == true){
+            filterPodatakList = filterPodatakList.stream()
+                    .filter(s->s.getLokacija().contains(lokacija))
+                    .collect(Collectors.toList());
+        }
+        if(Optional.ofNullable(datum).isEmpty() == false){
+            filterPodatakList = filterPodatakList.stream()
+                    .filter(s->s.getDatum().equals(datum))
+                    .collect(Collectors.toList());
+        }
+        podaciTableView.setItems(FXCollections.observableList(filterPodatakList));
+        running.set(false);
+
+    }
+    @Override
+    public void onClickShowRow() {
+        BirdUnos changed = podaciTableView.getSelectionModel().getSelectedItem();
+
+        vrstaComboBox.setValue(Nomenklatura.valueOf(changed.getNaziv()));
+        brojnostVrsteTextField.setText(changed.getBrojnost().toString());
+        spolVrsteComboBox.setValue(changed.getSpol());
+        istrazivacComboBox.setValue(changed.getIstrazivac());
+        lokacijaComboBox.setValue(changed.getLokacija());
+        datumDatePicker.setValue(changed.getDatum());
     }
 }
