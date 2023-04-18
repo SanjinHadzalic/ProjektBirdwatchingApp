@@ -22,7 +22,8 @@ public class LoginController {
 
     @FXML
     private Button cancelButton;
-
+    @FXML
+    private Label loginLabel;
     @FXML
     private Button loginButton;
     private static Set<AppUser> appUserSet;

@@ -30,7 +30,7 @@
    <center>
       <AnchorPane prefHeight="407.0" prefWidth="332.0" style="-fx-background-color: #ffe4bf;" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="100.0" layoutY="45.0" text="Log In">
+            <Label fx:id="loginLabel" layoutX="100.0" layoutY="45.0" text="Log In">
                <font>
                   <Font name="Impact" size="24.0" />
                </font>

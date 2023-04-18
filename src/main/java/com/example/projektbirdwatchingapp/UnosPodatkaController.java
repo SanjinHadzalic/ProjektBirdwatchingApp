@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.net.URL;
@@ -17,6 +18,12 @@ import java.util.OptionalInt;
 import java.util.ResourceBundle;
 
 public class UnosPodatkaController implements Initializable {
+    @FXML
+    private Text vrstaText;
+    @FXML
+    private Button addPodatakButton;
+    @FXML
+    private Button backToPrevScreenButton;
     @FXML
     private ComboBox<BinarnaNomenklatura> vrstaComboBox;
     @FXML
@@ -51,12 +58,15 @@ public class UnosPodatkaController implements Initializable {
         GenderSpecific male = new GenderSpecific("Male");
         GenderSpecific unknown = new GenderSpecific("Unknown");
         spolComboBox.setItems(FXCollections.observableArrayList(female.gender(),male.gender(),unknown.gender()));
+        spolComboBox.setValue(female.gender());
         for (IstrazivacUnos e : istrazivaciBaza){
             istrazivacComboBox.getItems().add(e.getIme() + " " + e.getPrezime());
         }
+        istrazivacComboBox.setValue(istrazivaciBaza.get(0).getIme() + " " + istrazivaciBaza.get(0).getPrezime());
         for (Lokalitet l : lokacijaBazaPodataka){
             lokacijaComboBox.getItems().add(l.getNazivLokacije());
         }
+        lokacijaComboBox.setValue(lokacijaBazaPodataka.get(0).getNazivLokacije());
     }
     @FXML
     public void savePodatak() throws Exception {
@@ -152,6 +162,7 @@ public class UnosPodatkaController implements Initializable {
     public static void showUnosPodatkaScreen() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("unosPodatka.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+        scene.getStylesheets().add("main.css");
         Application.getMainStage().setTitle("Unos novog podatka");
         Application.getMainStage().setScene(scene);
         Application.getMainStage().show();
