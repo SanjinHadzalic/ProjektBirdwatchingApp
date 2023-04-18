@@ -37,7 +37,7 @@
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <TableView fx:id="istrazivacPregledTableView" onMouseClicked="#onRowClickedShow" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="11" GridPane.rowSpan="2">
+      <TableView fx:id="istrazivacPregledTableView" onMouseClicked="#onClickShowRow" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="11" GridPane.rowSpan="2">
         <columns>
           <TableColumn fx:id="imeIstrazivacaTableColumn" prefWidth="75.0" text="Ime" />
           <TableColumn fx:id="prezimeIstrazivacaTableColumn" prefWidth="75.0" text="Prezime" />
@@ -176,7 +176,7 @@
                </stops>
             </LinearGradient>
          </fill></FontAwesomeIcon>
-      <FontAwesomeIcon fill="#6988d7" glyphName="FILTER" onMouseClicked="#filterIstrazivac" size="3em" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="8">
+      <FontAwesomeIcon fill="#6988d7" glyphName="FILTER" onMouseClicked="#filterValue" size="3em" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="8">
          <GridPane.margin>
             <Insets left="30.0" />
          </GridPane.margin>
@@ -186,7 +186,7 @@
             <Insets left="90.0" />
          </GridPane.margin>
       </FontAwesomeIcon>
-      <FontAwesomeIcon fill="#f60000" glyphName="BAN" onMouseClicked="#deleteSelectedIstrazivac" size="3em" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="8">
+      <FontAwesomeIcon fill="#f60000" glyphName="BAN" onMouseClicked="#deleteSelectedRowValue" size="3em" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="8">
          <GridPane.margin>
             <Insets left="150.0" />
          </GridPane.margin>

@@ -15,7 +15,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.util.Callback;
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.net.URL;

@@ -2,6 +2,7 @@ package com.example.projektbirdwatchingapp;
 
 import hr.java.vjezbe.baza.BazaPodataka;
 import hr.java.vjezbe.entiteti.Lokalitet;
+import hr.java.vjezbe.entiteti.ScreenControllerMethods;
 import hr.java.vjezbe.util.Serijalizacija;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
@@ -26,7 +27,7 @@ import java.util.stream.Collectors;
 
 import static com.example.projektbirdwatchingapp.LoginController.odabraniUser;
 
-public class PregledLokacijaController {
+public class PregledLokacijaController extends ScreenControllerMethods {
     String probaGlob = "NP";
     @FXML
     private TextField nazivLokacijeTextField;
@@ -115,67 +116,6 @@ public class PregledLokacijaController {
 
         return t;
     }
-
-    @FXML
-    public void filterLokacije() {
-        String nazivLokacije = nazivLokacijeTextField.getText();
-        String tipLokacije = probaGlob;
-        String x_coord = x_coordTextField.getText();
-        String y_coord = y_coordTextField.getText();
-
-        List<Lokalitet> filterLokacija = new ArrayList<>(Application.getLokacijaList());
-
-        if (Optional.of(nazivLokacije).isPresent() == true) {
-            filterLokacija = filterLokacija.stream()
-                    .filter(s -> s.getNazivLokacije().toLowerCase().contains(nazivLokacije.toLowerCase()))
-                    .collect(Collectors.toList());
-        }
-        if (Optional.ofNullable(tipLokacije).isPresent() == true){
-            filterLokacija = filterLokacija.stream()
-                    .filter(s -> s.getTypeLocation().toLowerCase().contains(tipLokacije.toLowerCase()))
-                    .collect(Collectors.toList());
-        }
-        if (Optional.of(x_coord).isPresent() == true) {
-            filterLokacija = filterLokacija.stream()
-                    .filter(s -> s.getxCoord().contains(x_coord))
-                    .collect(Collectors.toList());
-        }
-        if (Optional.of(y_coord).isPresent() == true){
-            filterLokacija = filterLokacija.stream()
-                    .filter(s -> s.getyCoord().contains(y_coord))
-                    .collect(Collectors.toList());
-        }
-
-        lokacijeTableView.setItems(FXCollections.observableList(filterLokacija));
-        System.out.println(nazivLokacije + " " +  tipLokacije + " " + x_coord + " " +  y_coord);
-        running.set(false);
-    }
-
-    @FXML
-    public void onRowClickedShowLokalitet() throws Exception{
-        Lokalitet clickedRowLokalitet = lokacijeTableView.getSelectionModel().getSelectedItem();
-
-        nazivLokacijeTextField.setText(String.valueOf(clickedRowLokalitet.getNazivLokacije()));
-        switch (clickedRowLokalitet.getTypeLocation()) {
-            case "NP" -> {
-                nacionalniParkRadioButton.setSelected(true);
-                System.out.println("Odabirom retka je odabran i NP radio button");
-            }
-            case "Ostalo" -> {
-                ostaloRadioButton.setSelected(true);
-                System.out.println("Odabirom retka je odabran i OSTALO radio button");
-            }
-            case "PP" -> {
-                parkPrirodeRadioButton.setSelected(true);
-                System.out.println("Odabirom retka je odabran i PP radio button");
-            }
-        }
-        x_coordTextField.setText(String.valueOf(clickedRowLokalitet.getxCoord()));
-        y_coordTextField.setText(String.valueOf(clickedRowLokalitet.getyCoord()));
-    }
-
-
-
     @FXML
     public void updateSelectedLokacijja(ActionEvent event) throws Exception {
         if (odabraniUser.equals("admin".toUpperCase())){
@@ -232,8 +172,68 @@ public class PregledLokacijaController {
         }
     }
 
+    @Override
+    public void filterValue() {
+        String nazivLokacije = nazivLokacijeTextField.getText();
+        String tipLokacije = probaGlob;
+        String x_coord = x_coordTextField.getText();
+        String y_coord = y_coordTextField.getText();
+
+        List<Lokalitet> filterLokacija = new ArrayList<>(Application.getLokacijaList());
+
+        if (Optional.of(nazivLokacije).isPresent() == true) {
+            filterLokacija = filterLokacija.stream()
+                    .filter(s -> s.getNazivLokacije().toLowerCase().contains(nazivLokacije.toLowerCase()))
+                    .collect(Collectors.toList());
+        }
+        if (Optional.ofNullable(tipLokacije).isPresent() == true){
+            filterLokacija = filterLokacija.stream()
+                    .filter(s -> s.getTypeLocation().toLowerCase().contains(tipLokacije.toLowerCase()))
+                    .collect(Collectors.toList());
+        }
+        if (Optional.of(x_coord).isPresent() == true) {
+            filterLokacija = filterLokacija.stream()
+                    .filter(s -> s.getxCoord().contains(x_coord))
+                    .collect(Collectors.toList());
+        }
+        if (Optional.of(y_coord).isPresent() == true){
+            filterLokacija = filterLokacija.stream()
+                    .filter(s -> s.getyCoord().contains(y_coord))
+                    .collect(Collectors.toList());
+        }
+
+        lokacijeTableView.setItems(FXCollections.observableList(filterLokacija));
+        System.out.println(nazivLokacije + " " +  tipLokacije + " " + x_coord + " " +  y_coord);
+        running.set(false);
+
+    }
+
+    @Override
+    public void onClickShowRow() {
+        Lokalitet clickedRowLokalitet = lokacijeTableView.getSelectionModel().getSelectedItem();
+
+        nazivLokacijeTextField.setText(String.valueOf(clickedRowLokalitet.getNazivLokacije()));
+        switch (clickedRowLokalitet.getTypeLocation()) {
+            case "NP" -> {
+                nacionalniParkRadioButton.setSelected(true);
+                System.out.println("Odabirom retka je odabran i NP radio button");
+            }
+            case "Ostalo" -> {
+                ostaloRadioButton.setSelected(true);
+                System.out.println("Odabirom retka je odabran i OSTALO radio button");
+            }
+            case "PP" -> {
+                parkPrirodeRadioButton.setSelected(true);
+                System.out.println("Odabirom retka je odabran i PP radio button");
+            }
+        }
+        x_coordTextField.setText(String.valueOf(clickedRowLokalitet.getxCoord()));
+        y_coordTextField.setText(String.valueOf(clickedRowLokalitet.getyCoord()));
+
+    }
+
     @FXML
-    public void clearSelection() throws Exception{
+    public void clearSelection(){
         nazivLokacijeTextField.clear();
         nacionalniParkRadioButton.setSelected(true);
         x_coordTextField.clear();
@@ -242,8 +242,8 @@ public class PregledLokacijaController {
         refreshLokacija(running);
     }
 
-    @FXML
-    public void deleteSelectedLokacija() throws Exception{
+    @Override
+    public void deleteSelectedRowValue() throws Exception {
         if (odabraniUser.equals("admin".toUpperCase())){
             Lokalitet abolished = lokacijeTableView.getSelectionModel().getSelectedItem();
 
@@ -266,7 +266,6 @@ public class PregledLokacijaController {
 
             warning.showAndWait();
         }
-
     }
     public static void showPregledLokacijaScreen() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("pregledLokacija.fxml"));
@@ -275,7 +274,6 @@ public class PregledLokacijaController {
         Application.getMainStage().setScene(scene);
         Application.getMainStage().show();
     }
-
     @FXML
     public void showUnosLokalitetaScreen() throws IOException {
         UnosLokalitetaController.showUnosLokalitetaScreen();
@@ -289,5 +287,4 @@ public class PregledLokacijaController {
             running.set(false);
         }
     }
-
 }

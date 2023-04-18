@@ -16,7 +16,7 @@
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
          <children>
-            <TableView fx:id="lokacijeTableView" onMouseClicked="#onRowClickedShowLokalitet" prefHeight="498.0" prefWidth="340.0">
+            <TableView fx:id="lokacijeTableView" onMouseClicked="#onClickShowRow" prefHeight="498.0" prefWidth="340.0">
               <columns>
                 <TableColumn fx:id="nazivLokacijeTableColumn" prefWidth="94.0" text="Naziv" />
                 <TableColumn fx:id="tipLokacijeTableColumn" prefWidth="56.0" text="Tip" />
@@ -57,9 +57,9 @@
                </toggleGroup></RadioButton>
             <RadioButton fx:id="parkPrirodeRadioButton" layoutX="87.0" layoutY="89.0" mnemonicParsing="false" text="Park prirode" toggleGroup="$parkToggleGroup" />
             <RadioButton fx:id="ostaloRadioButton" layoutX="87.0" layoutY="119.0" mnemonicParsing="false" text="Ostalo" toggleGroup="$parkToggleGroup" />
-            <FontAwesomeIcon fill="#62a9eb" glyphName="FILTER" layoutX="28.0" layoutY="272.0" onMouseClicked="#filterLokacije" selectionFill="#749edd" size="3em" />
+            <FontAwesomeIcon fill="#62a9eb" glyphName="FILTER" layoutX="28.0" layoutY="272.0" onMouseClicked="#filterValue" selectionFill="#749edd" size="3em" />
             <FontAwesomeIcon fill="#d3b75b" glyphName="EDIT" layoutX="77.0" layoutY="277.0" size="3em" />
-            <FontAwesomeIcon fill="RED" glyphName="BAN" layoutX="128.0" layoutY="277.0" onMouseClicked="#deleteSelectedLokacija" size="3em" />
+            <FontAwesomeIcon fill="RED" glyphName="BAN" layoutX="128.0" layoutY="277.0" onMouseClicked="#deleteSelectedRowValue" size="3em" />
             <FontAwesomeIcon glyphName="ERASER" layoutX="172.0" layoutY="277.0" onMouseClicked="#clearSelection" size="3em" />
             <FontAwesomeIcon fill="#99dd41" glyphName="USER_PLUS" layoutX="234.0" layoutY="277.0" onMouseClicked="#showUnosLokalitetaScreen" size="3em" />
             <Button layoutX="69.0" layoutY="252.0" mnemonicParsing="false" onAction="#updateSelectedLokacijja" opacity="0.0" text="Button" textFill="TRANSPARENT" />

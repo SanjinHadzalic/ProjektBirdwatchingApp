@@ -2,6 +2,7 @@ package com.example.projektbirdwatchingapp;
 
 import hr.java.vjezbe.baza.BazaPodataka;
 import hr.java.vjezbe.entiteti.IstrazivacUnos;
+import hr.java.vjezbe.entiteti.ScreenControllerMethods;
 import hr.java.vjezbe.util.Serijalizacija;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
@@ -28,7 +29,7 @@ import java.util.stream.Collectors;
 
 import static com.example.projektbirdwatchingapp.LoginController.odabraniUser;
 
-public class PregledIstrazivacaController {
+public class PregledIstrazivacaController extends ScreenControllerMethods {
     @FXML
     private TextField imeIstrazivacaTextField;
     @FXML
@@ -137,8 +138,73 @@ public class PregledIstrazivacaController {
         Application.getMainStage().show();
     }
 
-    @FXML
-    public void filterIstrazivac(){
+//    @FXML
+//    public void filterIstrazivac(){
+//        String imeIstrazivac = imeIstrazivacaTextField.getText();
+//        String prezimeIStrazivac = prezimeIStrazivacaTextField.getText();
+//        LocalDate datumIstrazivac = datumRodjenjaIstrazivacaTextField.getValue();
+//        String institucijaIstrazivaca = institucijaIstrazivacaTextField.getText();
+//        String adresaIstrazivaca = adresaIstrazivacaTextField.getText();
+//        String mobitelIstrazivaca = mobitelIstrazivacaTextField.getText();
+//        String emailIstrazivaca = emailIstrazivacaTextField.getText();
+//
+//        List<IstrazivacUnos> filterIStrazivacUnos = new ArrayList<>(Application.getIstrazivacUnosList());
+//
+//        if(Optional.of(imeIstrazivac).isPresent() == true){
+//            filterIStrazivacUnos = filterIStrazivacUnos.stream()
+//                    .filter(s -> s.getIme().toLowerCase().contains(imeIstrazivac.toLowerCase()))
+//                    .collect(Collectors.toList());
+//        }
+//        if(Optional.of(prezimeIStrazivac).isPresent() == true){
+//            filterIStrazivacUnos = filterIStrazivacUnos.stream()
+//                    .filter(s->s.getPrezime().toLowerCase().contains(prezimeIStrazivac.toLowerCase()))
+//                    .collect(Collectors.toList());
+//        }
+//        if(Optional.ofNullable(datumIstrazivac).isEmpty() == false){
+//            filterIStrazivacUnos = filterIStrazivacUnos.stream()
+//                    .filter(s->s.getDatum().equals(datumIstrazivac))
+//                    .collect(Collectors.toList());
+//        }
+//        if(Optional.of(institucijaIstrazivaca).isPresent() == true){
+//            filterIStrazivacUnos = filterIStrazivacUnos.stream()
+//                    .filter(s->s.getInstitucija().toLowerCase().contains(institucijaIstrazivaca.toLowerCase()))
+//                    .collect(Collectors.toList());
+//        }
+//        if (Optional.of(adresaIstrazivaca).isPresent() == true){
+//            filterIStrazivacUnos = filterIStrazivacUnos.stream()
+//                    .filter(s->s.getAdresa().toLowerCase().contains(adresaIstrazivaca.toLowerCase()))
+//                    .collect(Collectors.toList());
+//        }
+//        if (Optional.of(mobitelIstrazivaca).isPresent() == true){
+//            filterIStrazivacUnos = filterIStrazivacUnos.stream()
+//                    .filter(s->s.getBroj().toString().contains(mobitelIstrazivaca))
+//                    .collect(Collectors.toList());
+//        }
+//        if(Optional.of(emailIstrazivaca).isPresent() == true){
+//            filterIStrazivacUnos = filterIStrazivacUnos.stream()
+//                    .filter(s->s.getEmail().toLowerCase().contains(emailIstrazivaca.toLowerCase()))
+//                    .collect(Collectors.toList());
+//        }
+//
+//        istrazivacPregledTableView.setItems(FXCollections.observableList(filterIStrazivacUnos));
+//        running.set(false);
+//    }
+
+//    @FXML
+//    public void onRowClickedShow() throws Exception{
+//        IstrazivacUnos changed = istrazivacPregledTableView.getSelectionModel().getSelectedItem();
+//
+//        imeIstrazivacaTextField.setText(String.valueOf(changed.getIme()));
+//        prezimeIStrazivacaTextField.setText(String.valueOf(changed.getPrezime()));
+//        datumRodjenjaIstrazivacaTextField.setValue(LocalDate.parse(String.valueOf(changed.getDatum())));
+//        institucijaIstrazivacaTextField.setText(String.valueOf(changed.getInstitucija()));
+//        adresaIstrazivacaTextField.setText(String.valueOf(changed.getAdresa()));
+//        mobitelIstrazivacaTextField.setText(String.valueOf(changed.getBroj()));
+//        emailIstrazivacaTextField.setText(String.valueOf(changed.getEmail()));
+//    }
+
+    @Override
+    public void filterValue() {
         String imeIstrazivac = imeIstrazivacaTextField.getText();
         String prezimeIStrazivac = prezimeIStrazivacaTextField.getText();
         LocalDate datumIstrazivac = datumRodjenjaIstrazivacaTextField.getValue();
@@ -189,8 +255,8 @@ public class PregledIstrazivacaController {
         running.set(false);
     }
 
-    @FXML
-    public void onRowClickedShow() throws Exception{
+    @Override
+    public void onClickShowRow() {
         IstrazivacUnos changed = istrazivacPregledTableView.getSelectionModel().getSelectedItem();
 
         imeIstrazivacaTextField.setText(String.valueOf(changed.getIme()));
@@ -203,7 +269,7 @@ public class PregledIstrazivacaController {
     }
 
     @FXML
-    public void clearSelection() throws Exception{
+    public void clearSelection() {
         imeIstrazivacaTextField.clear();
         prezimeIStrazivacaTextField.clear();
         datumRodjenjaIstrazivacaTextField.setValue(null);
@@ -214,6 +280,33 @@ public class PregledIstrazivacaController {
         running.set(true);
         refreshIstrazivac(running);
     }
+
+    @Override
+    public void deleteSelectedRowValue() throws Exception {
+        if (odabraniUser.equals("admin".toUpperCase())){
+            IstrazivacUnos abolished = istrazivacPregledTableView.getSelectionModel().getSelectedItem();
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Brisanje odabranog korisnika");
+            alert.setHeaderText(null);
+            alert.setContentText("Zelite li ukloniti odabranog istrazivaca?");
+
+            Optional<ButtonType> action = alert.showAndWait();
+
+            if (action.get() == ButtonType.OK){
+                istrazivacPregledTableView.getItems().remove(abolished);
+                BazaPodataka.ukloniIstrazivaca(abolished.getId());
+            }
+        } else {
+            Alert warning = new Alert(Alert.AlertType.WARNING);
+            warning.setTitle("Upozorenje");
+            warning.setHeaderText(null);
+            warning.setContentText("Nemate administratorske ovlasti za uklanjanje odabrane osobe");
+
+            warning.showAndWait();
+        }
+    }
+
     @FXML
     public void submit(ActionEvent event) throws Exception {
         if (odabraniUser.equals("admin".toUpperCase())){
@@ -275,32 +368,32 @@ public class PregledIstrazivacaController {
         }
 
     }
-    @FXML
-    public void deleteSelectedIstrazivac() throws Exception{
-        if (odabraniUser.equals("admin".toUpperCase())){
-            IstrazivacUnos abolished = istrazivacPregledTableView.getSelectionModel().getSelectedItem();
-
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Brisanje odabranog korisnika");
-            alert.setHeaderText(null);
-            alert.setContentText("Zelite li ukloniti odabranog istrazivaca?");
-
-            Optional<ButtonType> action = alert.showAndWait();
-
-            if (action.get() == ButtonType.OK){
-                istrazivacPregledTableView.getItems().remove(abolished);
-                BazaPodataka.ukloniIstrazivaca(abolished.getId());
-            }
-        } else {
-            Alert warning = new Alert(Alert.AlertType.WARNING);
-            warning.setTitle("Upozorenje");
-            warning.setHeaderText(null);
-            warning.setContentText("Nemate administratorske ovlasti za uklanjanje odabrane osobe");
-
-            warning.showAndWait();
-
-        }
-    }
+//    @FXML
+//    public void deleteSelectedIstrazivac() throws Exception{
+//        if (odabraniUser.equals("admin".toUpperCase())){
+//            IstrazivacUnos abolished = istrazivacPregledTableView.getSelectionModel().getSelectedItem();
+//
+//            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+//            alert.setTitle("Brisanje odabranog korisnika");
+//            alert.setHeaderText(null);
+//            alert.setContentText("Zelite li ukloniti odabranog istrazivaca?");
+//
+//            Optional<ButtonType> action = alert.showAndWait();
+//
+//            if (action.get() == ButtonType.OK){
+//                istrazivacPregledTableView.getItems().remove(abolished);
+//                BazaPodataka.ukloniIstrazivaca(abolished.getId());
+//            }
+//        } else {
+//            Alert warning = new Alert(Alert.AlertType.WARNING);
+//            warning.setTitle("Upozorenje");
+//            warning.setHeaderText(null);
+//            warning.setContentText("Nemate administratorske ovlasti za uklanjanje odabrane osobe");
+//
+//            warning.showAndWait();
+//
+//        }
+//    }
 
     @FXML
     public void addNewUserSpona() throws IOException {
