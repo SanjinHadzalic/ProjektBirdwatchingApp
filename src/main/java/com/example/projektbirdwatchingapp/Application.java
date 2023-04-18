@@ -8,9 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +37,7 @@ public class Application extends javafx.application.Application {
         mainStage = stage;
         FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("login.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 520, 400);
+        scene.getStylesheets().add("main.css");
         stage.setTitle("BirdwatchingApp");
         stage.setScene(scene);
         stage.show();

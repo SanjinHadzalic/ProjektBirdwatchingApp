@@ -6,41 +6,26 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="520.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projektbirdwatchingapp.LoginController">
    <left>
-      <AnchorPane prefHeight="407.0" prefWidth="228.0" style="-fx-background-color: #ff8000;" BorderPane.alignment="CENTER">
-         <children>
-            <Label layoutX="28.0" layoutY="77.0" text="Birdwatching App" textFill="WHITE">
-               <font>
-                  <Font name="Calibri" size="24.0" />
-               </font>
-            </Label>
-            <Label layoutX="88.0" layoutY="124.0" text="Sign  In" textFill="WHITE">
-               <font>
-                  <Font name="Calibri" size="24.0" />
-               </font>
-            </Label>
-            <Line endX="100.0" layoutX="114.0" layoutY="115.0" startX="-100.0" />
-         </children>
-      </AnchorPane>
+      <AnchorPane fx:id="leftAnchorPane" prefHeight="407.0" prefWidth="228.0" BorderPane.alignment="CENTER" />
    </left>
    <center>
-      <AnchorPane prefHeight="407.0" prefWidth="332.0" style="-fx-background-color: #ffe4bf;" BorderPane.alignment="CENTER">
+      <AnchorPane fx:id="rightAnchorPane" prefHeight="407.0" prefWidth="332.0" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="100.0" layoutY="45.0" text="Log In">
+            <Label fx:id="loginLabel" layoutX="56.0" layoutY="21.0" text="Birdwatching App">
                <font>
-                  <Font name="Impact" size="24.0" />
+                  <Font name="Calibri" size="24.0" />
                </font>
             </Label>
             <Label layoutX="41.0" layoutY="105.0" text="Username" />
             <Label layoutX="44.0" layoutY="143.0" text="Password" />
             <TextField fx:id="usernameTextField" layoutX="117.0" layoutY="102.0" promptText="Enter Username" />
-            <Button layoutX="18.0" layoutY="228.0" mnemonicParsing="false" onAction="#loginButtonOnAction" prefHeight="25.0" prefWidth="124.0" style="-fx-background-color: #ff8000;" text="Sign In" textFill="WHITE" />
+            <Button layoutX="18.0" layoutY="228.0" mnemonicParsing="false" onAction="#loginButtonOnAction" prefHeight="25.0" prefWidth="124.0" text="Sign In" textFill="WHITE" />
             <PasswordField fx:id="passwordTextField" layoutX="118.0" layoutY="140.0" onAction="#onEnter" promptText="Enter Password" />
-            <Button fx:id="cancelButton" layoutX="154.0" layoutY="227.0" mnemonicParsing="false" onAction="#cancelButtonOnAction" prefHeight="25.0" prefWidth="124.0" style="-fx-background-color: #ff8000;" text="Exit" textFill="WHITE" />
+            <Button fx:id="cancelButton" layoutX="154.0" layoutY="227.0" mnemonicParsing="false" onAction="#cancelButtonOnAction" prefHeight="25.0" prefWidth="124.0" text="Exit" textFill="WHITE" />
          </children>
       </AnchorPane>
    </center>

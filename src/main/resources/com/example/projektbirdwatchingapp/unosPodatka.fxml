@@ -25,7 +25,7 @@
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Vrsta">
+      <Text fx:id="vrstaText" strokeType="OUTSIDE" strokeWidth="0.0" text="Vrsta">
          <font>
             <Font name="Calibri" size="18.0" />
          </font>
@@ -73,7 +73,7 @@
             <Insets left="10.0" />
          </GridPane.margin>
       </Text>
-      <Button mnemonicParsing="false" onAction="#savePodatak" text="Dodaj" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+      <Button fx:id="addPodatakButton" mnemonicParsing="false" onAction="#savePodatak" text="Dodaj" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
       <Button mnemonicParsing="false" onAction="#natragButtonClicked" text="Natrag" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
          <GridPane.margin>
             <Insets right="30.0" />

@@ -6,6 +6,7 @@ import hr.java.vjezbe.entiteti.HashingPassword;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -15,6 +16,10 @@ import java.util.*;
 
 public class LoginController {
     @FXML
+    private AnchorPane leftAnchorPane;
+    @FXML
+    private AnchorPane rightAnchorPane;
+    @FXML
     private TextField usernameTextField;
 
     @FXML
@@ -22,7 +27,8 @@ public class LoginController {
 
     @FXML
     private Button cancelButton;
-
+    @FXML
+    private Label loginLabel;
     @FXML
     private Button loginButton;
     private static Set<AppUser> appUserSet;
