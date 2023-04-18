@@ -34,8 +34,8 @@
         <columns>
           <TableColumn fx:id="vrstaTableColumn" prefWidth="135.33337914943695" text="Vrsta" />
           <TableColumn fx:id="brojnostTableColumn" prefWidth="55.333343505859375" text="Brojnost" />
-            <TableColumn fx:id="spolTableColumn" prefWidth="48.0" text="Spol" />
-            <TableColumn fx:id="komentariTableColumn" prefWidth="303.3333282470703" text="Komentari" />
+            <TableColumn fx:id="spolTableColumn" prefWidth="82.0" text="Spol" />
+            <TableColumn fx:id="komentariTableColumn" prefWidth="270.0" text="Komentari" />
             <TableColumn fx:id="istrazivacTableColumn" prefWidth="154.6666259765625" text="Istraživač" />
             <TableColumn fx:id="lokacijaTableColumn" prefWidth="167.3333740234375" text="Lokacija" />
             <TableColumn fx:id="datumTableColumn" prefWidth="138.6666259765625" text="Datum" />

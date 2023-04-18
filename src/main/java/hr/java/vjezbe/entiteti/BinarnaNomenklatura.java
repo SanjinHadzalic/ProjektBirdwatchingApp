@@ -1,11 +1,9 @@
 package hr.java.vjezbe.entiteti;
 
-import java.util.List;
-
 /**
  * enumeracija koja sadrzi hrvatske nazive vrsta te pripadajuce znanstvene nazive vrsta.
  */
-public enum Nomenklatura {
+public enum BinarnaNomenklatura {
     velika_sjenica("Parus major"),
     zeba("Fringilla coelebs"),
     kos("Turdus merula"),
@@ -22,7 +20,7 @@ public enum Nomenklatura {
     public String getVrsta(){
         return this.vrsta;
     }
-    private Nomenklatura(String vrsta) {
+    private BinarnaNomenklatura(String vrsta) {
         this.vrsta=vrsta;
     }
 }

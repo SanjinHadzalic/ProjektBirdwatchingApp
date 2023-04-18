@@ -1,10 +1,7 @@
 package com.example.projektbirdwatchingapp;
 
 import hr.java.vjezbe.baza.BazaPodataka;
-import hr.java.vjezbe.entiteti.BirdUnos;
-import hr.java.vjezbe.entiteti.IstrazivacUnos;
-import hr.java.vjezbe.entiteti.Lokalitet;
-import hr.java.vjezbe.entiteti.Nomenklatura;
+import hr.java.vjezbe.entiteti.*;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,7 +18,7 @@ import java.util.ResourceBundle;
 
 public class UnosPodatkaController implements Initializable {
     @FXML
-    private ComboBox<Nomenklatura> vrstaComboBox;
+    private ComboBox<BinarnaNomenklatura> vrstaComboBox;
     @FXML
     private TextField brojnostTextField;
     @FXML
@@ -49,8 +46,11 @@ public class UnosPodatkaController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         vrstaComboBox.setEditable(true);
-        vrstaComboBox.getItems().setAll(Nomenklatura.values());
-        spolComboBox.setItems(FXCollections.observableArrayList("M", "F","U" ));
+        vrstaComboBox.getItems().setAll(BinarnaNomenklatura.values());
+        GenderSpecific female = new GenderSpecific("Female");
+        GenderSpecific male = new GenderSpecific("Male");
+        GenderSpecific unknown = new GenderSpecific("Unknown");
+        spolComboBox.setItems(FXCollections.observableArrayList(female.gender(),male.gender(),unknown.gender()));
         for (IstrazivacUnos e : istrazivaciBaza){
             istrazivacComboBox.getItems().add(e.getIme() + " " + e.getPrezime());
         }

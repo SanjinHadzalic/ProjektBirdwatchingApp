@@ -29,7 +29,7 @@ import static com.example.projektbirdwatchingapp.LoginController.odabraniUser;
 
 public non-sealed class PregledPodatakaController extends ScreenControllerMethods implements Initializable, Analiza {
     @FXML
-    private ComboBox<Nomenklatura> vrstaComboBox;
+    private ComboBox<BinarnaNomenklatura> vrstaComboBox;
     @FXML
     private TextField brojnostVrsteTextField;
     @FXML
@@ -78,10 +78,10 @@ public non-sealed class PregledPodatakaController extends ScreenControllerMethod
     private final List<Lokalitet> lokacijaBazaPodataka = BazaPodataka.dohvatiSveLokalitete().stream().sorted(Comparator.comparing(Lokalitet::getNazivLokacije)).toList();
     private ArrayList<Serijalizacija> listaSTO = new ArrayList<>();
     private final AtomicBoolean running = new AtomicBoolean(true);
-    private Integer countFemale;// = countFemale(Application.getPodatakList());
-    private Integer countMale;// = countMale(Application.getPodatakList());
-    private Integer countUnknown;// = countUnkonown(Application.getPodatakList());
-    private Integer countHowMany;// = countHowMany(Application.getPodatakList());
+    private Integer countFemale;
+    private Integer countMale;
+    private Integer countUnknown;
+    private Integer countHowMany;
 
 
     public static void showPregledPodatakaScreen() throws IOException {
@@ -125,8 +125,11 @@ public non-sealed class PregledPodatakaController extends ScreenControllerMethod
                     }
                 });
         vrstaComboBox.setEditable(true);
-        vrstaComboBox.getItems().setAll(Arrays.stream(Nomenklatura.values()).sorted(Comparator.comparing(Nomenklatura::getVrsta)).toList());
-        spolVrsteComboBox.setItems(FXCollections.observableArrayList("M", "F","U" ));
+        vrstaComboBox.getItems().setAll(Arrays.stream(BinarnaNomenklatura.values()).sorted(Comparator.comparing(BinarnaNomenklatura::getVrsta)).toList());
+        GenderSpecific female = new GenderSpecific("Female");
+        GenderSpecific male = new GenderSpecific("Male");
+        GenderSpecific unknown = new GenderSpecific("Unknown");
+        spolVrsteComboBox.setItems(FXCollections.observableArrayList(female.gender(),male.gender(),unknown.gender()));
         if (odabraniUser.equals("admin".toUpperCase())){
             for (IstrazivacUnos e : istrazivaciBaza){
                 istrazivacComboBox.getItems().add(e.getIme() + " " + e.getPrezime());
@@ -286,7 +289,7 @@ public non-sealed class PregledPodatakaController extends ScreenControllerMethod
     @Override
     public Integer countFemale(List<BirdUnos> podaci) {
         Integer countFemale = Math.toIntExact(podaci.stream()
-                .filter(f -> f.getSpol().toUpperCase().equals("F".toUpperCase()))
+                .filter(f -> f.getSpol().toUpperCase().startsWith("F".toUpperCase()))
                 .count());
         return countFemale;
     }
@@ -294,7 +297,7 @@ public non-sealed class PregledPodatakaController extends ScreenControllerMethod
     @Override
     public Integer countMale(List<BirdUnos> podaci) {
         Integer countMale = Math.toIntExact(podaci.stream()
-                .filter(m -> m.getSpol().toUpperCase().equals("M".toUpperCase()))
+                .filter(m -> m.getSpol().toUpperCase().startsWith("M".toUpperCase()))
                 .count());
         return countMale;
     }
@@ -302,7 +305,7 @@ public non-sealed class PregledPodatakaController extends ScreenControllerMethod
     @Override
     public Integer countUnkonown(List<BirdUnos> podaci) {
         Integer countUnknown = Math.toIntExact(podaci.stream()
-                .filter(u -> u.getSpol().toUpperCase().equals("U".toUpperCase()))
+                .filter(u -> u.getSpol().toUpperCase().startsWith("U".toUpperCase()))
                 .count());
         return countUnknown;
     }
@@ -356,7 +359,7 @@ public non-sealed class PregledPodatakaController extends ScreenControllerMethod
     public void onClickShowRow() {
         BirdUnos changed = podaciTableView.getSelectionModel().getSelectedItem();
 
-        vrstaComboBox.setValue(Nomenklatura.valueOf(changed.getNaziv()));
+        vrstaComboBox.setValue(BinarnaNomenklatura.valueOf(changed.getNaziv()));
         brojnostVrsteTextField.setText(changed.getBrojnost().toString());
         spolVrsteComboBox.setValue(changed.getSpol());
         istrazivacComboBox.setValue(changed.getIstrazivac());
