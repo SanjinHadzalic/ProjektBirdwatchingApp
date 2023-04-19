@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
@@ -18,6 +19,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class MainMenuController{
     @FXML
     private GridPane menuGridPane;
+    @FXML
+    private Button test2;
+
     private  final AtomicBoolean flag = new AtomicBoolean(true);
     private static Timeline noviTimeLine = new Timeline(
             new KeyFrame(Duration.seconds(30), event -> Platform.runLater(new PosljednjaIzmjenaNit()))
