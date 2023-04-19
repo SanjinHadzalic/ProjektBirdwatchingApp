@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -16,16 +17,16 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class MainMenuController{
     @FXML
-    private Label pozdrav;
+    private GridPane menuGridPane;
     private  final AtomicBoolean flag = new AtomicBoolean(true);
     private static Timeline noviTimeLine = new Timeline(
             new KeyFrame(Duration.seconds(30), event -> Platform.runLater(new PosljednjaIzmjenaNit()))
     );
 
-
     public static void showMainMenuScreen() throws IOException{
         FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("mainMenu.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 520, 400);
+        scene.getStylesheets().add("main.css");
         Application.getMainStage().setTitle("Glavni ekran");
         Application.getMainStage().setScene(scene);
         Application.getMainStage().show();
@@ -68,9 +69,6 @@ public class MainMenuController{
     @FXML
     public void showPromjeneScreen(ActionEvent e) throws IOException {
         PromjeneController.showPromjeneScreen();
-    }
-    public void displayUsername(String username){
-        pozdrav.setText("Hello " + username);
     }
 }
 

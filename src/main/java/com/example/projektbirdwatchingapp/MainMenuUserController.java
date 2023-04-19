@@ -35,6 +35,7 @@ public class MainMenuUserController {
     public void logoutButtonOnAction(ActionEvent e) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("login.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 520, 400);
+        scene.getStylesheets().add("main.css");
         Application.getMainStage().setTitle("BirdwatchingApp");
         Application.getMainStage().setScene(scene);
         Application.getMainStage().show();

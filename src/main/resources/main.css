@@ -28,6 +28,10 @@
 .text-field:focused {
     -fx-background-color: -fx-focus-color, -fx-background ;
 }
+/*MainMenuController*/
+#menuGridPane{
+    -fx-background-color: rgb(214, 234, 248);
+}
 /*UnosPodatakaController */
 #vrstaText{
     -fx-font-size: 18px;
