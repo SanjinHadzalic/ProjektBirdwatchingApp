@@ -61,6 +61,27 @@
 #pregledPodatakaGridPane{
     -fx-background-color: rgb(214, 234, 248);
 }
+.table-view{
+    -fx-background-color: transparent;
+}
+.table-view .table-cell{
+    -fx-text-fill: white;
+}
+.table-row-cell:odd{
+    -fx-background-color: #424242;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+}
+.table-row-cell:even{
+    -fx-background-color: #616161;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-background-radius: 0.0em;
+}
+.table-row-cell:selected{
+    -fx-background-color: #005797;
+    -fx-background-insets: 0;
+    -fx-background-radius: 1;
+}
 /*PregledLokacijaController*/
 #pregledLokalitetaAnchorPane{
     -fx-background-color: rgb(214, 234, 248);
