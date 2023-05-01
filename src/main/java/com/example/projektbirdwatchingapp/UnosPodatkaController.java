@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
@@ -18,6 +19,8 @@ import java.util.OptionalInt;
 import java.util.ResourceBundle;
 
 public class UnosPodatkaController implements Initializable {
+    @FXML
+    private GridPane unosPodatakaGridPane;
     @FXML
     private Text vrstaText;
     @FXML

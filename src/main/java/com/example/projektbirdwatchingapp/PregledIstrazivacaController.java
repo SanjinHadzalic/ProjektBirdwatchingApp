@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
 import javafx.util.Callback;
 
 import java.io.FileNotFoundException;
@@ -30,6 +31,8 @@ import java.util.stream.Collectors;
 import static com.example.projektbirdwatchingapp.LoginController.odabraniUser;
 
 public class PregledIstrazivacaController extends ScreenControllerMethods {
+    @FXML
+    private GridPane pregledIstrazivacaGridPane;
     @FXML
     private TextField imeIstrazivacaTextField;
     @FXML
@@ -133,6 +136,7 @@ public class PregledIstrazivacaController extends ScreenControllerMethods {
     public static void showPregledIstrazivacaScreen() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("pregledIstrazivaca.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 600);
+        scene.getStylesheets().add("main.css");
         Application.getMainStage().setTitle("Pregled istrazivaca");
         Application.getMainStage().setScene(scene);
         Application.getMainStage().show();

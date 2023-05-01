@@ -14,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
 import javafx.util.Callback;
 
 import java.io.IOException;
@@ -28,6 +29,8 @@ import java.util.stream.Collectors;
 import static com.example.projektbirdwatchingapp.LoginController.odabraniUser;
 
 public non-sealed class PregledPodatakaController extends ScreenControllerMethods implements Initializable, Analiza {
+    @FXML
+    private GridPane pregledPodatakaGridPane;
     @FXML
     private ComboBox<BinarnaNomenklatura> vrstaComboBox;
     @FXML
@@ -87,6 +90,7 @@ public non-sealed class PregledPodatakaController extends ScreenControllerMethod
     public static void showPregledPodatakaScreen() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("pregledPodataka.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1000, 800);
+        scene.getStylesheets().add("main.css");
         Application.getMainStage().setTitle("Pregled Podataka");
         Application.getMainStage().setScene(scene);
         Application.getMainStage().show();

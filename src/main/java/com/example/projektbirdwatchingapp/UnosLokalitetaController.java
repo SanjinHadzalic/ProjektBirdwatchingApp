@@ -11,6 +11,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.AnchorPane;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,6 +22,8 @@ import java.util.OptionalInt;
 
 public class UnosLokalitetaController {
     private static final Logger logger = LoggerFactory.getLogger(Application.class);
+    @FXML
+    private AnchorPane unosLokalitetaAnchorPane;
     @FXML
     private TextField nazivLokacijeTextField;
     @FXML
@@ -171,6 +174,7 @@ public class UnosLokalitetaController {
     public static void showUnosLokalitetaScreen() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("unosLokaliteta.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+        scene.getStylesheets().add("main.css");
         Application.getMainStage().setTitle("Unos lokaliteta");
         Application.getMainStage().setScene(scene);
         Application.getMainStage().show();

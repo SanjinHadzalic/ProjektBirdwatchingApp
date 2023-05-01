@@ -25,7 +25,7 @@
               </columns>
             </TableView>
          </children></AnchorPane>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="397.0" prefWidth="272.0">
+    <AnchorPane fx:id="pregledLokalitetaAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="397.0" prefWidth="272.0">
          <children>
             <Label layoutX="22.0" layoutY="24.0" text="Naziv">
                <font>

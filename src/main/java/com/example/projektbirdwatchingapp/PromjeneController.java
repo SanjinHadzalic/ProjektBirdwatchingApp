@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.GridPane;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -16,6 +17,8 @@ import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class PromjeneController {
+    @FXML
+    private GridPane serijalizacijaGridPane;
     @FXML
     private TableColumn<Serijalizacija, String> beforeTableColumn;
     @FXML
@@ -73,6 +76,7 @@ public class PromjeneController {
     public static void showPromjeneScreen() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("promjene.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 850, 800);
+        scene.getStylesheets().add("main.css");
         Application.getMainStage().setTitle("Promjene");
         Application.getMainStage().setScene(scene);
         Application.getMainStage().show();

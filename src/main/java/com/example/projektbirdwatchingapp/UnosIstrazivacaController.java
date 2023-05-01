@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,6 +22,8 @@ import java.util.OptionalInt;
 
 public class UnosIstrazivacaController {
     private static final Logger logger = LoggerFactory.getLogger(Application.class);
+    @FXML
+    private GridPane unosIstrazivacaGridPane;
     @FXML
     private TextField imeIstrazivacaTextField;
     @FXML
@@ -212,6 +215,7 @@ public class UnosIstrazivacaController {
     public static void showUnosIstrazivacaScreen() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("unosIstrazivaca.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+        scene.getStylesheets().add("main.css");
         Application.getMainStage().setTitle("Unos istrazivaca");
         Application.getMainStage().setScene(scene);
         Application.getMainStage().show();

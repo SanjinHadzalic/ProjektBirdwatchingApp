@@ -57,3 +57,31 @@
     -fx-background-color:
             rgba(114,131,148,0.9);
 }
+/*PregledPodatakaController*/
+#pregledPodatakaGridPane{
+    -fx-background-color: rgb(214, 234, 248);
+}
+/*PregledLokacijaController*/
+#pregledLokalitetaAnchorPane{
+    -fx-background-color: rgb(214, 234, 248);
+}
+/*PregledIstrazivacaController*/
+#pregledIstrazivacaGridPane{
+    -fx-background-color: rgb(214, 234, 248);
+}
+/*UnosIstrazivacaController*/
+#unosIstrazivacaGridPane{
+    -fx-background-color: rgb(214, 234, 248);
+}
+/*UnosLokalitetaController*/
+#unosLokalitetaAnchorPane{
+    -fx-background-color: rgb(214, 234, 248);
+}
+/*UnosPodatakaController*/
+#unosPodatakaGridPane{
+    -fx-background-color: rgb(214, 234, 248);
+}
+/*serijalizacijaController*/
+#serijalizacijaGridPane{
+    -fx-background-color: rgb(214, 234, 248);
+}

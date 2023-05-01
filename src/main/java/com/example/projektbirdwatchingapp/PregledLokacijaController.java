@@ -15,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -28,6 +29,8 @@ import java.util.stream.Collectors;
 import static com.example.projektbirdwatchingapp.LoginController.odabraniUser;
 
 public class PregledLokacijaController extends ScreenControllerMethods {
+    @FXML
+    private AnchorPane pregledLokalitetaAnchorPane;
     String probaGlob = "NP";
     @FXML
     private TextField nazivLokacijeTextField;
@@ -270,6 +273,7 @@ public class PregledLokacijaController extends ScreenControllerMethods {
     public static void showPregledLokacijaScreen() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("pregledLokacija.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 650, 500);
+        scene.getStylesheets().add("main.css");
         Application.getMainStage().setTitle("Pregled lokacija");
         Application.getMainStage().setScene(scene);
         Application.getMainStage().show();
