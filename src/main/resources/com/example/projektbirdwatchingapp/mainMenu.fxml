@@ -79,7 +79,7 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <Button layoutX="14.0" layoutY="23.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="114.0" text="To PieChart" textFill="WHITE">
+                              <Button layoutX="14.0" layoutY="23.0" mnemonicParsing="false" onAction="#openPieChartIstrazivac" prefHeight="34.0" prefWidth="114.0" text="To PieChart" textFill="WHITE">
                                  <font>
                                     <Font name="Calibri" size="18.0" />
                                  </font>

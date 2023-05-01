@@ -67,6 +67,10 @@ public class MainMenuController{
         PregledLokacijaController.showPregledLokacijaScreen();
     }
     @FXML
+    public void openPieChartIstrazivac(ActionEvent e) throws IOException{
+        PieChartIstrazivaciController.showPieChartIstrazivac();
+    }
+    @FXML
     public void openLink(ActionEvent e){
         System.out.println("Ovo treba doraditi...");
     }//OVO TREBA DORADITI
