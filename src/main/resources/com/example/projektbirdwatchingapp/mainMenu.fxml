@@ -84,6 +84,11 @@
                                     <Font name="Calibri" size="18.0" />
                                  </font>
                               </Button>
+                              <Button layoutX="14.0" layoutY="83.0" mnemonicParsing="false" onAction="#openBarChartVrste" prefHeight="34.0" prefWidth="114.0" text="To BarChart" textFill="WHITE">
+                                 <font>
+                                    <Font name="Calibri" size="18.0" />
+                                 </font>
+                              </Button>
                            </children></AnchorPane>
                   </content>
                 </Tab>

@@ -5,8 +5,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Side;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
+import javafx.scene.layout.GridPane;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -23,6 +25,8 @@ import static com.example.projektbirdwatchingapp.LoginController.odabraniUser;
 
 public class PieChartIstrazivaciController {
     @FXML
+    private GridPane istrazivaciPieChartGridPane;
+    @FXML
     private PieChart istrazivacPieChart;
     @FXML
     public void initialize() throws FileNotFoundException {
@@ -37,19 +41,20 @@ public class PieChartIstrazivaciController {
         System.out.println(non.size());
         ObservableList<PieChart.Data> dataDva = FXCollections.observableArrayList();
 
-
         for (BirdUnos b: non
              ) {
                     dataDva.add(new PieChart.Data(b.getIstrazivac(), data.stream().filter(a->a.getIstrazivac().equals(b.getIstrazivac())).count()));
         }
 
-
-            istrazivacPieChart.setData(dataDva); // setting data
+        istrazivacPieChart.setData(dataDva); // setting data
+        istrazivacPieChart.setLabelsVisible(true);//set label visible
+        istrazivacPieChart.setLegendSide(Side.RIGHT);
     }
 
         public static void showPieChartIstrazivac() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("pieChartIstrazivaci.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 600);
+        scene.getStylesheets().add("main.css");
         Application.getMainStage().setTitle("PieChart Istrazivac");
         Application.getMainStage().setScene(scene);
         Application.getMainStage().show();

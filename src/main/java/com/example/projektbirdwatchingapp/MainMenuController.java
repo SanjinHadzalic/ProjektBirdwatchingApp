@@ -71,6 +71,10 @@ public class MainMenuController{
         PieChartIstrazivaciController.showPieChartIstrazivac();
     }
     @FXML
+    public void openBarChartVrste(ActionEvent e) throws  IOException{
+        VrsteBarChartController.showBarChartVrste();
+    }
+    @FXML
     public void openLink(ActionEvent e){
         System.out.println("Ovo treba doraditi...");
     }//OVO TREBA DORADITI

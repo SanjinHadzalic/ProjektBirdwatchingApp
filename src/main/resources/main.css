@@ -106,3 +106,7 @@
 #serijalizacijaGridPane{
     -fx-background-color: rgb(214, 234, 248);
 }
+/*istrazivaciPieChart*/
+#istrazivaciPieChartGridPane{
+    -fx-background-color: rgb(214, 234, 248);
+}
