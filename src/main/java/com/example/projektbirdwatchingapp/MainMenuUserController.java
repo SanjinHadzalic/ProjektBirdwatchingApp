@@ -5,12 +5,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
 
 
 public class MainMenuUserController {
+    @FXML
+    private GridPane mainMenuUserGridPane;
     @FXML
     private Text greetingText;
 
@@ -25,11 +28,11 @@ public class MainMenuUserController {
     public static void showMainMenuScreenUser() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("mainMenuUser.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 520, 400);
+        scene.getStylesheets().add("main.css");
         Application.getMainStage().setTitle("Glavni ekran");
         statGreeting.setText("Bok " + LoginController.odabraniUser);
         Application.getMainStage().setScene(scene);
         Application.getMainStage().show();
-
     }
 
     public void logoutButtonOnAction(ActionEvent e) throws IOException {

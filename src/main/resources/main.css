@@ -32,6 +32,12 @@
 #menuGridPane{
     -fx-background-color: rgb(214, 234, 248);
 }
+
+/*MainMenuUserController*/
+#mainMenuUserGridPane{
+    -fx-background-color: #FFB190;
+
+}
 /*UnosPodatakaController */
 #vrstaText{
     -fx-font-size: 18px;

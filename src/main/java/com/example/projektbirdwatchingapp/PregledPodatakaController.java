@@ -170,6 +170,15 @@ public non-sealed class PregledPodatakaController extends ScreenControllerMethod
                         countHowManyTextField.setText(String.valueOf(countHowMany));
                     } else {
                         podaciTableView.setItems(FXCollections.observableList(Application.getPodatakList().stream().filter(a->a.getIstrazivac().toLowerCase().startsWith(odabraniUser.toLowerCase())).collect(Collectors.toList())));
+                        countFemale= countFemale(Application.getPodatakList().stream().filter(a->a.getIstrazivac().toLowerCase().startsWith(odabraniUser.toLowerCase())).collect(Collectors.toList()));
+                        countMale = countMale(Application.getPodatakList().stream().filter(a->a.getIstrazivac().toLowerCase().startsWith(odabraniUser.toLowerCase())).collect(Collectors.toList()));
+                        countUnknown = countUnkonown(Application.getPodatakList().stream().filter(a->a.getIstrazivac().toLowerCase().startsWith(odabraniUser.toLowerCase())).collect(Collectors.toList()));
+                        countHowMany = countHowMany(Application.getPodatakList().stream().filter(a->a.getIstrazivac().toLowerCase().startsWith(odabraniUser.toLowerCase())).collect(Collectors.toList()));
+                        countFemaleTextField.setText(String.valueOf(countFemale));
+                        countMaleTextField.setText(String.valueOf(countMale));
+                        countUnknownTextField.setText(String.valueOf(countUnknown));
+                        countHowManyTextField.setText(String.valueOf(countHowMany));
+
                     }
                 });
                 try {

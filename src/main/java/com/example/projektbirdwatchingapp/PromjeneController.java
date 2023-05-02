@@ -16,6 +16,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import static com.example.projektbirdwatchingapp.LoginController.odabraniUser;
+
 public class PromjeneController {
     @FXML
     private GridPane serijalizacijaGridPane;
@@ -83,7 +85,12 @@ public class PromjeneController {
     }
 
     public void natragButtonClicked() throws IOException {
-        MainMenuController.showMainMenuScreen();
-        running.set(false);
+        if (odabraniUser.equals("admin".toUpperCase())){
+            MainMenuController.showMainMenuScreen();
+            running.set(false);
+        } else {
+            MainMenuUserController.showMainMenuScreenUser();
+            running.set(false);
+        }
     }
 }
