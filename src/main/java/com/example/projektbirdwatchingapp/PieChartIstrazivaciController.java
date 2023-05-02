@@ -34,11 +34,6 @@ public class PieChartIstrazivaciController {
 
         List<BirdUnos> non=data.stream().filter(distinctByKey(a->a.getIstrazivac())).collect(Collectors.toList());
 
-        for (BirdUnos a: non
-             ) {
-            System.out.println(a.getIstrazivac());
-        }
-        System.out.println(non.size());
         ObservableList<PieChart.Data> dataDva = FXCollections.observableArrayList();
 
         for (BirdUnos b: non
@@ -73,4 +68,5 @@ public class PieChartIstrazivaciController {
 
         Map<Object, Boolean> seen = new ConcurrentHashMap<>();
         return t -> seen.putIfAbsent(keyExtractor.apply(t), Boolean.TRUE) == null;
-    }}
+    }
+}
