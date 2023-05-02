@@ -7,7 +7,7 @@ import java.io.IOException;
 
 import static com.example.projektbirdwatchingapp.LoginController.odabraniUser;
 
-public class VrsteBarChartController {
+public class BarChartVrsteController {
     public static void showBarChartVrste() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("vrsteBarChart.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 600);

@@ -9,7 +9,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
 
@@ -72,7 +71,7 @@ public class MainMenuController{
     }
     @FXML
     public void openBarChartVrste(ActionEvent e) throws  IOException{
-        VrsteBarChartController.showBarChartVrste();
+        BarChartVrsteController.showBarChartVrste();
     }
     @FXML
     public void openLink(ActionEvent e){
