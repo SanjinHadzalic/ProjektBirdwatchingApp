@@ -40,7 +40,6 @@
         </dependency>
         <!-- Thanks for using https://jar-download.com -->
 
-
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>

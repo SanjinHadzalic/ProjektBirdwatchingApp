@@ -4,7 +4,6 @@ module com.example.projektbirdwatchingapp {
     requires java.sql;
     requires org.slf4j;
 
-
     opens com.example.projektbirdwatchingapp to javafx.fxml;
     exports com.example.projektbirdwatchingapp;
 }
