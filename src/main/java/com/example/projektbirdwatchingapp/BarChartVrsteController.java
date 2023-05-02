@@ -11,6 +11,7 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.ComboBox;
+import javafx.scene.layout.GridPane;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -26,9 +27,11 @@ import java.util.stream.Collectors;
 import static com.example.projektbirdwatchingapp.LoginController.odabraniUser;
 
 public class BarChartVrsteController {
-        private String changer = "zeba";
+        public static String changer = "zeba";
         ObservableList<BirdUnos> data = FXCollections.observableArrayList(Application.getPodatakList());
         XYChart.Series series1 = new XYChart.Series();
+        @FXML
+        private GridPane barChartGridPane;
         @FXML
         private BarChart barChartVrste;
         @FXML
@@ -47,6 +50,8 @@ public class BarChartVrsteController {
 
             barChartVrste.getData().addAll(series1);
             barChartVrste.setAnimated(false);
+            barChartVrste.setBarGap(0);
+            barChartVrste.setMaxSize(650,450);
 
             vrsteComboBox.setEditable(true);
             vrsteComboBox.setValue("zeba");
@@ -57,21 +62,24 @@ public class BarChartVrsteController {
             System.out.println(vrsteComboBox.getSelectionModel().getSelectedItem().toString());
             System.out.println("Changer: "+changer);
 
-            barChartVrste.layout();
-            barChartVrste.getData().clear();
-            barChartVrste.layout();
-
-            for (BirdUnos a: data
-            ) {
-                series1.getData().add(new XYChart.Data(a.getIstrazivac(), data.stream().filter(b->b.getNaziv().equals(changer) && b.getIstrazivac().equals(a.getIstrazivac())).count()));
-            }
-
-            barChartVrste.getData().addAll(series1);
+            showBarChartVrste(changer);
+//            barChartVrste.getData().remove(series1);
+//            barChartVrste.getData().clear();
+//            barChartVrste.layout();
+//
+//            for (BirdUnos a: data
+//            ) {
+//                series1.getData().add(new XYChart.Data(a.getIstrazivac(), data.stream().filter(b->b.getNaziv().equals(changer) && b.getIstrazivac().equals(a.getIstrazivac())).count()));
+//            }
+//
+//            barChartVrste.getData().add(series1);
         }
-        public static void showBarChartVrste() throws IOException {
+        public static void showBarChartVrste(String changerDva) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("vrsteBarChart.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 600);
         scene.getStylesheets().add("main.css");
+
+        changer=changerDva;
 
         Application.getMainStage().setTitle("BarChart vrste");
         Application.getMainStage().setScene(scene);

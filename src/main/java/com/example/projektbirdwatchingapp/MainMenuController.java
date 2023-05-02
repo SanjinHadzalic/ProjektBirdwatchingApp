@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class MainMenuController{
+    public String changerOne = "zeba";
     @FXML
     private GridPane menuGridPane;
     @FXML
@@ -71,7 +72,7 @@ public class MainMenuController{
     }
     @FXML
     public void openBarChartVrste(ActionEvent e) throws  IOException{
-        BarChartVrsteController.showBarChartVrste();
+        BarChartVrsteController.showBarChartVrste(changerOne);
     }
     @FXML
     public void openLink(ActionEvent e){

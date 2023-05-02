@@ -110,3 +110,7 @@
 #istrazivaciPieChartGridPane{
     -fx-background-color: rgb(214, 234, 248);
 }
+/*BarChartVrsteController*/
+#barChartGridPane{
+    -fx-background-color: rgb(214, 234, 248);
+}
