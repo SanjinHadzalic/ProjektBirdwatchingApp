@@ -24,7 +24,7 @@ public class MainMenuController{
 
     private  final AtomicBoolean flag = new AtomicBoolean(true);
     private static Timeline noviTimeLine = new Timeline(
-            new KeyFrame(Duration.seconds(30), event -> Platform.runLater(new PosljednjaIzmjenaNit()))
+            new KeyFrame(Duration.seconds(60), event -> Platform.runLater(new PosljednjaIzmjenaNit()))
     );
 
     public static void showMainMenuScreen() throws IOException{

@@ -17,6 +17,9 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.OptionalInt;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
+
+import static com.example.projektbirdwatchingapp.LoginController.odabraniUser;
 
 public class UnosPodatkaController implements Initializable {
     @FXML
@@ -62,10 +65,22 @@ public class UnosPodatkaController implements Initializable {
         GenderSpecific unknown = new GenderSpecific("Unknown");
         spolComboBox.setItems(FXCollections.observableArrayList(female.gender(),male.gender(),unknown.gender()));
         spolComboBox.setValue(female.gender());
-        for (IstrazivacUnos e : istrazivaciBaza){
-            istrazivacComboBox.getItems().add(e.getIme() + " " + e.getPrezime());
+
+        if (odabraniUser.equals("admin".toUpperCase())){
+            for (IstrazivacUnos e : istrazivaciBaza){
+                istrazivacComboBox.getItems().add(e.getIme() + " " + e.getPrezime());
+            }
+            istrazivacComboBox.setValue(istrazivaciBaza.get(0).getIme() + " " + istrazivaciBaza.get(0).getPrezime());
+        } else {
+            String user = odabraniUser;
+            List<IstrazivacUnos> istr = istrazivaciBaza.stream()
+                            .filter(a->a.getIme().toLowerCase().startsWith(user.toLowerCase()))
+                    .collect(Collectors.toList());
+            for(IstrazivacUnos f : istr){
+                istrazivacComboBox.getItems().add(f.getIme() + " " + f.getPrezime());
+            }
+            istrazivacComboBox.setValue(istr.get(0).getIme() + " " + istr.get(0).getPrezime());
         }
-        istrazivacComboBox.setValue(istrazivaciBaza.get(0).getIme() + " " + istrazivaciBaza.get(0).getPrezime());
         for (Lokalitet l : lokacijaBazaPodataka){
             lokacijaComboBox.getItems().add(l.getNazivLokacije());
         }

@@ -1,0 +1,58 @@
+--kreacija tablice za istrazivace
+CREATE TABLE ISTRAZIVAC( 
+id LONG NOT NULL GENERATED ALWAYS AS IDENTITY, 
+ime VARCHAR(50) NOT NULL, 
+prezime VARCHAR(50) NOT NULL, 
+datum_rodjenja DATE NOT NULL, 
+institucija VARCHAR(50) NOT NULL, 
+adresa VARCHAR(50) NOT NULL,
+telefon INTEGER,
+email VARCHAR(50) NOT NULL,
+PRIMARY KEY(id)); 
+
+--dummy podaci za tablicu istrazivac
+insert into istrazivac(ime, prezime, datum_rodjenja, institucija, adresa, telefon, email) values('Luka', 'Lovrinovic', '1979-05-25', 'HVI', 'Bosutska 27a', 0987894561, 'llovrinovic12@gmail.com');
+insert into istrazivac(ime, prezime, datum_rodjenja, institucija, adresa, telefon, email) values('Ljiljana', 'Becmenica', '1991-06-26', 'Udruga BIOM', 'Vrapcanska 15', 092457812, 'ljbecmenica2@gmail.com');
+insert into istrazivac(ime, prezime, datum_rodjenja, institucija, adresa, telefon, email) values('Ana', 'Medic', '1992-05-25', 'Geo', 'Teleskopska 12', 098123123, 'amedic22@gmail.com');
+insert into istrazivac(ime, prezime, datum_rodjenja, institucija, adresa, telefon, email) values('Sanda', 'Katic', '1993-04-27', 'Spark', 'Ferdinandska 17', 092123453, 'skatic88@gmail.com');
+
+--kreacija tablice za lokacija
+create table lokacija(
+id long not null generated always as identity,
+naziv varchar(50) not null,
+tip varchar(50) not null,
+x_coord numeric(10,8) not null,
+y_coord numeric(10,8) not null,
+primary key(id));
+
+--dummy za tablicu lokacija
+insert into lokacija(naziv, tip, x_coord, y_coord) values('Ucka', 'PP', 45.244013, 14.212295);
+insert into lokacija(naziv, tip, x_coord, y_coord) values('Mljet', 'NP', 42.74675980, 17.39564970);
+insert into lokacija(naziv, tip, x_coord, y_coord) values('Palud', 'ostalo',45.0323009, 13.6881451);
+insert into lokacija(naziv, tip, x_coord, y_coord) values('Brijuni', 'NP', 44.233013, 14.212456);
+insert into lokacija(naziv, tip, x_coord, y_coord) values('Savica', 'ostalo', 43.74675980, 17.39564970);
+insert into lokacija(naziv, tip, x_coord, y_coord) values('Papuk', 'PP',44.1113009, 12.6845651);
+
+-- kreacija tablice za podatak
+create table podatak(
+id long not null generated always as identity,
+vrsta varchar(100) not null,
+brojnost integer not null,
+spol varchar(10) not null,
+komentari varchar(255),
+istrazivac varchar(255) not null,
+lokacija varchar(100) not null,
+datum date not null,
+primary key(id));
+
+--dummy podatci za tablicu podatak
+insert into podatak(vrsta, brojnost, spol, komentari, istrazivac, lokacija, datum) values('velika_sjenica',3,'Unknown','pjeva u parku', 'Ljiljana Becmenica','Ucka','2023-05-04');
+insert into podatak(vrsta, brojnost, spol, komentari, istrazivac, lokacija, datum) values('zeba',4,'Unknown','', 'Ana Medic','Mljet','2021-04-04');
+insert into podatak(vrsta, brojnost, spol, komentari, istrazivac, lokacija, datum) values('skanjac',1,'Male','prelet', 'Luka Lovrinovic','Mljet','202-03-02');
+insert into podatak(vrsta, brojnost, spol, komentari, istrazivac, lokacija, datum) values('zeba',1,'Unknown','pjeva', 'Ana Medic','Savica','2023-05-04');
+insert into podatak(vrsta, brojnost, spol, komentari, istrazivac, lokacija, datum) values('divlja_patka',2,'Female','prelet', 'Luka Lovrinovic','Savica','2022-06-06');
+insert into podatak(vrsta, brojnost, spol, komentari, istrazivac, lokacija, datum) values('zeba',2,'Female','', 'Ljiljana Becmenica','Savica','2023-05-04');
+insert into podatak(vrsta, brojnost, spol, komentari, istrazivac, lokacija, datum) values('kos',2,'Male','pjeva', 'Sanda Katic','Palud','2020-01-04');
+insert into podatak(vrsta, brojnost, spol, komentari, istrazivac, lokacija, datum) values('kos',3,'Unknown','', 'Ana Medic','Savica','2023-07-04');
+insert into podatak(vrsta, brojnost, spol, komentari, istrazivac, lokacija, datum) values('zelendur',1,'Unknown','pjeva', 'Ljiljana Becmenica','Savica','2022-06-14');
+insert into podatak(vrsta, brojnost, spol, komentari, istrazivac, lokacija, datum) values('velika_sjenica',3,'Unknown','pjeva u parku', 'Luka Lovrinovic','Mljet','2021-04-07');
