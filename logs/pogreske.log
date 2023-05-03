@@ -441,3 +441,4 @@
 2023-05-02 21:57:16,449 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:26] Aplikacija je pokrenuta
 2023-05-02 22:14:05,391 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:26] Aplikacija je pokrenuta
 2023-05-03 13:53:40,999 ERROR [main] h.j.v.b.BazaPodataka [BazaPodataka.java:80] Problem tijekom dohvacanja svih istrazivaca!
+2023-05-03 14:06:54,919 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:26] Aplikacija je pokrenuta

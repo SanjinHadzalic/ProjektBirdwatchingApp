@@ -55,6 +55,5 @@ public class BasicTests{
         int value = p.countUnkonown(testList);
 
         Assertions.assertEquals(2,value);
-
     }
 }
