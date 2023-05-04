@@ -35,9 +35,6 @@ public class MainMenuController{
         Application.getMainStage().setScene(scene);
         Application.getMainStage().show();
 
-//        var noviTimeLine = new Timeline(
-//                new KeyFrame(Duration.seconds(5), event -> Platform.runLater(new PosljednjaIzmjenaNit()))
-//        );
         noviTimeLine.setCycleCount(Timeline.INDEFINITE);
         noviTimeLine.play();
     }
@@ -75,9 +72,9 @@ public class MainMenuController{
         BarChartVrsteController.showBarChartVrste(changerOne);
     }
     @FXML
-    public void openLink(ActionEvent e){
-        System.out.println("Ovo treba doraditi...");
-    }//OVO TREBA DORADITI
+    public void openBirdsMedia(ActionEvent e) throws IOException{
+        BirdsMediaController.showBirdsMedia();
+    }
     @FXML
     public void showPromjeneScreen(ActionEvent e) throws IOException {
         PromjeneController.showPromjeneScreen();

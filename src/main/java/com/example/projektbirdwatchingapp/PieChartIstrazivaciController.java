@@ -24,13 +24,13 @@ import java.util.stream.Collectors;
 import static com.example.projektbirdwatchingapp.LoginController.odabraniUser;
 
 public class PieChartIstrazivaciController {
+    ObservableList<BirdUnos> data = FXCollections.observableArrayList(Application.getPodatakList());
     @FXML
     private GridPane istrazivaciPieChartGridPane;
     @FXML
     private PieChart istrazivacPieChart;
     @FXML
     public void initialize() throws FileNotFoundException {
-        ObservableList<BirdUnos> data = FXCollections.observableArrayList(Application.getPodatakList());
 
         List<BirdUnos> non=data.stream().filter(distinctByKey(a->a.getIstrazivac())).collect(Collectors.toList());
 

@@ -97,7 +97,7 @@
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
                               <Button layoutX="41.0" layoutY="14.0" mnemonicParsing="false" onAction="#showPromjeneScreen" text="Promjene" />
-                              <Button layoutX="32.0" layoutY="71.0" mnemonicParsing="false" text="AddUserPass" />
+                              <Button layoutX="32.0" layoutY="71.0" mnemonicParsing="false" onAction="#openBirdsMedia" text="Media" />
                            </children></AnchorPane>
                   </content>
                 </Tab>

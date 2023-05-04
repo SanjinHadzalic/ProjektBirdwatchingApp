@@ -1,6 +1,7 @@
 module com.example.projektbirdwatchingapp {
     requires javafx.controls;
     requires javafx.fxml;
+    requires javafx.media;
     requires java.sql;
     requires org.slf4j;
 

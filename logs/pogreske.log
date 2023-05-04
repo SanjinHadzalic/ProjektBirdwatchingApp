@@ -459,3 +459,13 @@
 2023-05-03 15:40:30,042 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:26] Aplikacija je pokrenuta
 2023-05-03 15:42:22,707 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:26] Aplikacija je pokrenuta
 2023-05-03 15:42:56,618 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:26] Aplikacija je pokrenuta
+2023-05-03 15:49:45,514 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:26] Aplikacija je pokrenuta
+2023-05-03 15:51:16,072 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:26] Aplikacija je pokrenuta
+2023-05-03 15:52:17,657 ERROR [JavaFX Application Thread] c.e.p.Application [UnosIstrazivacaController.java:104] Datum rodjenja ne moze biti poslije 2002-01-01
+2023-05-03 15:52:27,145 ERROR [JavaFX Application Thread] c.e.p.Application [UnosIstrazivacaController.java:104] Datum rodjenja ne moze biti poslije 2002-01-01
+2023-05-03 15:52:33,502 ERROR [JavaFX Application Thread] c.e.p.Application [UnosIstrazivacaController.java:104] Datum rodjenja ne moze biti poslije 2002-01-01
+2023-05-03 15:53:19,022 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:26] Aplikacija je pokrenuta
+2023-05-03 15:55:05,058 ERROR [JavaFX Application Thread] c.e.p.Application [UnosIstrazivacaController.java:104] Datum rodjenja ne moze biti poslije 2002-01-01
+2023-05-03 15:57:07,533 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:26] Aplikacija je pokrenuta
+2023-05-04 19:08:39,380 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:26] Aplikacija je pokrenuta
+2023-05-04 19:15:03,000 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:26] Aplikacija je pokrenuta
