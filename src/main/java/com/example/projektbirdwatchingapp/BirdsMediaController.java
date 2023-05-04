@@ -3,12 +3,16 @@ package com.example.projektbirdwatchingapp;
 import hr.java.vjezbe.entiteti.BirdUnos;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Side;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
+import org.w3c.dom.events.MouseEvent;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -20,12 +24,19 @@ import java.util.stream.Collectors;
 import static com.example.projektbirdwatchingapp.LoginController.odabraniUser;
 
 public class BirdsMediaController {
+    MediaPlayer mediaPlayer;
 
     @FXML
-    public void initialize() throws FileNotFoundException, MalformedURLException {
-        File mediaFile = new File("blackbird.mp3");
-        Media media = new Media(mediaFile.toURI().toString());
+    void play(ActionEvent event){
+        File mediaFile = new File("src/main/resources/Tmerula.mp3");
+        playHitSound(mediaFile);
+    }
 
+    private void playHitSound(File mediaFile){
+        Media media = new Media(mediaFile.toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+        mediaPlayer.play();
     }
     public static void showBirdsMedia() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("birdsMedia.fxml"));
