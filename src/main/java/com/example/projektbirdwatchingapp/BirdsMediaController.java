@@ -28,8 +28,13 @@ public class BirdsMediaController {
 
     @FXML
     void play(ActionEvent event){
-        File mediaFile = new File("src/main/resources/Tmerula.mp3");
+        File mediaFile = new File("src/main/resources/music/Tmerula.mp3");
         playHitSound(mediaFile);
+    }
+
+    @FXML
+    void stopSound(ActionEvent event){
+        mediaPlayer.stop();
     }
 
     private void playHitSound(File mediaFile){
@@ -50,8 +55,10 @@ public class BirdsMediaController {
     public void natragButtonClicked() throws IOException {
         if (odabraniUser.equals("admin".toUpperCase())){
             MainMenuController.showMainMenuScreen();
+            mediaPlayer.stop();
         } else {
             MainMenuUserController.showMainMenuScreenUser();
+            mediaPlayer.stop();
         }
     }
 

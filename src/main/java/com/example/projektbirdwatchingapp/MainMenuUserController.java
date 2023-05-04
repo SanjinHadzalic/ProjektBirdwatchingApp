@@ -18,8 +18,6 @@ public class MainMenuUserController {
     private Text greetingText;
 
     public static Text statGreeting;
-    @FXML
-    private Hyperlink poveznica;
 
     @FXML
     public void initialize(){
@@ -59,12 +57,12 @@ public class MainMenuUserController {
         PregledLokacijaController.showPregledLokacijaScreen();
     }
     @FXML
-    public void openLink(ActionEvent e){
-        System.out.println("Ovo treba doraditi...");
-    }//OVO TREBA DORADITI
-    @FXML
     public void showPromjeneScreen(ActionEvent e) throws IOException {
         PromjeneController.showPromjeneScreen();
     }
 
+    @FXML
+    public void showBirdMedia(ActionEvent event) throws IOException {
+        BirdsMediaController.showBirdsMedia();
+    }
 }
