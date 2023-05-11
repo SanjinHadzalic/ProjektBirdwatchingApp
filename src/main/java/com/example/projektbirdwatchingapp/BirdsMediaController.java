@@ -19,19 +19,32 @@ import static com.example.projektbirdwatchingapp.LoginController.odabraniUser;
 public class BirdsMediaController  {
     MediaPlayer mediaPlayer;
 
-    FileInputStream input;
+    FileInputStream inputKosStream;
+    FileInputStream inputSkanjacStream;
+    FileInputStream inputZebaStream;
+    FileInputStream inputVjetrusaStream;
+    FileInputStream inputRobinStream;
+    FileInputStream inputDivljaPatkaStream;
 
     {
         try {
-            input = new FileInputStream("src/main/resources/images/Tmerula.jpg");
+            inputKosStream = new FileInputStream("src/main/resources/images/Tmerula.jpg");
+            inputSkanjacStream = new FileInputStream("src/main/resources/images/Tmerula.jpg");
+            inputZebaStream = new FileInputStream("src/main/resources/images/Finch.jpg");
+            inputVjetrusaStream=new FileInputStream("src/main/resources/images/kestrel.png");
+            inputRobinStream=new FileInputStream("src/main/resources/images/Robin.jpg");
+            inputDivljaPatkaStream = new FileInputStream("src/main/resources/images/mallard.jpg");
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
 
-    Image kos = new Image(input);
     @FXML
-    ImageView kos2 = new ImageView(kos);
+    ImageView kosImageView = new ImageView(new Image(inputKosStream));
+    @FXML
+    ImageView skanjacImageView=new ImageView(new Image(inputSkanjacStream));
+    @FXML
+    ImageView zebaImageView=new ImageView(new Image(inputZebaStream));
 
 
     public static void showBirdsMedia() throws IOException {
@@ -47,10 +60,23 @@ public class BirdsMediaController  {
         File mediaFile = new File("src/main/resources/music/Tmerula.mp3");
         playHitSound(mediaFile);
     }
+    @FXML
+    void playSkanjac(ActionEvent event){
+        File mediaFile = new File("src/main/resources/music/Skanjac.mp3");
+        playHitSound(mediaFile);
+    }
+    @FXML
+    void playZeba(ActionEvent event){
+        File mediaFile = new File("src/main/resources/music/Zeba.mp3");
+        playHitSound(mediaFile);
+
+    }
 
     @FXML
     void stopSoundAll(ActionEvent event){
+
         mediaPlayer.stop();
+
     }
 
     private void playHitSound(File mediaFile){
