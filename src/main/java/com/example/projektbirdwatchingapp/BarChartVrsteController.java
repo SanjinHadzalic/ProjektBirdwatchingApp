@@ -54,13 +54,14 @@ public class BarChartVrsteController {
             barChartVrste.setMaxSize(650,450);
 
             vrsteComboBox.setEditable(true);
-            vrsteComboBox.setValue("zeba");
+            vrsteComboBox.setValue(changer);
+//            vrsteComboBox.setValue("zeba");
             vrsteComboBox.getItems().setAll(Arrays.stream(BinarnaNomenklatura.values()).sorted(Comparator.comparing(BinarnaNomenklatura::getVrsta)).toList());
         }
         public void changeVrsta() throws IOException {
             changer = vrsteComboBox.getSelectionModel().getSelectedItem().toString();
-            System.out.println(vrsteComboBox.getSelectionModel().getSelectedItem().toString());
-            System.out.println("Changer: "+changer);
+//            System.out.println(vrsteComboBox.getSelectionModel().getSelectedItem().toString());
+//            System.out.println("Changer: "+changer);
 
             showBarChartVrste(changer);
 //            barChartVrste.getData().remove(series1);
