@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class Application extends javafx.application.Application {
     private static List<Lokalitet> lokacijaList;
     private static List<BirdUnos> podatakList;
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) throws IOException {
         logger.info("Aplikacija je pokrenuta");
         istrazivacUnosList= new ArrayList<>();
         lokacijaList = new ArrayList<>();
@@ -31,7 +32,7 @@ public class Application extends javafx.application.Application {
         addIstrazivac();
         addLokacija();
         addPodatak();
-        } catch (RuntimeException e){
+        } catch (RuntimeException | FileNotFoundException e){
             logger.error("Niste povezani s H2 bat datotekom");
         }
         mainStage = stage;
