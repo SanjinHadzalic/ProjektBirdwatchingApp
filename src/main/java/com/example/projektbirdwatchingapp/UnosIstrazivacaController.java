@@ -193,7 +193,7 @@ public class UnosIstrazivacaController {
         String ret = toBeCapitalized.substring(0,1).toUpperCase() + toBeCapitalized.substring(1).toLowerCase();
         return ret;
     }
-    public void writeNewIstrazivac() throws Exception{
+    public void writeNewIstrazivac() throws Exception {
         List<IstrazivacUnos> listaIstrazivaca = BazaPodataka.dohvatiSveIstrazivacee();
         OptionalInt idIstrazivacaRaw = listaIstrazivaca.stream()
                 .mapToInt(s->s.getId())

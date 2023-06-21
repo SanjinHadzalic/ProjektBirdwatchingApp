@@ -1,5 +1,8 @@
 package hr.java.vjezbe.iznimke;
 
+/**
+ * Exception koji se baca kada je unijet korisnik koji vec postoji u aplikaciji
+ */
 public class KorisnikPostojiException extends Exception{
     public KorisnikPostojiException() {
     }

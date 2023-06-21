@@ -1,5 +1,8 @@
 package hr.java.vjezbe.iznimke;
 
+/**
+ * Exception koji se baca kada novi lokalitet vec postoji u aplikaciji
+ */
 public class LokalitetPostojiException extends RuntimeException {
     public LokalitetPostojiException() {
     }

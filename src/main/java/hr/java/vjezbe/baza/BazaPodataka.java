@@ -6,6 +6,7 @@ import hr.java.vjezbe.entiteti.Lokalitet;
 import org.slf4j.LoggerFactory;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,7 @@ public final class BazaPodataka {
     private static final Logger logger = LoggerFactory.getLogger(BazaPodataka.class);
     private static final String DATABASE_FINAL = "dat/bazaPodataka.properties";
 
-    private static Connection spajanjeNaBazu() throws Exception{
+    private static Connection spajanjeNaBazu() throws IOException, SQLException {
         Properties konfiguracijaBaze = new Properties();
         konfiguracijaBaze.load(new FileInputStream(DATABASE_FINAL));
 
@@ -103,7 +104,7 @@ public final class BazaPodataka {
             throw new RuntimeException(e);
         }
     }
-    public static void spremiNovogIstrazivaca(IstrazivacUnos istrazivac) throws Exception{
+    public static void spremiNovogIstrazivaca(IstrazivacUnos istrazivac){
         try(Connection con = spajanjeNaBazu()){
             PreparedStatement pstmt = con.prepareStatement("INSERT INTO ISTRAZIVAC(ime, prezime, datum_rodjenja, institucija, adresa, telefon, email) VALUES(?, ?, ?, ?, ?, ?, ?);");
 
@@ -123,11 +124,11 @@ public final class BazaPodataka {
         }
     }
 
-    public static void ukloniIstrazivaca(Integer id) throws Exception{
+    public static void ukloniIstrazivaca(Integer id) {
         removeData(id, "DELETE FROM ISTRAZIVAC WHERE ID = ?");
     }
 
-    public static void azurirajIstrazivaca(IstrazivacUnos istrazivac) throws Exception {
+    public static void azurirajIstrazivaca(IstrazivacUnos istrazivac) throws SQLException, IOException {
         Connection cnt = spajanjeNaBazu();
 
         PreparedStatement pstmt = cnt.prepareStatement("UPDATE ISTRAZIVAC SET " +
@@ -152,7 +153,7 @@ public final class BazaPodataka {
         pstmt.executeUpdate();
     }
 
-    public static void spremiNovuLokaciju(Lokalitet novaLokacija) throws Exception{
+    public static void spremiNovuLokaciju(Lokalitet novaLokacija) {
         try(Connection con = spajanjeNaBazu()){
             PreparedStatement pstmt = con.prepareStatement("INSERT INTO LOKACIJA(naziv, tip, x_coord, y_coord) VALUES(?, ?, ?, ?);");
 
@@ -169,7 +170,7 @@ public final class BazaPodataka {
         }
     }
 
-    public static void azurirajLLokalitet(Lokalitet updateLokalitet) throws Exception {
+    public static void azurirajLLokalitet(Lokalitet updateLokalitet) throws SQLException, IOException {
         Connection cnt = spajanjeNaBazu();
 
         PreparedStatement pstmt = cnt.prepareStatement("UPDATE LOKACIJA SET " +
@@ -188,12 +189,12 @@ public final class BazaPodataka {
         pstmt.executeUpdate();
     }
 
-    public static void ukloniLokaciju(Integer id) throws Exception{
+    public static void ukloniLokaciju(Integer id) {
         removeData(id,"DELETE FROM LOKACIJA WHERE ID = ?");
     }
 
 
-    public static void azurirajPodatak(BirdUnos updatePodatak) throws Exception {
+    public static void azurirajPodatak(BirdUnos updatePodatak) throws SQLException, IOException {
         Connection cnt = spajanjeNaBazu();
 
         PreparedStatement pstmt = cnt.prepareStatement("UPDATE PODATAK SET " +
@@ -216,7 +217,7 @@ public final class BazaPodataka {
         pstmt.executeUpdate();
     }
 
-    public static void spremiNoviPodatak(BirdUnos noviPodatak) throws Exception{
+    public static void spremiNoviPodatak(BirdUnos noviPodatak) {
         try(Connection con = spajanjeNaBazu()){
             PreparedStatement pstmt = con.prepareStatement("INSERT INTO PODATAK(vrsta, brojnost, spol, komentari, istrazivac, lokacija, datum) VALUES(?, ?, ?, ?, ?, ?, ?);");
 
@@ -236,7 +237,7 @@ public final class BazaPodataka {
         }
     }
 
-    public static void ukloniPodatak(Integer id) throws Exception{
+    public static void ukloniPodatak(Integer id) {
         removeData(id,"DELETE FROM PODATAK WHERE ID = ?");
     }
 }
