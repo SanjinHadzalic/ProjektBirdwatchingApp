@@ -23,32 +23,39 @@ public class BirdsMediaController {
     private static final Logger logger = LoggerFactory.getLogger(Application.class);
     MediaPlayer mediaPlayer;
     private boolean isPlaying = false;
-    FileInputStream inputKosStream;
-    FileInputStream inputSkanjacStream;
-    FileInputStream inputZebaStream;
-    FileInputStream inputVjetrusaStream;
+    FileInputStream inputBlackbirdStream;
+    FileInputStream inputBuzzardStream;
+    FileInputStream inputChafinchStream;
+    FileInputStream inputKestrelStream;
     FileInputStream inputRobinStream;
-    FileInputStream inputDivljaPatkaStream;
+    FileInputStream inputMallardStream;
 
     {
         try {
-            inputKosStream = new FileInputStream("src/main/resources/images/Tmerula.jpg");
-            inputSkanjacStream = new FileInputStream("src/main/resources/images/Tmerula.jpg");
-            inputZebaStream = new FileInputStream("src/main/resources/images/Finch.jpg");
-            inputVjetrusaStream = new FileInputStream("src/main/resources/images/kestrel.png");
+            inputBlackbirdStream = new FileInputStream("src/main/resources/images/Tmerula.jpg");
+            inputBuzzardStream = new FileInputStream("src/main/resources/images/Tmerula.jpg");
+            inputChafinchStream = new FileInputStream("src/main/resources/images/Finch.jpg");
+            inputKestrelStream = new FileInputStream("src/main/resources/images/kestrel.png");
             inputRobinStream = new FileInputStream("src/main/resources/images/Robin.jpg");
-            inputDivljaPatkaStream = new FileInputStream("src/main/resources/images/mallard.jpg");
+            inputMallardStream = new FileInputStream("src/main/resources/images/mallard.jpg");
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
 
     @FXML
-    ImageView kosImageView = new ImageView(new Image(inputKosStream));
+    ImageView kosImageView = new ImageView(new Image(inputBlackbirdStream));
     @FXML
-    ImageView skanjacImageView = new ImageView(new Image(inputSkanjacStream));
+    ImageView skanjacImageView = new ImageView(new Image(inputBuzzardStream));
     @FXML
-    ImageView zebaImageView = new ImageView(new Image(inputZebaStream));
+    ImageView zebaImageView = new ImageView(new Image(inputChafinchStream));
+    @FXML
+    ImageView kestrelImageView = new ImageView(new Image(inputKestrelStream));
+    @FXML
+    ImageView mallardImageView = new ImageView(new Image(inputMallardStream));
+    @FXML
+    ImageView robinIamgeView = new ImageView(new Image(inputRobinStream));
+
 
 
     public static void showBirdsMedia() throws IOException {

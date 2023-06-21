@@ -571,3 +571,5 @@
 2023-06-21 23:45:04,389 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
 2023-06-21 23:47:34,970 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
 2023-06-21 23:47:42,160 ERROR [JavaFX Application Thread] c.e.p.Application [BirdsMediaController.java:151] Uslo se u prozor te se nije nista pokrenulo od ponudjenog!
+2023-06-21 23:55:20,641 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-06-22 00:01:09,214 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
