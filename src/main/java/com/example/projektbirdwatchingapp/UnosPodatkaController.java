@@ -2,6 +2,7 @@ package com.example.projektbirdwatchingapp;
 
 import hr.java.vjezbe.baza.BazaPodataka;
 import hr.java.vjezbe.entiteti.*;
+import hr.java.vjezbe.iznimke.NedozvoljenBrojException;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +11,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.URL;
@@ -22,6 +25,7 @@ import java.util.stream.Collectors;
 import static com.example.projektbirdwatchingapp.LoginController.odabraniUser;
 
 public class UnosPodatkaController implements Initializable {
+    private static final Logger logger = LoggerFactory.getLogger(Application.class);
     @FXML
     private GridPane unosPodatakaGridPane;
     @FXML
@@ -63,29 +67,30 @@ public class UnosPodatkaController implements Initializable {
         GenderSpecific female = new GenderSpecific("Female");
         GenderSpecific male = new GenderSpecific("Male");
         GenderSpecific unknown = new GenderSpecific("Unknown");
-        spolComboBox.setItems(FXCollections.observableArrayList(female.gender(),male.gender(),unknown.gender()));
+        spolComboBox.setItems(FXCollections.observableArrayList(female.gender(), male.gender(), unknown.gender()));
         spolComboBox.setValue(female.gender());
 
-        if (odabraniUser.equals("admin".toUpperCase())){
-            for (IstrazivacUnos e : istrazivaciBaza){
+        if (odabraniUser.equals("admin".toUpperCase())) {
+            for (IstrazivacUnos e : istrazivaciBaza) {
                 istrazivacComboBox.getItems().add(e.getIme() + " " + e.getPrezime());
             }
             istrazivacComboBox.setValue(istrazivaciBaza.get(0).getIme() + " " + istrazivaciBaza.get(0).getPrezime());
         } else {
             String user = odabraniUser;
             List<IstrazivacUnos> istr = istrazivaciBaza.stream()
-                            .filter(a->a.getIme().toLowerCase().startsWith(user.toLowerCase()))
+                    .filter(a -> a.getIme().toLowerCase().startsWith(user.toLowerCase()))
                     .collect(Collectors.toList());
-            for(IstrazivacUnos f : istr){
+            for (IstrazivacUnos f : istr) {
                 istrazivacComboBox.getItems().add(f.getIme() + " " + f.getPrezime());
             }
             istrazivacComboBox.setValue(istr.get(0).getIme() + " " + istr.get(0).getPrezime());
         }
-        for (Lokalitet l : lokacijaBazaPodataka){
+        for (Lokalitet l : lokacijaBazaPodataka) {
             lokacijaComboBox.getItems().add(l.getNazivLokacije());
         }
         lokacijaComboBox.setValue(lokacijaBazaPodataka.get(0).getNazivLokacije());
     }
+
     @FXML
     public void savePodatak() {
         List<BirdUnos> podatakList = BazaPodataka.dohvatiSvePodatkee();
@@ -105,25 +110,25 @@ public class UnosPodatkaController implements Initializable {
 
         StringBuilder errors = new StringBuilder();
 
-        if (vrstaPodatka.isBlank()){
+        if (vrstaPodatka.isBlank()) {
             errors.append("Nedostaje unos za ime vrsste podatka!\n");
         }
-        if (brojnostPodatka.isBlank()){
+        if (brojnostPodatka.isBlank()) {
             errors.append("Nedostaje unos za brojnost vrste!\n");
         }
-        if (spolPodatka.isBlank()){
+        if (spolPodatka.isBlank()) {
             errors.append("Nedostaje unos za spol vrste!\n");
         }
-        if (istrazivacPodatka.isBlank()){
+        if (istrazivacPodatka.isBlank()) {
             errors.append("Nedostaje unos za istrazivaca vrste!\n");
         }
-        if (lokacijaPodatka.isBlank()){
+        if (lokacijaPodatka.isBlank()) {
             errors.append("Nedostaje unos za unos!\n");
         }
-        if (datumPodatka == null){
+        if (datumPodatka == null) {
             errors.append("Nedostaje unos za datum unosa podatka!\n");
         }
-        if (errors.length()>0){
+        if (errors.length() > 0) {
             Alert obavijestUpozerenja = new Alert(Alert.AlertType.WARNING);
             obavijestUpozerenja.setTitle("Nedostaju unosi");
             obavijestUpozerenja.setHeaderText("Nedostaju sljedeci unosi za podatke:");
@@ -131,36 +136,57 @@ public class UnosPodatkaController implements Initializable {
 
             obavijestUpozerenja.showAndWait();
         } else if (vrstaPodatka.isBlank() != true && brojnostPodatka.isBlank() != true && datumPodatka != null && spolPodatka.isBlank() != true && istrazivacPodatka.isBlank() != true && lokacijaPodatka.isBlank() != true) {
-            BirdUnos noviPodatak = new BirdUnos(idPodatka, vrstaPodatka, Integer.parseInt(brojnostPodatka), spolPodatka, komentari, istrazivacPodatka, lokacijaPodatka, datumPodatka);
+            boolean flag = true;
 
-            Application.getPodatakList().add(noviPodatak);
-
-            writeNewPodatak();
-
-            Alert obavijestUnosa = new Alert(Alert.AlertType.INFORMATION);
-            obavijestUnosa.setTitle("Spremanje novog podatka");
-            obavijestUnosa.setHeaderText("Uspjesno je spremljen podatak:");
-            obavijestUnosa.setContentText("Podatak: " + vrstaPodatka + " >>" + idPodatka + " je uspjesno dodan u aplikaciju!\n");
-
-            obavijestUnosa.showAndWait();
-
-            FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("pregledPodataka.fxml"));
-            Scene scene = null;
-            try{
-                scene = new Scene(fxmlLoader.load(), 1000, 800);
-            } catch (IOException ex){
-                throw new RuntimeException(ex);
+            try {
+                checkNumberInput(brojnostPodatka, flag);
+            } catch (NedozvoljenBrojException ex) {
+                logger.error(ex.getMessage());
+                Alert ob = new Alert(Alert.AlertType.ERROR, "Nesipravno je unesena brojnost vrste!");
+                ob.showAndWait();
+                brojnostTextField.clear();
+                flag = false;
             }
-            Application.getMainStage().setTitle("Pregled podataka");
-            Application.getMainStage().setScene(scene);
-            Application.getMainStage().show();
+
+            if (flag) {
+                BirdUnos noviPodatak = new BirdUnos(idPodatka, vrstaPodatka, Integer.parseInt(brojnostPodatka), spolPodatka, komentari, istrazivacPodatka, lokacijaPodatka, datumPodatka);
+                Application.getPodatakList().add(noviPodatak);
+
+                writeNewPodatak();
+
+                Alert obavijestUnosa = new Alert(Alert.AlertType.INFORMATION);
+                obavijestUnosa.setTitle("Spremanje novog podatka");
+                obavijestUnosa.setHeaderText("Uspjesno je spremljen podatak:");
+                obavijestUnosa.setContentText("Podatak: " + vrstaPodatka + " >>" + idPodatka + " je uspjesno dodan u aplikaciju!\n");
+
+                obavijestUnosa.showAndWait();
+
+                FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("pregledPodataka.fxml"));
+                Scene scene = null;
+                try {
+                    scene = new Scene(fxmlLoader.load(), 1000, 800);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+                Application.getMainStage().setTitle("Pregled podataka");
+                Application.getMainStage().setScene(scene);
+                Application.getMainStage().show();
+            }
         }
     }
 
-    public void writeNewPodatak(){
+    private void checkNumberInput(String brojnostPodatka, boolean flag) throws NedozvoljenBrojException {
+        try {
+            Integer numToCheck = Integer.valueOf(brojnostPodatka);
+        } catch (RuntimeException ex) {
+            throw new NedozvoljenBrojException("Tijekom unosa podataka, nije unesen ispravan broj!");
+        }
+    }
+
+    public void writeNewPodatak() {
         List<BirdUnos> podatakList = BazaPodataka.dohvatiSvePodatkee();
         OptionalInt idPodatakRaw = podatakList.stream()
-                .mapToInt(s->s.getId())
+                .mapToInt(s -> s.getId())
                 .max();
         Integer idPodatak = idPodatakRaw.getAsInt() + 1;
         String vrstaPodatak = String.valueOf(vrstaComboBox.getSelectionModel().getSelectedItem());
@@ -171,7 +197,7 @@ public class UnosPodatkaController implements Initializable {
         String lokacijaPodatak = lokacijaComboBox.getSelectionModel().getSelectedItem();
         LocalDate datumIstrazivac = datumDatePicker.getValue();
 
-        BirdUnos noviPodatak = new BirdUnos(idPodatak, vrstaPodatak, Integer.parseInt(brojnostPodatak), spolPodatak, komentari, istrazivacPodatak,  lokacijaPodatak, datumIstrazivac);
+        BirdUnos noviPodatak = new BirdUnos(idPodatak, vrstaPodatak, Integer.parseInt(brojnostPodatak), spolPodatak, komentari, istrazivacPodatak, lokacijaPodatak, datumIstrazivac);
 
         BazaPodataka.spremiNoviPodatak(noviPodatak);
     }

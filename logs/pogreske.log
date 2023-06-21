@@ -540,3 +540,16 @@
 2023-06-19 22:07:03,843 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
 2023-06-21 19:54:49,575 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
 2023-06-21 20:03:58,538 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-06-21 20:57:15,135 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-06-21 21:29:57,748 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-06-21 21:31:06,008 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-06-21 21:31:41,739 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-06-21 21:32:42,602 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-06-21 21:34:12,218 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-06-21 21:34:29,070 ERROR [JavaFX Application Thread] c.e.p.Application [UnosPodatkaController.java:144] Tijekom unosa podataka, nije unesen ispravan broj!
+2023-06-21 21:36:55,645 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-06-21 21:38:40,214 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-06-21 21:38:50,152 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-06-21 21:39:02,150 ERROR [JavaFX Application Thread] c.e.p.Application [UnosPodatkaController.java:144] Tijekom unosa podataka, nije unesen ispravan broj!
+2023-06-21 21:39:54,526 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-06-21 21:40:06,753 ERROR [JavaFX Application Thread] c.e.p.Application [UnosPodatkaController.java:144] Tijekom unosa podataka, nije unesen ispravan broj!
