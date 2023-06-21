@@ -39,7 +39,7 @@ public class UnosLokalitetaController {
     @FXML
     private TextField yKoordinataTextField;
     @FXML
-    public void saveLokalitet() throws Exception{
+    public void saveLokalitet(){
         List<Lokalitet> listaLokaliteta = BazaPodataka.dohvatiSveLokalitete();
 
         OptionalInt idLokalitetaRaw = listaLokaliteta.stream()
@@ -141,7 +141,7 @@ public class UnosLokalitetaController {
         System.out.println(flag);
 
     }
-    public void writeNewLokalitet() throws Exception{
+    public void writeNewLokalitet(){
         List<Lokalitet> listaLokaliteta = BazaPodataka.dohvatiSveLokalitete();
         OptionalInt idLokalitetaRaw = listaLokaliteta.stream()
                 .mapToInt(s->s.getId())

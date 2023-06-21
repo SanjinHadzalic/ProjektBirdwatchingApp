@@ -40,7 +40,7 @@ public class UnosIstrazivacaController {
     private TextField emailIstrazivacaTextField;
 
     @FXML
-    public void saveIstrazivac() throws Exception {
+    public void saveIstrazivac() {
 //        boolean flag = true;
         List<IstrazivacUnos> listaIstrazivaca = BazaPodataka.dohvatiSveIstrazivacee();
 
@@ -193,7 +193,7 @@ public class UnosIstrazivacaController {
         String ret = toBeCapitalized.substring(0,1).toUpperCase() + toBeCapitalized.substring(1).toLowerCase();
         return ret;
     }
-    public void writeNewIstrazivac() throws Exception {
+    public void writeNewIstrazivac() {
         List<IstrazivacUnos> listaIstrazivaca = BazaPodataka.dohvatiSveIstrazivacee();
         OptionalInt idIstrazivacaRaw = listaIstrazivaca.stream()
                 .mapToInt(s->s.getId())

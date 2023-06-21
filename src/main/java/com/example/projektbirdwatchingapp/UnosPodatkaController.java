@@ -87,7 +87,7 @@ public class UnosPodatkaController implements Initializable {
         lokacijaComboBox.setValue(lokacijaBazaPodataka.get(0).getNazivLokacije());
     }
     @FXML
-    public void savePodatak() throws Exception {
+    public void savePodatak() {
         List<BirdUnos> podatakList = BazaPodataka.dohvatiSvePodatkee();
 
         OptionalInt idPodatakRaw = podatakList.stream()
@@ -157,7 +157,7 @@ public class UnosPodatkaController implements Initializable {
         }
     }
 
-    public void writeNewPodatak() throws Exception{
+    public void writeNewPodatak(){
         List<BirdUnos> podatakList = BazaPodataka.dohvatiSvePodatkee();
         OptionalInt idPodatakRaw = podatakList.stream()
                 .mapToInt(s->s.getId())
