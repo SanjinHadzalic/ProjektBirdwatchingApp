@@ -553,3 +553,21 @@
 2023-06-21 21:39:02,150 ERROR [JavaFX Application Thread] c.e.p.Application [UnosPodatkaController.java:144] Tijekom unosa podataka, nije unesen ispravan broj!
 2023-06-21 21:39:54,526 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
 2023-06-21 21:40:06,753 ERROR [JavaFX Application Thread] c.e.p.Application [UnosPodatkaController.java:144] Tijekom unosa podataka, nije unesen ispravan broj!
+2023-06-21 22:30:27,482 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-06-21 22:41:58,120 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-06-21 22:43:34,366 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-06-21 22:59:18,480 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-06-21 23:00:05,758 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-06-21 23:00:25,728 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-06-21 23:15:13,947 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-06-21 23:21:49,234 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-06-21 23:23:05,144 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-06-21 23:23:46,530 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-06-21 23:36:02,148 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-06-21 23:36:24,200 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-06-21 23:37:49,900 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-06-21 23:42:56,039 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-06-21 23:44:08,391 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-06-21 23:45:04,389 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-06-21 23:47:34,970 INFO [JavaFX Application Thread] c.e.p.Application [Application.java:27] Aplikacija je pokrenuta
+2023-06-21 23:47:42,160 ERROR [JavaFX Application Thread] c.e.p.Application [BirdsMediaController.java:151] Uslo se u prozor te se nije nista pokrenulo od ponudjenog!

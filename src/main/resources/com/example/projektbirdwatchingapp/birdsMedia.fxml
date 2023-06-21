@@ -7,7 +7,7 @@
 
 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projektbirdwatchingapp.BirdsMediaController">
    <children>
-      <ImageView fx:id="kosImageView" fitHeight="150.0" fitWidth="200.0" layoutX="43.0" layoutY="55.0" onMouseClicked="#playKos" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="kosImageView" fitHeight="150.0" fitWidth="200.0" layoutX="43.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../images/Tmerula.jpg" />
          </image>
@@ -15,12 +15,12 @@
       <Button layoutX="118.0" layoutY="200.0" mnemonicParsing="false" onAction="#playKos" text="Kos" />
       <Button layoutX="12.0" layoutY="361.0" mnemonicParsing="false" onAction="#stopSoundAll" text="Stop" />
       <Button layoutX="652.0" layoutY="14.0" mnemonicParsing="false" onAction="#natragButtonClicked" text="Back" />
-      <ImageView fx:id="kosImageView1" fitHeight="152.0" fitWidth="239.0" layoutX="467.0" layoutY="55.0" onMouseClicked="#playKos" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="kosImageView1" fitHeight="152.0" fitWidth="239.0" layoutX="467.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../images/Finch.jpg" />
          </image>
       </ImageView>
-      <ImageView fx:id="kosImageView2" fitHeight="133.0" fitWidth="200.0" layoutX="257.0" layoutY="55.0" onMouseClicked="#playKos" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="kosImageView2" fitHeight="133.0" fitWidth="200.0" layoutX="257.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../images/Buteo.jpg" />
          </image>
