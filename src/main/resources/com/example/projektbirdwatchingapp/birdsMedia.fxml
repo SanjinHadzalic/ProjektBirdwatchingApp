@@ -26,7 +26,7 @@
          </image>
       </ImageView>
       <Button layoutX="303.0" layoutY="167.0" mnemonicParsing="false" onAction="#playSkanjac" text="Buzzard" />
-      <Button layoutX="562.0" layoutY="167.0" mnemonicParsing="false" onAction="#playZeba" text="Chafinch" />
+      <Button layoutX="562.0" layoutY="167.0" mnemonicParsing="false" onAction="#playKestrel" text="Chafinch" />
       <ImageView fx:id="kestrelImageView" fitHeight="150.0" fitWidth="200.0" layoutX="33.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../images/kestrel.png" />
@@ -42,8 +42,8 @@
             <Image url="@../../../images/Robin.jpg" />
          </image>
       </ImageView>
-      <Button layoutX="90.0" layoutY="372.0" mnemonicParsing="false" text="Kestrel" />
-      <Button layoutX="331.0" layoutY="373.0" mnemonicParsing="false" text="Mallard" />
-      <Button layoutX="569.0" layoutY="385.0" mnemonicParsing="false" text="Robin" />
+      <Button layoutX="90.0" layoutY="372.0" mnemonicParsing="false" onAction="#playKestrel" text="Kestrel" />
+      <Button layoutX="331.0" layoutY="373.0" mnemonicParsing="false" onAction="#playMallard" text="Mallard" />
+      <Button layoutX="569.0" layoutY="385.0" mnemonicParsing="false" onAction="#playRobin" text="Robin" />
    </children>
 </AnchorPane>

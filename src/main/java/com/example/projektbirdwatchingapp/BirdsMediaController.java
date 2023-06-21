@@ -109,7 +109,6 @@ public class BirdsMediaController {
                 }
             }).start();
         }
-
     }
 
     @FXML
@@ -120,6 +119,69 @@ public class BirdsMediaController {
                 @Override
                 public void run() {
                     File mediaFile = new File("src/main/resources/music/Zeba.mp3");
+                    playHitSound(mediaFile);
+
+                    Platform.runLater(() -> {
+                        mediaPlayer.setOnPaused(() -> {
+                            synchronized (mediaPlayer) {
+                                mediaPlayer.notify();
+                            }
+                        });
+                    });
+                }
+            }).start();
+        }
+    }
+    @FXML
+    void playKestrel(ActionEvent event) {
+        if (!isPlaying) {
+            isPlaying = true;
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    File mediaFile = new File("src/main/resources/music/kestrel.mp3");
+                    playHitSound(mediaFile);
+
+                    Platform.runLater(() -> {
+                        mediaPlayer.setOnPaused(() -> {
+                            synchronized (mediaPlayer) {
+                                mediaPlayer.notify();
+                            }
+                        });
+                    });
+                }
+            }).start();
+        }
+    }
+    @FXML
+    void playMallard(ActionEvent event) {
+        if (!isPlaying) {
+            isPlaying = true;
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    File mediaFile = new File("src/main/resources/music/mallard.mp3");
+                    playHitSound(mediaFile);
+
+                    Platform.runLater(() -> {
+                        mediaPlayer.setOnPaused(() -> {
+                            synchronized (mediaPlayer) {
+                                mediaPlayer.notify();
+                            }
+                        });
+                    });
+                }
+            }).start();
+        }
+    }
+    @FXML
+    void playRobin(ActionEvent event) {
+        if (!isPlaying) {
+            isPlaying = true;
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    File mediaFile = new File("src/main/resources/music/robin.mp3");
                     playHitSound(mediaFile);
 
                     Platform.runLater(() -> {
